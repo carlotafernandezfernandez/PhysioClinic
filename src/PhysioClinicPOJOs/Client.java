@@ -16,8 +16,93 @@ public class Client implements Serializable {
     private boolean large_family; 
     private String email; 
     private List<Prosthetics> prosthetics;
+    
+    
 	
-    public Client() {
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public Date getDoB() {
+		return doB;
+	}
+
+	public void setDoB(Date doB) {
+		this.doB = doB;
+	}
+
+	public int getCard_n() {
+		return card_n;
+	}
+
+	public void setCard_n(int card_n) {
+		this.card_n = card_n;
+	}
+
+	public List<String> getAllergies() {
+		return allergies;
+	}
+
+	public void setAllergies(List<String> allergies) {
+		this.allergies = allergies;
+	}
+
+	public List<String> getTreatments_inprogress() {
+		return treatments_inprogress;
+	}
+
+	public void setTreatments_inprogress(List<String> treatments_inprogress) {
+		this.treatments_inprogress = treatments_inprogress;
+	}
+
+	public boolean isLarge_family() {
+		return large_family;
+	}
+
+	public void setLarge_family(boolean large_family) {
+		this.large_family = large_family;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Prosthetics> getProsthetics() {
+		return prosthetics;
+	}
+
+	public void setProsthetics(List<Prosthetics> prosthetics) {
+		this.prosthetics = prosthetics;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Client() {
 		super();
 		this.allergies = new ArrayList<String>();
 		this.treatments_inprogress = new ArrayList<String>();
@@ -79,10 +164,5 @@ public class Client implements Serializable {
 		return "Client [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", card_n=" + card_n
 				+ ", large_family=" + large_family + ", email=" + email + "]";
 	}
-    
-    
-    
-    
-    
     
 }

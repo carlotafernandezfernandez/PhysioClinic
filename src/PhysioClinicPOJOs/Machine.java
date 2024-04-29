@@ -41,6 +41,10 @@ public class Machine implements Serializable {
 	public void setExams(List<Exams> exams) {
 		this.exams = exams;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	public Machine(int id, String type, Date doB, Date dBought) {
 		super();
 		this.id = id;

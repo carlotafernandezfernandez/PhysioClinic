@@ -23,6 +23,9 @@ public class Exams implements Serializable {
 	public String getType() {
 		return type;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public void setType(String type) {
 		this.type = type;
 	}
