@@ -17,7 +17,7 @@ public class Client implements Serializable {
     private String email; 
     private List<Prosthetics> prosthetics;
     private List<Exams> exams;  
-    
+    	
     
 	
     public int getId() {

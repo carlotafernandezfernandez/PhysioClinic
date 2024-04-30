@@ -7,7 +7,7 @@ public class Prosthetics implements Serializable {
     private static final long serialVersionUID = 7826851246375282594L;
 	private int id; 
     private String type; 
-    private int client_id;
+    private Client client_id;
     private String observations;
 	
     public int getId() {
@@ -22,10 +22,10 @@ public class Prosthetics implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public int getClient_id() {
+	public Client getClient_id() {
 		return client_id;
 	}
-	public void setClient_id(int client_id) {
+	public void setClient_id(Client client_id) {
 		this.client_id = client_id;
 	}
 	public String getObservations() {
@@ -73,7 +73,9 @@ public class Prosthetics implements Serializable {
 	public String toString() {
 		return "Prosthetics [id=" + id + ", type=" + type + ", client_id=" + client_id + ", observations="
 				+ observations + "]";
-	} 
+	}
+	
+
 	
 	
     
