@@ -11,7 +11,6 @@ public class Exams implements Serializable {
     private Machine machine; 
     private Date doB; 
     private int client_id; 
-    private int physio_id; 
     private List<Physio> physios;
 	
     public int getId() {
@@ -47,12 +46,7 @@ public class Exams implements Serializable {
 	public void setClient_id(int client_id) {
 		this.client_id = client_id;
 	}
-	public int getPhysio_id() {
-		return physio_id;
-	}
-	public void setPhysio_id(int physio_id) {
-		this.physio_id = physio_id;
-	}
+	
 	public List<Physio> getPhysios() {
 		return physios;
 	}
@@ -65,7 +59,6 @@ public class Exams implements Serializable {
 		this.machine = machine;
 		this.doB = doB;
 		this.client_id = client_id;
-		this.physio_id = physio_id;
 		this.physios = new ArrayList<Physio>();
 		
 	} 
@@ -76,7 +69,6 @@ public class Exams implements Serializable {
 		this.machine = machine;
 		this.doB = doB;
 		this.client_id = client_id;
-		this.physio_id = physio_id;
 		this.physios = new ArrayList<Physio>();
 		
 	} 
@@ -88,7 +80,7 @@ public class Exams implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(client_id, doB, id, machine, physio_id, physios, type);
+		return Objects.hash(client_id, doB, id, machine, physios, type);
 	}
 	
 	@Override
@@ -101,13 +93,13 @@ public class Exams implements Serializable {
 			return false;
 		Exams other = (Exams) obj;
 		return client_id == other.client_id && Objects.equals(doB, other.doB) && id == other.id
-				&& Objects.equals(machine, other.machine) && physio_id == other.physio_id
-				&& Objects.equals(physios, other.physios) && Objects.equals(type, other.type);
+				&& Objects.equals(machine, other.machine) && Objects.equals(physios, other.physios)
+				&& Objects.equals(type, other.type);
 	}
 	@Override
 	public String toString() {
 		return "Exams [id=" + id + ", type=" + type + ", machine=" + machine + ", doB=" + doB + ", client_id="
-				+ client_id + ", physio_id=" + physio_id + "]";
+				+ client_id + "]";
 	} 
 	
 	

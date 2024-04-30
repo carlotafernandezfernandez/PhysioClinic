@@ -16,6 +16,7 @@ public class Client implements Serializable {
     private boolean large_family; 
     private String email; 
     private List<Prosthetics> prosthetics;
+    private List<Exams> exams;  
     
     
 	
@@ -82,7 +83,13 @@ public class Client implements Serializable {
 	public void setLarge_family(boolean large_family) {
 		this.large_family = large_family;
 	}
+	public List<Exams> getExams() {
+		return exams;
+	}
 
+	public void setExams(List<Exams> exams) {
+		this.exams = exams;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -107,6 +114,7 @@ public class Client implements Serializable {
 		this.allergies = new ArrayList<String>();
 		this.treatments_inprogress = new ArrayList<String>();
 		this.prosthetics = new ArrayList<Prosthetics>();
+		this.exams = new ArrayList<Exams>();
 		
 	}
 
@@ -122,6 +130,7 @@ public class Client implements Serializable {
 		this.allergies = new ArrayList<String>();
 		this.treatments_inprogress = new ArrayList<String>();
 		this.prosthetics = new ArrayList<Prosthetics>();
+		this.exams = new ArrayList<Exams>();
 	}
 
 	public Client(String name, int phone, Date doB, int card_n, boolean large_family, String email) {
@@ -135,12 +144,13 @@ public class Client implements Serializable {
 		this.allergies = new ArrayList<String>();
 		this.treatments_inprogress = new ArrayList<String>();
 		this.prosthetics = new ArrayList<Prosthetics>();
+		this.exams = new ArrayList<Exams>();
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(allergies, card_n, doB, email, id, large_family, name, phone, prosthetics,
-				treatments_inprogress);
+				treatments_inprogress, exams);
 	}
 
 	@Override
@@ -155,7 +165,7 @@ public class Client implements Serializable {
 		return Objects.equals(allergies, other.allergies) && card_n == other.card_n && Objects.equals(doB, other.doB)
 				&& Objects.equals(email, other.email) && id == other.id && large_family == other.large_family
 				&& Objects.equals(name, other.name) && phone == other.phone
-				&& Objects.equals(prosthetics, other.prosthetics)
+				&& Objects.equals(prosthetics, other.prosthetics) && Objects.equals(exams, other.exams)
 				&& Objects.equals(treatments_inprogress, other.treatments_inprogress);
 	}
 
@@ -164,5 +174,6 @@ public class Client implements Serializable {
 		return "Client [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", card_n=" + card_n
 				+ ", large_family=" + large_family + ", email=" + email + "]";
 	}
-    
+
+
 }
