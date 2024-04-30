@@ -66,8 +66,5 @@ public class OrderProductPhysio implements Serializable{
 		return "OrderProductPhysio [id=" + id + ", physio_id=" + physio_id + ", product_id=" + product_id + "]";
 	}
 	
-	
-	
-	
 
 }
