@@ -9,7 +9,8 @@ public class Prosthetics implements Serializable {
     private String type; 
     private int client_id;
     private String observations;
-	public int getId() {
+	
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {
