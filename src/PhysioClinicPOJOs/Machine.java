@@ -11,11 +11,19 @@ public class Machine implements Serializable {
     private Date doB; 
     private Date dBought; 
     private List<Exams> exams;
-	public int getId() {
+    private Engineer engineer; 
+	
+    public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Engineer getEngineer() {
+		return engineer;
+	}
+	public void setEngineer(Engineer engineer) {
+		this.engineer = engineer;
 	}
 	public String getType() {
 		return type;
@@ -45,19 +53,21 @@ public class Machine implements Serializable {
 		return serialVersionUID;
 	}
 	
-	public Machine(int id, String type, Date doB, Date dBought) {
+	public Machine(int id, String type, Date doB, Date dBought, Engineer engineer) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.doB = doB;
 		this.dBought = dBought;
+		this.engineer = engineer; 
 		this.exams = new ArrayList<Exams>();
 	}
-	public Machine(String type, Date doB, Date dBought) {
+	public Machine(String type, Date doB, Date dBought, Engineer engineer) {
 		super();
 		this.type = type;
 		this.doB = doB;
 		this.dBought = dBought;
+		this.engineer = engineer; 
 		this.exams = new ArrayList<Exams>();
 	}
 	public Machine() {
@@ -66,7 +76,7 @@ public class Machine implements Serializable {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(dBought, doB, exams, id, type);
+		return Objects.hash(dBought, doB, engineer, exams, id, type);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -78,15 +88,14 @@ public class Machine implements Serializable {
 			return false;
 		Machine other = (Machine) obj;
 		return Objects.equals(dBought, other.dBought) && Objects.equals(doB, other.doB)
-				&& Objects.equals(exams, other.exams) && id == other.id && Objects.equals(type, other.type);
+				&& Objects.equals(engineer, other.engineer) && Objects.equals(exams, other.exams) && id == other.id
+				&& Objects.equals(type, other.type);
 	}
 	@Override
 	public String toString() {
-		return "Machine [id=" + id + ", type=" + type + ", doB=" + doB + ", dBought=" + dBought + "]";
+		return "Machine [id=" + id + ", type=" + type + ", doB=" + doB + ", dBought=" + dBought + ", exams=" + exams
+				+ "]";
 	}
-    
 	
-    
-    
-    
+	
 }

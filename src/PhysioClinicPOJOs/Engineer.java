@@ -178,12 +178,8 @@ public class Engineer implements Serializable {
 	@Override
 	public String toString() {
 		return "Engineer [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", specialty="
-				+ specialty + ", email=" + email + ", salary=" + salary + ", license=" + Arrays.toString(license) + "]";
-	} 
-	
-	
-    
-    
-    
+				+ specialty + ", email=" + email + ", salary=" + salary + ", license=" + Arrays.toString(license)
+				+ ", products=" + products + ", machines=" + machines + "]";
+	}    
     
 }

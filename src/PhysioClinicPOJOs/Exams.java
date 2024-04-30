@@ -10,7 +10,7 @@ public class Exams implements Serializable {
     private String type; 
     private Machine machine; 
     private Date doB; 
-    private int client_id; 
+    private Client client; 
     private List<Physio> physios;
 	
     public int getId() {
@@ -40,11 +40,11 @@ public class Exams implements Serializable {
 	public void setDoB(Date doB) {
 		this.doB = doB;
 	}
-	public int getClient_id() {
-		return client_id;
+	public Client getClient() {
+		return client;
 	}
-	public void setClient_id(int client_id) {
-		this.client_id = client_id;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	
 	public List<Physio> getPhysios() {
@@ -53,22 +53,22 @@ public class Exams implements Serializable {
 	public void setPhysios(List<Physio> physios) {
 		this.physios = physios;
 	}
-	public Exams(String type, Machine machine, Date doB, int client_id, int physio_id) {
+	public Exams(String type, Machine machine, Date doB, Client client, int physio_id) {
 		super();
 		this.type = type;
 		this.machine = machine;
 		this.doB = doB;
-		this.client_id = client_id;
+		this.client = client;
 		this.physios = new ArrayList<Physio>();
 		
 	} 
-	public Exams(int id, String type, Machine machine, Date doB, int client_id, int physio_id) {
+	public Exams(int id, String type, Machine machine, Date doB, Client client, int physio_id) {
 		super();
 		this.id= id;
 		this.type = type;
 		this.machine = machine;
 		this.doB = doB;
-		this.client_id = client_id;
+		this.client = client;
 		this.physios = new ArrayList<Physio>();
 		
 	} 
@@ -80,7 +80,7 @@ public class Exams implements Serializable {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(client_id, doB, id, machine, physios, type);
+		return Objects.hash(client, doB, id, machine, physios, type);
 	}
 	
 	@Override
@@ -92,20 +92,15 @@ public class Exams implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Exams other = (Exams) obj;
-		return client_id == other.client_id && Objects.equals(doB, other.doB) && id == other.id
+		return client == other.client && Objects.equals(doB, other.doB) && id == other.id
 				&& Objects.equals(machine, other.machine) && Objects.equals(physios, other.physios)
 				&& Objects.equals(type, other.type);
 	}
 	@Override
 	public String toString() {
-		return "Exams [id=" + id + ", type=" + type + ", machine=" + machine + ", doB=" + doB + ", client_id="
-				+ client_id + "]";
-	} 
-	
-	
-	
-	
-    
+		return "Exams [id=" + id + ", type=" + type + ", machine=" + machine + ", doB=" + doB + ", client=" + client
+				+ "]";
+	}	
     
     
 }

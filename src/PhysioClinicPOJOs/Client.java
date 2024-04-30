@@ -17,6 +17,7 @@ public class Client implements Serializable {
     private String email; 
     private List<Prosthetics> prosthetics;
     private List<Exams> exams;  
+    private Physio physio; 
     	
     
 	
@@ -42,6 +43,13 @@ public class Client implements Serializable {
 
 	public void setPhone(int phone) {
 		this.phone = phone;
+	}
+	public Physio getPhysio() {
+		return physio;
+	}
+
+	public void setPhysio(Physio physio) {
+		this.physio = physio;
 	}
 
 	public Date getDoB() {
@@ -118,9 +126,10 @@ public class Client implements Serializable {
 		
 	}
 
-	public Client(int id, String name, int phone, Date doB, int card_n, boolean large_family, String email) {
+	public Client(int id, Physio physio, String name, int phone, Date doB, int card_n, boolean large_family, String email) {
 		super();
 		this.id = id;
+		this.physio = physio; 
 		this.name = name;
 		this.phone = phone;
 		this.doB = doB;
@@ -133,11 +142,12 @@ public class Client implements Serializable {
 		this.exams = new ArrayList<Exams>();
 	}
 
-	public Client(String name, int phone, Date doB, int card_n, boolean large_family, String email) {
+	public Client(String name, Physio physio, int phone, Date doB, int card_n, boolean large_family, String email) {
 		super();
 		this.name = name;
 		this.phone = phone;
 		this.doB = doB;
+		this.physio = physio; 
 		this.card_n = card_n;
 		this.large_family = large_family;
 		this.email = email;
@@ -150,7 +160,7 @@ public class Client implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(allergies, card_n, doB, email, id, large_family, name, phone, prosthetics,
-				treatments_inprogress, exams);
+				treatments_inprogress, exams, physio);
 	}
 
 	@Override
@@ -164,7 +174,7 @@ public class Client implements Serializable {
 		Client other = (Client) obj;
 		return Objects.equals(allergies, other.allergies) && card_n == other.card_n && Objects.equals(doB, other.doB)
 				&& Objects.equals(email, other.email) && id == other.id && large_family == other.large_family
-				&& Objects.equals(name, other.name) && phone == other.phone
+				&& Objects.equals(name, other.name) && phone == other.phone && Objects.equals(physio, other.physio)
 				&& Objects.equals(prosthetics, other.prosthetics) && Objects.equals(exams, other.exams)
 				&& Objects.equals(treatments_inprogress, other.treatments_inprogress);
 	}
@@ -172,8 +182,8 @@ public class Client implements Serializable {
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", card_n=" + card_n
-				+ ", large_family=" + large_family + ", email=" + email + "]";
+				+ ", allergies=" + allergies + ", treatments_inprogress=" + treatments_inprogress + ", large_family="
+				+ large_family + ", email=" + email + ", prosthetics=" + prosthetics + ", physio=" + physio + "]";
 	}
-
 
 }

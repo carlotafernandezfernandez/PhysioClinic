@@ -131,6 +131,7 @@ public class Physio implements Serializable {
 				+ Objects.hash(clients, doB, email, exams, id, name, phone, products, salary, specialty);
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -147,5 +148,13 @@ public class Physio implements Serializable {
 				&& Float.floatToIntBits(salary) == Float.floatToIntBits(other.salary)
 				&& Objects.equals(specialty, other.specialty);
 	}
+	@Override
+	public String toString() {
+		return "Physio [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", specialty=" + specialty
+				+ ", email=" + email + ", salary=" + salary + ", license=" + Arrays.toString(license) + ", products="
+				+ products + ", exams=" + exams + ", clients=" + clients + "]";
+	}
+	
+	
     
 }
