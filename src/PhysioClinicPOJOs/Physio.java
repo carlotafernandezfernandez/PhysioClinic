@@ -148,6 +148,7 @@ public class Physio implements Serializable {
 				&& Float.floatToIntBits(salary) == Float.floatToIntBits(other.salary)
 				&& Objects.equals(specialty, other.specialty);
 	}
+	
 	@Override
 	public String toString() {
 		return "Physio [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", specialty=" + specialty
