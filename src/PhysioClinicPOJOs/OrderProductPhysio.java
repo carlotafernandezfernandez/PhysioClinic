@@ -5,11 +5,12 @@ import java.util.Objects;
 
 public class OrderProductPhysio implements Serializable{
 	
-	private static final long serialVersionUID = -2422886417459079899L;
+	private static final long serialVersionUID = -603180946856190919L;
 	
 	private int id; 
 	private int physio_id; 
 	private int product_id;
+	
 	public int getId() {
 		return id;
 	}
@@ -46,10 +47,13 @@ public class OrderProductPhysio implements Serializable{
 	public OrderProductPhysio() {
 		super();
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, physio_id, product_id);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -61,10 +65,10 @@ public class OrderProductPhysio implements Serializable{
 		OrderProductPhysio other = (OrderProductPhysio) obj;
 		return id == other.id && physio_id == other.physio_id && product_id == other.product_id;
 	}
+	
 	@Override
 	public String toString() {
 		return "OrderProductPhysio [id=" + id + ", physio_id=" + physio_id + ", product_id=" + product_id + "]";
 	}
-	
 
 }
