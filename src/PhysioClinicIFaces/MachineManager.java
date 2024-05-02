@@ -6,5 +6,5 @@ public interface MachineManager {
 
 	public void createMachine(Machine m);
 	public List<Machine> showAllMachines();
-	public void deleteMachineByID(int machine_id);
+	//public void deleteMachineByID(int machine_id);
 }
