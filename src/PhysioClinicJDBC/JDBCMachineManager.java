@@ -63,8 +63,8 @@ public class JDBCMachineManager implements MachineManager{
 				Integer engineer_id = rs.getInt("engineer_id");
 				Engineer eng = null;
 				eng = searchEngineerByID(engineer_id);
-				
-				Machine m = new Machine (id, );
+		
+				Machine m = new Machine (id, type, doB, d_bought, eng);
 				machines.add(m);
 			}
 			
