@@ -65,7 +65,7 @@ private Connection c = null;
 					+ "ex_id	INTEGER,"
 					+ "ex_type	TEXT NOT NULL,"
 					+ "ex_clientFrom	TEXT,"
-					+ "ex_doB\"	DATE,"
+					+ "ex_doB	DATE,"
 					+ "Machine_id INTEGER,"
 					+ "PRIMARY KEY(ex_id),"
 					+ "FOREIGN KEY(Machine_id) REFERENCES Machine(Machine_id)"
@@ -104,17 +104,17 @@ private Connection c = null;
 					+ ")";
 			stmt.executeUpdate(sql);
 			
-			sql = "CREATE TABLE Prosthetics("
-					+ "	prost_id INTEGER PRIMARY KEY,"
-					+ "	prost_type TEXT NOT NULL,"
-					+ "	prost_clientUsing TEXT,"
-					+ "	prost_doB DATE,"
-					+ "	prost_dateBought DATE DEFAULT CURRENT_DATE,"
-					+ "	prost_inspections TEXT NOT NULL,"
-					+ "	eng_id INTEGER,"
-					+ "	client_id INTEGER,"
-					+ "	FOREIGN KEY(eng_id) REFERENCES Engineer (eng_id),"
-					+ "	FOREIGN KEY(client_id) REFERENCES Client (client_id)"
+			sql = "CREATE TABLE Prosthetics ("
+					+ "prost_id	INTEGER,"
+					+ "prost_type	TEXT NOT NULL,"
+					+ "prost_doB	DATE,"
+					+ "prost_dateBought DATE DEFAULT CURRENT_DATE,"
+					+ "prost_inspections	TEXT NOT NULL,"
+					+ "eng_id	INTEGER,"
+					+ "client_id	INTEGER,"
+					+ "FOREIGN KEY(eng_id) REFERENCES Engineer(eng_id),"
+					+ "FOREIGN KEY(client_id) REFERENCES Client(client_id),"
+					+ "PRIMARY KEY(prost_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
