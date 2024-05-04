@@ -9,7 +9,9 @@ public class Prosthetics implements Serializable {
     private String type; 
     private Client client;
     private Engineer engineer; 
-    private String observations;
+    private Date doB; 
+    private Date date_bought; 
+    private String inspections;
 	
     public Engineer getEngineer() {
 		return engineer;
@@ -36,36 +38,54 @@ public class Prosthetics implements Serializable {
 		this.client = client_id;
 	}
 	public String getObservations() {
-		return observations;
+		return inspections;
 	}
 	public void setObservations(String observations) {
-		this.observations = observations;
+		this.inspections = observations;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
-	public Prosthetics(int id, String type, Engineer engineer, Client client, String observations) {
+	public Prosthetics(int id, String type, Engineer engineer, Client client, String inspections,
+			Date doB, Date date_bought) {
 		super();
 		this.id = id;
+		this.date_bought = date_bought; 
+		this.doB = doB; 
 		this.type = type;
 		this.client = client;
 		this.engineer = engineer; 
-		this.observations = observations;
+		this.inspections = inspections;
 	} 
-	public Prosthetics(String type, Client client, Engineer engineer, String observations) {
+	public Prosthetics(String type, Client client, Engineer engineer, String inspections, 
+			Date doB, Date date_bought) {
 		super();
 		this.type = type;
+		this.date_bought = date_bought; 
+		this.doB = doB; 
 		this.engineer = engineer; 
 		this.client = client;
-		this.observations = observations;
+		this.inspections = inspections;
 	} 
 	public Prosthetics() {
 		super();
 	}
+	public Date getDoB() {
+		return doB;
+	}
+	public void setDoB(Date doB) {
+		this.doB = doB;
+	}
+	public Date getDate_bought() {
+		return date_bought;
+	}
+	public void setDate_bought(Date date_bought) {
+		this.date_bought = date_bought;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(client, engineer, id, observations, type);
+		return Objects.hash(client, date_bought, doB, engineer, id, inspections, type);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -76,14 +96,17 @@ public class Prosthetics implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Prosthetics other = (Prosthetics) obj;
-		return Objects.equals(client, other.client) && Objects.equals(engineer, other.engineer) && id == other.id
-				&& Objects.equals(observations, other.observations) && Objects.equals(type, other.type);
+		return Objects.equals(client, other.client) && Objects.equals(date_bought, other.date_bought)
+				&& Objects.equals(doB, other.doB) && Objects.equals(engineer, other.engineer) && id == other.id
+				&& Objects.equals(inspections, other.inspections) && Objects.equals(type, other.type);
 	}
 	@Override
 	public String toString() {
-		return "Prosthetics [id=" + id + ", type=" + type + ", engineer=" + engineer + ", observations=" + observations
-				+ "]";
+		return "Prosthetics [id=" + id + ", type=" + type + ", client=" + client + ", engineer=" + engineer + ", doB="
+				+ doB + ", date_bought=" + date_bought + ", observations=" + inspections + "]";
 	}
+	
+	
 	
 	
 	

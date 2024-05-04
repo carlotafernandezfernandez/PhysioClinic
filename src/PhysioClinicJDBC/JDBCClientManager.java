@@ -11,6 +11,7 @@ import java.util.List;
 import PhysioClinicIFaces.ClientManager;
 import PhysioClinicIFaces.PhysioManager;
 import PhysioClinicPOJOs.Client;
+import PhysioClinicPOJOs.Engineer;
 import PhysioClinicPOJOs.Physio;
 
 public class JDBCClientManager implements ClientManager{
@@ -104,6 +105,41 @@ public class JDBCClientManager implements ClientManager{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public Client searchClientByID(int client_id) {
+		// TODO Auto-generated method stub
+		Client client = null;
+		
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM client WHERE id=" + client_id;
+		
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			Integer id = rs.getInt("client_id");
+			Integer phone = rs.getInt("phone");
+			String name = rs.getString("name");
+			Date doB = rs.getDate("doB");
+			Integer card_number = rs.getInt("card_number");
+			Boolean family_number = rs.getBoolean("family_number");
+			String email = rs.getString("email");
+			Integer physio_id = rs.getInt("physiotherapist_id");
+			Physio physio = null;
+			physio = PhysioManager.searchPhysioByID(physio_id);
+			
+			client = new Client (id, physio, name, phone, doB, card_number, family_number, email);
+		    
+		    rs.close();
+		    stmt.close();
+		    
+		}catch(Exception e) {e.printStackTrace();}
+		
+		
+		return client;
+	}
 	}
 	
 
