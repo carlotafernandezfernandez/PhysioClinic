@@ -51,8 +51,8 @@ public class JDBCEngineerManager implements EngineerManager{
 			Byte[] license = rs.get("eng_license");
 			String specialty = rs.getString("eng_specialty");
 			String email = rs.getString("eng_email");
-			Integer phone = rs.getInt("phone");
-			String name = rs.getString("name");
+			Integer phone = rs.getInt("eng_phone");
+			String name = rs.getString("eng_name");
 			Date doB = rs.getDate("eng_doB");
 			Float salary = rs.getFloat("eng_salary");
 			

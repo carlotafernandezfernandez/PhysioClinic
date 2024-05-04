@@ -60,7 +60,6 @@ public class JDBCClientManager implements ClientManager{
 			
 			while(rs.next())
 			{
-				//phone, name, doB, card_number, allergies, treatment, family_number, email
 				Integer id = rs.getInt("client_id");
 				Integer phone = rs.getInt("phone");
 				String name = rs.getString("name");
