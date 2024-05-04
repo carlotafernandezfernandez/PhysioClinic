@@ -1,6 +1,7 @@
 package PhysioClinicJDBC;
 
 import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import PhysioClinicIFaces.ClientManager;
+import PhysioClinicIFaces.PhysioManager;
 import PhysioClinicPOJOs.Client;
+import PhysioClinicPOJOs.Physio;
 
 public class JDBCClientManager implements ClientManager{
 	
@@ -22,7 +25,8 @@ public class JDBCClientManager implements ClientManager{
 	public void createClient(Client c) {
 		// TODO Auto-generated method stub
 		try {
-			String sql= "INSERT INTO client (phone, name, doB, card_number, allergies, treatment, "
+			//NO SE NECESITARÍA EL ID??
+			String sql= "INSERT INTO client (id, phone, name, doB, card_number, allergies, treatment, "
 					+ "family_number, email)"
 					+ "VALUES (?,?,?,?,?,?,?,?)";
 			
@@ -62,14 +66,13 @@ public class JDBCClientManager implements ClientManager{
 				String name = rs.getString("name");
 				Date doB = rs.getDate("doB");
 				Integer card_number = rs.getInt("card_number");
-				//WHAT DO I DO WITH ARRAYS
-				List<String> allergies = rs.getString("allergies");
-				Integer teatment = rs.getInt("treatment");
 				Boolean family_number = rs.getBoolean("family_number");
 				String email = rs.getString("email");
 				Integer physio_id = rs.getInt("physiotherapist_id");
-				
+				Physio physio = null;
+				physio = searchPhysioByID(physio_id);
 				//TENGO QUE BUSCAR AL PHYSIO POR ID Y METERLE EN EL CONSTRUCTOR?? O ES PHYSIO SIN ID
+				
 				Client c = new Client (id, physio, name, phone, doB, card_number, family_number, email);
 				clients.add(c);
 			}
