@@ -31,8 +31,6 @@ public class JDBCExamsManager implements ExamsManager{
 		
 	}
 		
-	}
+}
 
 	
-
-}
