@@ -48,7 +48,6 @@ public class JDBCPhysioManager implements PhysioManager{
 		
 		return physio;
 	}
-	}
-	}
-		
+
 }
+		
