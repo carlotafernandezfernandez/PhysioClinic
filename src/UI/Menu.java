@@ -14,7 +14,7 @@ import PhysioClinicJPA.*;
 import PhysioClinicPOJOs.*;
 
 public class Menu {
-    
+
 	private static JDBCManager jdbcmanager;
 	private static ClientManager clientmanager;
 	private static EngineerManager engineermanager;
@@ -50,9 +50,28 @@ public class Menu {
 				System.out.println("0. Exit.");
 								
 				choice = Integer.parseInt(reader.readLine());
-					
+										
+				switch(choice)
+				{
+				case 1: 
+					login();					
+				case 2:
+					System.out.println("Add info of new user.");
+					signUpUser();
+				case 3: 
+					System.out.println("Udpate the password of an exissting user.");
+					updatePassword();
+				case 0:
+					System.out.println("Exiting application.");
+					jdbcmanager.disconnect();
+				}
+				
+			}while(choice!=0);
+			
+			
+		}catch(Exception e)
+		{e.printStackTrace();}
+	}
+	
 
-}
-}
-}
 }
