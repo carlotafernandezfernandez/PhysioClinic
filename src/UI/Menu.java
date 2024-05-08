@@ -129,16 +129,15 @@ public class Menu {
 		System.out.println("Email: ");
 		String email = reader.readLine();
 				
-		System.out.println("Enter current Password");
+		System.out.println("Enter current Password: ");
 		String passwd = reader.readLine();
 		
 		User u = usermanager.checkPassword(email, passwd);
 		
-		System.out.println("Enter new Password");
-		String new_passwd = reader.readLine();
-		
 		if(u!=null)
 		{
+			System.out.println("Enter new Password: ");
+			String new_passwd = reader.readLine();
 			System.out.println("Login of owner successful!");
 			usermanager.changePassword(email, new_passwd);
 		}

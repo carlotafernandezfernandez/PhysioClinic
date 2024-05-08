@@ -48,7 +48,7 @@ public class JDBCEngineerManager implements EngineerManager{
 			
 			Integer e_id = rs.getInt("eng_id");
 			//COMO HACER BYTE[]
-			Byte[] license = rs.get("eng_license");
+			Byte[] license = rs.("eng_license");
 			String specialty = rs.getString("eng_specialty");
 			String email = rs.getString("eng_email");
 			Integer phone = rs.getInt("eng_phone");
