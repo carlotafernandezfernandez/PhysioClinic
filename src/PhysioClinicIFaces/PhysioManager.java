@@ -7,8 +7,5 @@ public interface PhysioManager {
 	//public void createMachine(Physio p);
 	//public List<Physio> showAllPhysios();
 	//public void deletePhysioByID(int physio_id);
-	public static Physio searchPhysioByID(int physio_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Physio searchPhysioByID(int physio_id);
 }

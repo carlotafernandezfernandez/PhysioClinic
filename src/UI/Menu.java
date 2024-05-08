@@ -47,6 +47,7 @@ public class Menu {
 				System.out.println("Choose an option");
 				System.out.println("1. Login User");
 				System.out.println("2. Sign-up new user");
+				System.out.println("3. Update password");
 				System.out.println("0. Exit.");
 								
 				choice = Integer.parseInt(reader.readLine());
@@ -55,12 +56,15 @@ public class Menu {
 				{
 				case 1: 
 					login();					
+				
 				case 2:
 					System.out.println("Add info of new user.");
 					signUpUser();
+				
 				case 3: 
 					System.out.println("Udpate the password of an exissting user.");
 					updatePassword();
+				
 				case 0:
 					System.out.println("Exiting application.");
 					jdbcmanager.disconnect();
@@ -69,9 +73,115 @@ public class Menu {
 			}while(choice!=0);
 			
 			
+		} catch(Exception e){
+			e.printStackTrace();
+			}
+	} //límite main
+    
+    private static void login() throws Exception {
+		System.out.println("Email: ");
+		String email = reader.readLine();
+		
+		System.out.println("Password");
+		String passwd = reader.readLine();
+		
+		User u = usermanager.checkPassword(email, passwd);
+		
+		if(u!=null & u.getRole().getName().equals("physiotherapist"))
+		{
+			System.out.println("Login of owner successful!");
+			//call for physiotherapist submenu;
+			physioMenu(email);
+		} else if(u!=null & u.getRole().getName().equals("client")){
+			System.out.println("Login of owner successful!");
+			//call for client submenu;
+			clientMenu(email);
+		} else if (u!=null & u.getRole().getName().equals("engineer")){
+			System.out.println("Login of owner successful!");
+			//call for engineer submenu;
+			engMenu(email);
+		}
+		
+	}
+    
+    private static void signUpUser() {
+		try {
+			System.out.println("Introduce email: ");
+			String email = reader.readLine();
+			System.out.println("Introduce the password");
+			String password = reader.readLine();
+			
+			MessageDigest md= MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] pass = md.digest();
+			
+			System.out.println("Introduce the role of the user. 1: physiotherapist, 2: client, 3:engineer");
+			Integer rol = Integer.parseInt(reader.readLine());
+			Role r = usermanager.getRole(rol);
+			
+			User u = new User(email, pass, r);
+			
+			usermanager.newUser(u);
+		}catch(Exception e){e.printStackTrace();}
+	}
+    
+    private static void updatePassword() throws Exception {
+		System.out.println("Email: ");
+		String email = reader.readLine();
+				
+		System.out.println("Enter current Password");
+		String passwd = reader.readLine();
+		
+		System.out.println("Enter new Password");
+		String new_passwd = reader.readLine();
+				
+		User u = usermanager.checkPassword(email, passwd);
+				
+		if(u!=null)
+		{
+			System.out.println("Login of owner successful!");
+			usermanager.changePassword(email, new_passwd);
+		}
+				
+	}
+    
+    private static void physioMenu(String email) {
+		// TODO Auto-generated method stub
+		try {
+			int choice;
+			do {
+				System.out.println("Choose an option");
+				System.out.println("1. Add a new owner.");
+				System.out.println("2. Print all the owners in DB.");
+				System.out.println("3. Add a new pet in the DB");
+				System.out.println("4. Print all the pets of an owner.");
+				System.out.println("0. Return.");
+				
+				choice = Integer.parseInt(reader.readLine());
+								
+				switch(choice)
+				{
+				case 1: 
+					createOwner();
+					break;
+				case 2:
+					getAllowners();
+				case 3:
+					createPet();
+				case 4:
+					printOwnersPets();
+				case 0:
+					System.out.println("Back to main menu");
+					
+				}
+				
+			}while(choice!=0);
+			
+			
 		}catch(Exception e)
 		{e.printStackTrace();}
 	}
-	
+    
+    
 
-}
+}//limite menu

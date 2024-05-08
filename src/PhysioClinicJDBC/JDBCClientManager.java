@@ -140,7 +140,5 @@ public class JDBCClientManager implements ClientManager{
 		
 		return client;
 	}
-	}
-	
-
 }
+	

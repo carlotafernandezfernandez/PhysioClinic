@@ -1,6 +1,7 @@
 package PhysioClinicJPA;
 
 import java.security.MessageDigest;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -117,6 +118,24 @@ public class JPAUserManager implements UserManager{
 		}catch(NoResultException e) {}
 		
 		return u;
+	}
+	
+	@Override
+	public void changePassword(String email, String new_passwd) {
+		try {
+			String sql = "UPDATE users SET password= ? WHERE email= ?;";
+			PreparedStatement prep = ""; 
+			
+			prep.setString(1, new_passwd);
+			prep.setString(2, email);
+			
+			prep.executeQuery();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		
 	}
 
 }
