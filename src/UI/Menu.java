@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 import java.sql.Date;
@@ -189,6 +190,67 @@ public class Menu {
 		{e.printStackTrace();}
 	}
     
+    private static void createClient() throws Exception {
+    	Client c = null; 
+    	
+    	System.out.println("Type the id of the client");
+		Integer id = Integer.parseInt(reader.readLine());
+    	System.out.println("Type the name of the client");
+		String name = reader.readLine();
+		System.out.println("Type the phone of the client");
+		Integer phone = Integer.parseInt(reader.readLine());
+		System.out.println("Type the dob of the client, format=yyyy/mm/dd");
+		String dob_str = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date dob = (Date) df.parse(dob_str);
+		System.out.println("Type the cardnumber of the client");
+		Integer cardnumber = Integer.parseInt(reader.readLine());
+		System.out.println("Client has large family (YES:1, NO:0)");
+		Boolean largeFam = Boolean.valueOf(reader.readLine());
+		System.out.println("Type the email of the client");
+		String email = reader.readLine();
+		System.out.println("Type the ID of the assigned physiotherapist");
+		int physioID = Integer.parseInt(reader.readLine());
+		Physio p = physiomanager.searchPhysioByID(physioID);
+    	
+		c = new Client(id, p, name, phone, dob, cardnumber, largeFam, email);
+		
+    	clientmanager.createClient(c);
+    }
+    
+    private static void showClients() {
+    	List<Client> clients = null;
+		
+		clients = clientmanager.showAllClients();
+		
+		System.out.println(clients);
+    }
+    
+    private static void deleteClient() throws NumberFormatException, Exception {
+    	System.out.println("Type the id of the client");
+		Integer id = Integer.parseInt(reader.readLine());
+		
+		clientmanager.deleteClientByID(id);
+    }
+    
+    private static void searchClientID() throws NumberFormatException, Exception {
+    	Client c = null; 
+    	System.out.println("Type the id of the client");
+		Integer id = Integer.parseInt(reader.readLine());
+		
+		c = clientmanager.searchClientByID(id);
+		System.out.println(c);
+    }
+    
+    private static void searchEngID() throws NumberFormatException, Exception {
+    	Engineer e = null; 
+    	System.out.println("Type the id of the engineer");
+		Integer id = Integer.parseInt(reader.readLine());
+		
+		e = engineermanager.searchEngineerByID(id);
+		System.out.println(e);
+    }
+    
     private static void clientMenu(String email) {
 		// TODO Auto-generated method stub
 		try {
@@ -221,6 +283,22 @@ public class Menu {
 		{e.printStackTrace();}
 	}
     
+    public static void searchPhysioID() throws NumberFormatException, Exception {
+    	Physio p = null; 
+    	System.out.println("Type the id of the physio");
+		Integer id = Integer.parseInt(reader.readLine());
+		
+		p = physiomanager.searchPhysioByID(id);
+		System.out.println(p);
+    }
+    
+    public static void deleteExamID() throws NumberFormatException, Exception {
+    	System.out.println("Type the id of the exam");
+		Integer id = Integer.parseInt(reader.readLine());
+		
+		examsmanager.deleteExamByID(id);
+    }
+    
     private static void engMenu(String email) {
 		// TODO Auto-generated method stub
 		try {
@@ -231,7 +309,7 @@ public class Menu {
 				System.out.println("2. Create a machine"); 
 				System.out.println("3. Show all machines");
 				System.out.println("4. Change product availability");
-				System.out.println("4. Show all prosthetics of same type");
+				System.out.println("5. Show all prosthetics of same type");
 				System.out.println("0. Return.");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -250,7 +328,7 @@ public class Menu {
 					changeProdAvailability();
 					break;
 				case 5:
-					
+					prostheticsType();
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -264,7 +342,61 @@ public class Menu {
 		{e.printStackTrace();}
 	}
     
+    public static void changeEngPhoneID() throws NumberFormatException, Exception {
+    	System.out.println("Type the id of the engineer");
+		Integer id = Integer.parseInt(reader.readLine());
+		System.out.println("Type the new phone number of the engineer");
+		Integer new_ph = Integer.parseInt(reader.readLine());
+		
+		engineermanager.changeEngineerTelephoneByID(new_ph, id);
+    }
     
+    public static void createMachine() throws NumberFormatException, Exception {
+    	Machine m = null; 
+    	
+    	System.out.println("Type the id of the machine");
+		Integer id = Integer.parseInt(reader.readLine());
+    	System.out.println("Type in the type of the machine");
+		String type = reader.readLine();
+		System.out.println("Type the dob of the machine, format=yyyy/mm/dd");
+		String dob_str = reader.readLine();
+		DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
+		Date dob = (Date) df1.parse(dob_str);
+		System.out.println("Type in the date in which the machine was bought, format=yyyy/mm/dd");
+		String db_str = reader.readLine();
+		DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd");
+		Date db = (Date) df2.parse(db_str);
+		System.out.println("Type the ID of the assigned engineer");
+		int engID = Integer.parseInt(reader.readLine());
+		Engineer e = engineermanager.searchEngineerByID(engID);
+		
+		m = new Machine(id, type, dob, db, e);
+		
+    	machinemanager.createMachine(m);
+    }
     
+    public static void showMachines() {
+    	List<Machine> machines = null;
+		
+		machines = machinemanager.showAllMachines();
+		
+		System.out.println(machines);
+    }
+    
+    public static void changeProdAvailability() throws NumberFormatException, Exception {
+    	System.out.println("Type the id of the product");
+		Integer id = Integer.parseInt(reader.readLine());
+		System.out.println("Type new number of available product");
+		Integer newN_available = Integer.parseInt(reader.readLine());
+		
+		productsmanager.changeProductNAvailable(id, newN_available);
+    }
+    
+    public static void prostheticsType() throws Exception {
+    	System.out.println("Type in the type of the prosthetic");
+		String type = reader.readLine();
+		
+		prostheticsmanager.showAllProstheticsOfType(type);
+    }
 
 }//limite menu

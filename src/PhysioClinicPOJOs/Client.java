@@ -126,7 +126,8 @@ public class Client implements Serializable {
 		
 	}
 
-	public Client(int id, Physio physio, String name, int phone, Date doB, int card_n, boolean large_family, String email) {
+	public Client(int id, Physio physio, String name, int phone, Date doB, int card_n, 
+			boolean large_family, String email) {
 		super();
 		this.id = id;
 		this.physio = physio; 
