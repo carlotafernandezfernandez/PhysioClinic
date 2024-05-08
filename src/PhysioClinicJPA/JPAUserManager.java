@@ -123,13 +123,9 @@ public class JPAUserManager implements UserManager{
 	@Override
 	public void changePassword(String email, String new_passwd) {
 		try {
-			String sql = "UPDATE users SET password= ? WHERE email= ?;";
-			PreparedStatement prep = ""; 
-			
-			prep.setString(1, new_passwd);
-			prep.setString(2, email);
-			
-			prep.executeQuery();
+			Query q = em.createNativeQuery("UPDATE users SET password= ? WHERE email= ?;", User.class);
+			q.setParameter(1, new_passwd);
+			q.setParameter(2, email);
 		}
 		catch(Exception e){
 			e.printStackTrace();

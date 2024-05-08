@@ -56,7 +56,7 @@ public class Menu {
 				{
 				case 1: 
 					login();					
-				
+					
 				case 2:
 					System.out.println("Add info of new user.");
 					signUpUser();
@@ -82,7 +82,7 @@ public class Menu {
 		System.out.println("Email: ");
 		String email = reader.readLine();
 		
-		System.out.println("Password");
+		System.out.println("Password: ");
 		String passwd = reader.readLine();
 		
 		User u = usermanager.checkPassword(email, passwd);
@@ -132,11 +132,11 @@ public class Menu {
 		System.out.println("Enter current Password");
 		String passwd = reader.readLine();
 		
+		User u = usermanager.checkPassword(email, passwd);
+		
 		System.out.println("Enter new Password");
 		String new_passwd = reader.readLine();
-				
-		User u = usermanager.checkPassword(email, passwd);
-				
+		
 		if(u!=null)
 		{
 			System.out.println("Login of owner successful!");
@@ -151,10 +151,10 @@ public class Menu {
 			int choice;
 			do {
 				System.out.println("Choose an option");
-				System.out.println("1. Add a new owner.");
-				System.out.println("2. Print all the owners in DB.");
-				System.out.println("3. Add a new pet in the DB");
-				System.out.println("4. Print all the pets of an owner.");
+				System.out.println("1. Search physio by ID");
+				System.out.println("2. ");
+				System.out.println("3. ");
+				System.out.println("4. ");
 				System.out.println("0. Return.");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -162,14 +162,17 @@ public class Menu {
 				switch(choice)
 				{
 				case 1: 
-					createOwner();
+					
 					break;
 				case 2:
-					getAllowners();
+					
+					break;
 				case 3:
-					createPet();
+					
+					break;
 				case 4:
-					printOwnersPets();
+					
+					break;
 				case 0:
 					System.out.println("Back to main menu");
 					
@@ -181,6 +184,86 @@ public class Menu {
 		}catch(Exception e)
 		{e.printStackTrace();}
 	}
+    
+    private static void clientMenu(String email) {
+		// TODO Auto-generated method stub
+		try {
+			int choice;
+			do {
+				System.out.println("Choose an option");
+				System.out.println("1. Create client");
+				System.out.println("2. Delete client by ID");
+				System.out.println("3. Show all clients");
+				System.out.println("4. Search client by ID");
+				System.out.println("0. Return.");
+				
+				choice = Integer.parseInt(reader.readLine());
+								
+				switch(choice)
+				{
+				case 1: 
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				case 4:
+					
+					break;
+				case 0:
+					System.out.println("Back to main menu");
+					
+				}
+				
+			}while(choice!=0);
+			
+			
+		}catch(Exception e)
+		{e.printStackTrace();}
+	}
+    
+    private static void engMenu(String email) {
+		// TODO Auto-generated method stub
+		try {
+			int choice;
+			do {
+				System.out.println("Choose an option");
+				System.out.println("1. Search engineer by ID");
+				System.out.println("2. Change engineer salary"); //ESTO NO DEBERÍA HACER UN INGENIERO
+				System.out.println("3. ");
+				System.out.println("4. ");
+				System.out.println("0. Return.");
+				
+				choice = Integer.parseInt(reader.readLine());
+								
+				switch(choice){
+				case 1: 
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				case 4:
+					
+					break;
+				case 0:
+					System.out.println("Back to main menu");
+					
+				}
+				
+			}while(choice!=0);
+			
+			
+		}catch(Exception e)
+		{e.printStackTrace();}
+	}
+    
     
     
 
