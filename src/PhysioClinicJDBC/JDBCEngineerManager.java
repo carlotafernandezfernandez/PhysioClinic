@@ -65,6 +65,4 @@ public class JDBCEngineerManager implements EngineerManager{
 		
 		return eng;
 	}
-	}
-
 }
