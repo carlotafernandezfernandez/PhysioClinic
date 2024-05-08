@@ -1,6 +1,4 @@
 package PhysioClinicIFaces;
-import java.util.List;
-import PhysioClinicPOJOs.Exams;
 
 public interface ExamsManager {
 

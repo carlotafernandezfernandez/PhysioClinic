@@ -21,7 +21,6 @@ public class JDBCPhysioManager implements PhysioManager{
 		// TODO Auto-generated method stub
 		Physio physio = null;
 		
-		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
 			String sql = "SELECT * FROM physiotherapist WHERE id=" + physio_id;
@@ -33,8 +32,7 @@ public class JDBCPhysioManager implements PhysioManager{
 			String specialty = rs.getString("physio_specialty");
 			String email = rs.getString("physio_email");
 			Integer phone = rs.getInt("physio_phone");
-			//COMO HACER BYTE[]
-			Byte[] license = rs.get("physio_license");
+			byte[] license = rs.getBytes("physio_license");
 			Float salary = rs.getFloat("physio_salary");
 			Date doB = rs.getDate("physio_doB");
 			
@@ -44,7 +42,6 @@ public class JDBCPhysioManager implements PhysioManager{
 		    stmt.close();
 		    
 		}catch(Exception e) {e.printStackTrace();}
-		
 		
 		return physio;
 	}

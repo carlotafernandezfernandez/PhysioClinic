@@ -18,9 +18,13 @@ import PhysioClinicPOJOs.Prosthetics;
 public class JDBCProstheticsManager implements ProstheticsManager{
 	
 	private JDBCManager manager;
+	private EngineerManager engineermanager; 
+	private ClientManager clientmanager; 
 	
 	public JDBCProstheticsManager (JDBCManager m) {
 		this.manager = m;
+		this.engineermanager = new JDBCEngineerManager(m);
+		this.clientmanager = new JDBCClientManager(m);
 	}
 
 	@Override
@@ -46,8 +50,8 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 				Engineer eng = null; 
 				Integer client_id = rs.getInt("client_id");
 				Client client = null; 
-				eng = EngineerManager.searchEngineerByID(eng_id);
-				client = ClientManager.searchClientByID(client_id);
+				eng = engineermanager.searchEngineerByID(eng_id);
+				client = clientmanager.searchClientByID(client_id);
 				
 				Prosthetics p = new Prosthetics(id, p_type, eng, client, inspections, doB, d_bought);
 				prosthetics.add(p);

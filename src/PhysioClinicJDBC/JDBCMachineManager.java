@@ -15,9 +15,11 @@ import PhysioClinicPOJOs.Engineer;
 public class JDBCMachineManager implements MachineManager{
 	
 	private JDBCManager manager;
+	private EngineerManager engineermanager; 
 	
 	public JDBCMachineManager (JDBCManager m) {
 		this.manager = m;
+		this.engineermanager = new JDBCEngineerManager(m); 
 	}
 
 	@Override
@@ -25,15 +27,16 @@ public class JDBCMachineManager implements MachineManager{
 		// TODO Auto-generated method stub
 		try {
 			//NO SE NECESITARÍA EL ID????
-			String sql= "INSERT INTO machine (machine_type, machine_doB, machine_datebought, "
+			String sql= "INSERT INTO machine (machine_id, machine_type, machine_doB, machine_datebought, "
 					+ "engineer_id)"
-					+ "VALUES (?,?,?,?,)";
+					+ "VALUES (?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setString(1, m.getType());
-			prep.setDate(2, (Date) m.getDoB());
-			prep.setDate(3, (Date) m.getdBought());
-			prep.setInt(7, m.getEngineer().getId());
+			prep.setInt(1, m.getId());
+			prep.setString(2, m.getType());
+			prep.setDate(3, (Date) m.getDoB());
+			prep.setDate(4, (Date) m.getdBought());
+			prep.setInt(5,  m.getEngineer().getId());
 			
 			prep.executeUpdate();				
 					
@@ -62,7 +65,7 @@ public class JDBCMachineManager implements MachineManager{
 				Date d_bought = rs.getDate("machine_dateBought");
 				Integer engineer_id = rs.getInt("engineer_id");
 				Engineer eng = null;
-				eng = EngineerManager.searchEngineerByID(engineer_id);
+				eng = engineermanager.searchEngineerByID(engineer_id);
 		
 				Machine m = new Machine (id, type, doB, d_bought, eng);
 				machines.add(m);

@@ -8,6 +8,6 @@ public interface EngineerManager {
 	//public List<Engineer> showAllEngineers();
 	//public void deleteEngineerByID(int eng_id);
 	public Engineer searchEngineerByID(int eng_id);
-	public void changeEngineerSalaryByID(float new_eng_salary, int eng_id);
+	public void changeEngineerTelephoneByID(int phone, int eng_id);
 	
 }

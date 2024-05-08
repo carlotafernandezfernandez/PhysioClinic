@@ -17,10 +17,13 @@ import PhysioClinicPOJOs.Physio;
 public class JDBCClientManager implements ClientManager{
 	
 	private JDBCManager manager;
+	private PhysioManager physiomanager; 
 	
 	public JDBCClientManager (JDBCManager m) {
 		this.manager = m;
+		this.physiomanager = new JDBCPhysioManager(m);
 	}
+	
 	
 	@Override
 	public void createClient(Client c) {
@@ -70,8 +73,7 @@ public class JDBCClientManager implements ClientManager{
 				String email = rs.getString("email");
 				Integer physio_id = rs.getInt("physiotherapist_id");
 				Physio physio = null;
-				physio = searchPhysioByID(physio_id);
-				//TENGO QUE BUSCAR AL PHYSIO POR ID Y METERLE EN EL CONSTRUCTOR?? O ES PHYSIO SIN ID
+				physio = physiomanager.searchPhysioByID(physio_id);
 				
 				Client c = new Client (id, physio, name, phone, doB, card_number, family_number, email);
 				clients.add(c);
@@ -128,7 +130,7 @@ public class JDBCClientManager implements ClientManager{
 			String email = rs.getString("email");
 			Integer physio_id = rs.getInt("physiotherapist_id");
 			Physio physio = null;
-			physio = PhysioManager.searchPhysioByID(physio_id);
+			physio = physiomanager.searchPhysioByID(physio_id);
 			
 			client = new Client (id, physio, name, phone, doB, card_number, family_number, email);
 		    

@@ -124,7 +124,7 @@ public class Menu {
 			usermanager.newUser(u);
 		}catch(Exception e){e.printStackTrace();}
 	}
-    
+      
     private static void updatePassword() throws Exception {
 		System.out.println("Email: ");
 		String email = reader.readLine();
@@ -150,10 +150,11 @@ public class Menu {
 			int choice;
 			do {
 				System.out.println("Choose an option");
-				System.out.println("1. Search physio by ID");
-				System.out.println("2. ");
-				System.out.println("3. ");
-				System.out.println("4. ");
+				System.out.println("1. Create client");
+				System.out.println("2. Show all clients");
+				System.out.println("3. Delete client");
+				System.out.println("4. Search client by ID");
+				System.out.println("5. Search engineer by ID");
 				System.out.println("0. Return.");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -161,16 +162,20 @@ public class Menu {
 				switch(choice)
 				{
 				case 1: 
-					
+					createClient();
 					break;
 				case 2:
-					
+					showClients();
 					break;
 				case 3:
-					
+					deleteClient();
 					break;
 				case 4:
-					
+					searchClientID();
+					break;
+	
+				case 5:
+					searchEngID();
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -190,10 +195,8 @@ public class Menu {
 			int choice;
 			do {
 				System.out.println("Choose an option");
-				System.out.println("1. Create client");
-				System.out.println("2. Delete client by ID");
-				System.out.println("3. Show all clients");
-				System.out.println("4. Search client by ID");
+				System.out.println("1. Search physiotherapist by ID");
+				System.out.println("2. Delete exam by (exam)ID");
 				System.out.println("0. Return.");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -201,16 +204,10 @@ public class Menu {
 				switch(choice)
 				{
 				case 1: 
-					
+					searchPhysioID();
 					break;
 				case 2:
-					
-					break;
-				case 3:
-					
-					break;
-				case 4:
-					
+					deleteExamID();
 					break;
 				case 0:
 					System.out.println("Back to main menu");
@@ -230,25 +227,29 @@ public class Menu {
 			int choice;
 			do {
 				System.out.println("Choose an option");
-				System.out.println("1. Search engineer by ID");
-				System.out.println("2. Change engineer salary"); //ESTO NO DEBERÍA HACER UN INGENIERO
-				System.out.println("3. ");
-				System.out.println("4. ");
+				System.out.println("1. Change phone by ID");
+				System.out.println("2. Create a machine"); 
+				System.out.println("3. Show all machines");
+				System.out.println("4. Change product availability");
+				System.out.println("4. Show all prosthetics of same type");
 				System.out.println("0. Return.");
 				
 				choice = Integer.parseInt(reader.readLine());
 								
 				switch(choice) {
 				case 1: 
-					
+					changeEngPhoneID();
 					break;
 				case 2:
-					
+					createMachine();
 					break;
 				case 3:
-					
+					showMachines()
 					break;
 				case 4:
+					changeProdAvailability();
+					break;
+				case 5:
 					
 					break;
 				case 0:

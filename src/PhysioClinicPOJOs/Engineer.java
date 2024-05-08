@@ -13,13 +13,13 @@ public class Engineer implements Serializable {
     private String specialty; 
     private String email; 
     private float salary; 
-    private Byte[] license; 
+    private byte[] license; 
     private List<Products> products; 
     private List<Machine> machines;
     private List<Prosthetics> prosthetics;
 	
     public Engineer (String name, int phone, Date doB, String specialty, String email, float salary,
-			Byte[] license) {
+			byte[] license) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -34,7 +34,7 @@ public class Engineer implements Serializable {
 	}
 
 	public Engineer(int id, String name, int phone, Date doB, String specialty, String email, float salary,
-			Byte[] license) {
+			byte[] license) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -112,11 +112,11 @@ public class Engineer implements Serializable {
 		this.salary = salary;
 	}
 
-	public Byte[] getLicense() {
+	public byte[] getLicense() {
 		return license;
 	}
 
-	public void setLicense(Byte[] license) {
+	public void setLicense(byte[] license) {
 		this.license = license;
 	}
 

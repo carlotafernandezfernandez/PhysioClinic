@@ -17,13 +17,13 @@ public class JDBCEngineerManager implements EngineerManager{
 	}
 
 	@Override
-	public void changeEngineerSalaryByID(float new_eng_salary, int eng_id) {
+	public void changeEngineerTelephoneByID(int phone, int eng_id) {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "UPDATE engineer SET eng_salary= ? WHERE id= ?;";
+			String sql = "UPDATE engineer SET eng_phone= ? WHERE id= ?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
-			prep.setFloat(1, new_eng_salary);
+			prep.setFloat(1, phone);
 			prep.setInt(2, eng_id);
 			
 			prep.executeQuery();
@@ -47,8 +47,7 @@ public class JDBCEngineerManager implements EngineerManager{
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			Integer e_id = rs.getInt("eng_id");
-			//COMO HACER BYTE[]
-			Byte[] license = rs.("eng_license");
+			byte[] license = rs.getBytes("eng_license");
 			String specialty = rs.getString("eng_specialty");
 			String email = rs.getString("eng_email");
 			Integer phone = rs.getInt("eng_phone");

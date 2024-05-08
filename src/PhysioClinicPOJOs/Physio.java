@@ -13,7 +13,7 @@ public class Physio implements Serializable {
     private String specialty; 
     private String email; 
     private float salary; 
-    private Byte[] license; 
+    private byte[] license; 
     private List<Products> products; 
     private List<Exams> exams;
     private List<Client> clients;
@@ -60,10 +60,10 @@ public class Physio implements Serializable {
 	public void setSalary(float salary) {
 		this.salary = salary;
 	}
-	public Byte[] getLicense() {
+	public byte[] getLicense() {
 		return license;
 	}
-	public void setLicense(Byte[] license) {
+	public void setLicense(byte[] license) {
 		this.license = license;
 	}
 	public List<Products> getProducts() {
@@ -88,7 +88,7 @@ public class Physio implements Serializable {
 		return serialVersionUID;
 	}
 	public Physio(int id, String name, int phone, Date doB, String specialty, String email, float salary,
-			Byte[] license) {
+			byte[] license) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -103,7 +103,7 @@ public class Physio implements Serializable {
 		this.clients = new ArrayList<Client>();;
 	} 
 	public Physio(String name, int phone, Date doB, String specialty, String email, float salary,
-			Byte[] license) {
+			byte[] license) {
 		super();
 		this.name = name;
 		this.phone = phone;
