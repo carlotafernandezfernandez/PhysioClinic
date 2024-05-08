@@ -239,7 +239,7 @@ public class Menu {
 				
 				choice = Integer.parseInt(reader.readLine());
 								
-				switch(choice){
+				switch(choice) {
 				case 1: 
 					
 					break;
