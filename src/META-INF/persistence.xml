@@ -11,7 +11,7 @@
  
 		<!-- Entity Class -->
 		<class>PhysioClinicPOJOs.User</class>
-		<class>PysioClinicPOJOs.Role</class>
+		<class>PhysioClinicPOJOs.Role</class>
  
 		<properties>	
 			<!-- Connection properties -->

@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.persistence.*;
 
 import PhysioClinicIFaces.*;
 import PhysioClinicJDBC.*;
@@ -322,7 +323,7 @@ public class Menu {
 					createMachine();
 					break;
 				case 3:
-					showMachines()
+					showMachines();
 					break;
 				case 4:
 					changeProdAvailability();

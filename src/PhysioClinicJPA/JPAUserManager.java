@@ -35,9 +35,9 @@ public class JPAUserManager implements UserManager{
 			Role physio = new Role("Physiotherapist");
 			Role client = new Role("Client");
 			Role engineer = new Role("Engineer");
-			this.newRole(physio);
-			this.newRole(client);
-			this.newRole(engineer);
+			//this.newRole(physio);
+			//this.newRole(client);
+			//this.newRole(engineer);
 		}
 		
 	}
@@ -54,6 +54,7 @@ public class JPAUserManager implements UserManager{
 		em.getTransaction().begin();
 		em.persist(r);
 		em.getTransaction().commit();
+		
 	}
 	
 	@Override
