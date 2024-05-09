@@ -42,6 +42,7 @@ public class Menu {
         usermanager = new JPAUserManager();
 		
 		try {
+			
 			int choice;
 			
 			do {
@@ -57,19 +58,19 @@ public class Menu {
 				switch(choice)
 				{
 				case 1: 
-					login();					
+					login(); break; 			
 					
 				case 2:
 					System.out.println("Add info of new user.");
-					signUpUser();
+					signUpUser(); break; 
 				
 				case 3: 
 					System.out.println("Udpate the password of an exissting user.");
-					updatePassword();
+					updatePassword(); break; 
 				
 				case 0:
 					System.out.println("Exiting application.");
-					jdbcmanager.disconnect();
+					jdbcmanager.disconnect(); break; 
 				}
 				
 			}while(choice!=0);
@@ -87,18 +88,19 @@ public class Menu {
 		System.out.println("Password: ");
 		String passwd = reader.readLine();
 		
+		
 		User u = usermanager.checkPassword(email, passwd);
 		
-		if(u!=null & u.getRole().getName().equals("physiotherapist"))
+		if(u!=null & u.getRole().getName().equals("Physiotherapist"))
 		{
 			System.out.println("Login of owner successful!");
 			//call for physiotherapist submenu;
 			physioMenu(email);
-		} else if(u!=null & u.getRole().getName().equals("client")){
+		} else if(u!=null & u.getRole().getName().equals("Client")){
 			System.out.println("Login of owner successful!");
 			//call for client submenu;
 			clientMenu(email);
-		} else if (u!=null & u.getRole().getName().equals("engineer")){
+		} else if (u!=null & u.getRole().getName().equals("Engineer")){
 			System.out.println("Login of owner successful!");
 			//call for engineer submenu;
 			engMenu(email);
@@ -124,8 +126,96 @@ public class Menu {
 			User u = new User(email, pass, r);
 			
 			usermanager.newUser(u);
+			
+			if(u!=null & u.getRole().getName().equals("Physiotherapist")){
+				createPhys(); 
+			} else if(u!=null & u.getRole().getName().equals("Client")){
+				createClient();
+			} else if (u!=null & u.getRole().getName().equals("Engineer")){
+				createEng(); 
+			}
+			
+			
 		}catch(Exception e){e.printStackTrace();}
 	}
+    
+    private static void createClient() throws Exception {
+    	Client c = null; 
+    	
+    	System.out.println("Type the id of the client");
+		Integer id = Integer.parseInt(reader.readLine());
+    	System.out.println("Type the name of the client");
+		String name = reader.readLine();
+		System.out.println("Type the phone of the client");
+		Integer phone = Integer.parseInt(reader.readLine());
+		System.out.println("Type the dob of the client, format=yyyy/mm/dd");
+		String dob_str = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date dob = (Date) df.parse(dob_str);
+		System.out.println("Type the cardnumber of the client");
+		Integer cardnumber = Integer.parseInt(reader.readLine());
+		System.out.println("Client has large family (YES:1, NO:0)");
+		Boolean largeFam = Boolean.valueOf(reader.readLine());
+		System.out.println("Type the email of the client");
+		String email = reader.readLine();
+		System.out.println("Type the ID of the assigned physiotherapist");
+		int physioID = Integer.parseInt(reader.readLine());
+		Physio p = physiomanager.searchPhysioByID(physioID);
+    	
+		c = new Client(id, p, name, phone, dob, cardnumber, largeFam, email);
+		
+    	clientmanager.createClient(c);
+    }
+    
+    private static void createPhys() {
+    	Physio p = null; 
+    	
+    	System.out.println("Type the id of the physio");
+		Integer id = Integer.parseInt(reader.readLine());
+    	System.out.println("Type the name of the physio");
+		String name = reader.readLine();
+		System.out.println("Type the phone of the physio");
+		Integer phone = Integer.parseInt(reader.readLine());
+		System.out.println("Type the dob of the physio, format=yyyy/mm/dd");
+		String dob_str = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date dob = (Date) df.parse(dob_str);
+		System.out.println("Type the email of the physio");
+		String email = reader.readLine();
+		System.out.println("Type the salary of the physio");
+		Float salary = Float.parseFloat(reader.readLine());
+		System.out.println("Type the speciality of the physio");
+		String specialty = reader.readLine();
+    	
+		p = new Physio(id, name, phone, dob, specialty, email, salary, license¿?¿?);
+		
+    	physiomanager.createPhysio(p);
+    }
+    
+    private static void createEng() {
+    	Engineer eng = null; 
+    	
+    	System.out.println("Type the id of the engineer");
+		Integer id = Integer.parseInt(reader.readLine());
+    	System.out.println("Type the name of the engineer");
+		String name = reader.readLine();
+		System.out.println("Type the phone of the engineer");
+		Integer phone = Integer.parseInt(reader.readLine());
+		System.out.println("Type the dob of the engineer, format=yyyy/mm/dd");
+		String dob_str = reader.readLine();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date dob = (Date) df.parse(dob_str);
+		System.out.println("Type the email of the engineer");
+		String email = reader.readLine();
+		System.out.println("Type the salary of the engineer");
+		Float salary = Float.parseFloat(reader.readLine());
+		System.out.println("Type the speciality of the engineer");
+		String specialty = reader.readLine();
+    	
+		eng = new Engineer(id, name, phone, dob, specialty, email, salary, license¿?¿?);
+		
+		engineermanager.createEngineer(eng);
+    }
       
     private static void updatePassword() throws Exception {
 		System.out.println("Email: ");
@@ -190,34 +280,6 @@ public class Menu {
 		}catch(Exception e)
 		{e.printStackTrace();}
 	}
-    
-    private static void createClient() throws Exception {
-    	Client c = null; 
-    	
-    	System.out.println("Type the id of the client");
-		Integer id = Integer.parseInt(reader.readLine());
-    	System.out.println("Type the name of the client");
-		String name = reader.readLine();
-		System.out.println("Type the phone of the client");
-		Integer phone = Integer.parseInt(reader.readLine());
-		System.out.println("Type the dob of the client, format=yyyy/mm/dd");
-		String dob_str = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df.parse(dob_str);
-		System.out.println("Type the cardnumber of the client");
-		Integer cardnumber = Integer.parseInt(reader.readLine());
-		System.out.println("Client has large family (YES:1, NO:0)");
-		Boolean largeFam = Boolean.valueOf(reader.readLine());
-		System.out.println("Type the email of the client");
-		String email = reader.readLine();
-		System.out.println("Type the ID of the assigned physiotherapist");
-		int physioID = Integer.parseInt(reader.readLine());
-		Physio p = physiomanager.searchPhysioByID(physioID);
-    	
-		c = new Client(id, p, name, phone, dob, cardnumber, largeFam, email);
-		
-    	clientmanager.createClient(c);
-    }
     
     private static void showClients() {
     	List<Client> clients = null;
@@ -357,16 +419,20 @@ public class Menu {
     	
     	System.out.println("Type the id of the machine");
 		Integer id = Integer.parseInt(reader.readLine());
-    	System.out.println("Type in the type of the machine");
+    	
+		System.out.println("Type in the type of the machine");
 		String type = reader.readLine();
+		
 		System.out.println("Type the dob of the machine, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
 		DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df1.parse(dob_str);
+		java.util.Date dob = df1.parse(dob_str);
+		
 		System.out.println("Type in the date in which the machine was bought, format=yyyy/mm/dd");
 		String db_str = reader.readLine();
 		DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd");
-		Date db = (Date) df2.parse(db_str);
+		java.util.Date db = df2.parse(db_str);
+		
 		System.out.println("Type the ID of the assigned engineer");
 		int engID = Integer.parseInt(reader.readLine());
 		Engineer e = engineermanager.searchEngineerByID(engID);

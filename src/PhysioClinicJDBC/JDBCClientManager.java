@@ -30,17 +30,18 @@ public class JDBCClientManager implements ClientManager{
 		// TODO Auto-generated method stub
 		try {
 			//NO SE NECESITARÍA EL ID??
-			String sql= "INSERT INTO client (id, phone, name, doB, card_number, allergies, treatment, "
+			String sql= "INSERT INTO Client (id, phone, name, doB, card_number, allergies, treatment, "
 					+ "family_number, email)"
 					+ "VALUES (?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, c.getPhone());
-			prep.setString(2, c.getName());
-			prep.setDate(3, (Date) c.getDoB());
-			prep.setInt(4, c.getCard_n());
-			prep.setBoolean(7, c.isLarge_family());
-			prep.setString(8, c.getEmail());
+			prep.setInt(1, c.getId());
+			prep.setInt(2, c.getPhone());
+			prep.setString(3, c.getName());
+			prep.setDate(4, (Date) c.getDoB());
+			prep.setInt(5, c.getCard_n());
+			prep.setBoolean (8, c.isLarge_family());
+			prep.setString(9, c.getEmail());
 			
 			prep.executeUpdate();				
 					
@@ -59,7 +60,7 @@ public class JDBCClientManager implements ClientManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM client";
+			String sql = "SELECT * FROM Client";
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			while(rs.next())
@@ -95,7 +96,7 @@ public class JDBCClientManager implements ClientManager{
 	public void deleteClientByID(int client_id) {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "DELETE FROM clients WHERE id=?";
+			String sql = "DELETE FROM Client WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
 			prep.setInt(1, client_id);
@@ -117,7 +118,7 @@ public class JDBCClientManager implements ClientManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM client WHERE id=" + client_id;
+			String sql = "SELECT * FROM Client WHERE id=" + client_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			

@@ -10,10 +10,11 @@ public class OrderProductEngineer implements Serializable{
 	private int id; 
 	private int engineer_id; 
 	private int product_id;
+	
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(int id){
 		this.id = id;
 	}
 	public int getEngineer_id() {

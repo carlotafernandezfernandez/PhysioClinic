@@ -42,7 +42,7 @@ public class JDBCEngineerManager implements EngineerManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM engineer WHERE id=" + eng_id;
+			String sql = "SELECT * FROM Engineer WHERE id=" + eng_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
@@ -65,4 +65,35 @@ public class JDBCEngineerManager implements EngineerManager{
 		
 		return eng;
 	}
+	
+	public void createEngineer(Engineer e) {
+		try {
+			String sql= "INSERT INTO Engineer (eng_id, eng_address, eng_license, "
+					+ "eng_speciality, eng_email, eng_phone, eng_name, eng_doB, "
+					+ "eng_salary)"
+					+ "VALUES (?,?,?,?,?,?,?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, e.getId());
+			prep.setString(4, e.getSpecialty());
+			prep.setString(5, e.getEmail());
+			prep.setInt(6, e.getPhone());
+			prep.setString(7, e.getName());
+			prep.setDate(8, (Date) e.getDoB());
+			prep.setFloat(9, e.getSalary());
+			
+			
+			prep.executeUpdate();				
+					
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
 }

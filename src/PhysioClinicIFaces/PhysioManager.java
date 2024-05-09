@@ -8,4 +8,5 @@ public interface PhysioManager {
 	//public List<Physio> showAllPhysios();
 	//public void deletePhysioByID(int physio_id);
 	public Physio searchPhysioByID(int physio_id);
+	public void createPhysio(Physio p);
 }

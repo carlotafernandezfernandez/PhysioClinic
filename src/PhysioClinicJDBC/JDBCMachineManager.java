@@ -27,7 +27,7 @@ public class JDBCMachineManager implements MachineManager{
 		// TODO Auto-generated method stub
 		try {
 			//NO SE NECESITARÍA EL ID????
-			String sql= "INSERT INTO machine (machine_id, machine_type, machine_doB, machine_datebought, "
+			String sql= "INSERT INTO Machine (machine_id, machine_type, machine_doB, machine_datebought, "
 					+ "engineer_id)"
 					+ "VALUES (?,?,?,?,?)";
 			

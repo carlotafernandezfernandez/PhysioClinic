@@ -23,7 +23,6 @@ public class JPAUserManager implements UserManager{
 	@Override
 	public void connect() {
 		// TODO Auto-generated method stub
-		//PHYSIOCLINIC-PROVIDER QUE ES
 		em = Persistence.createEntityManagerFactory("physioclinic-provider").createEntityManager();
 		
 		em.getTransaction().begin();
@@ -35,11 +34,10 @@ public class JPAUserManager implements UserManager{
 			Role physio = new Role("Physiotherapist");
 			Role client = new Role("Client");
 			Role engineer = new Role("Engineer");
-			//this.newRole(physio);
-			//this.newRole(client);
-			//this.newRole(engineer);
+			this.newRole(physio);
+			this.newRole(client);
+			this.newRole(engineer);
 		}
-		
 	}
 	
 	@Override

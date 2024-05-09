@@ -23,7 +23,7 @@ public class JDBCPhysioManager implements PhysioManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM physiotherapist WHERE id=" + physio_id;
+			String sql = "SELECT * FROM Physiotherapist WHERE id=" + physio_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
@@ -46,5 +46,29 @@ public class JDBCPhysioManager implements PhysioManager{
 		return physio;
 	}
 
+	public void createPhysio(Physio p) {
+		try {
+			String sql= "INSERT INTO Physiotherapist (physio_id, physio_name, physio_specialty, "
+					+ "physio_phone, physio_email, physio_license, physio_salary, physio_doB, "
+					+ "physio_address)"
+					+ "VALUES (?,?,?,?,?,?,?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setInt(1, p.getId());
+			prep.setString(2, p.getName());
+			prep.setString(3, p.getSpecialty());
+			prep.setInt(4, p.getPhone());
+			prep.setString(5, p.getEmail());
+			prep.setFloat(7, p.getSalary());
+			prep.setDate(8, (Date) p.getDoB());
+			
+			prep.executeUpdate();				
+					
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
 		

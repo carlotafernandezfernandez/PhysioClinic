@@ -34,7 +34,7 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM prosthetics WHERE prost_type="+type;
+			String sql = "SELECT * FROM Prosthetics WHERE prost_type="+type;
 			
 			ResultSet rs = stmt.executeQuery(sql);
 			

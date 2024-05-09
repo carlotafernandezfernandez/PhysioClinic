@@ -17,7 +17,7 @@ public class JDBCExamsManager implements ExamsManager{
 		// TODO Auto-generated method stub
 		
 		try {
-			String sql = "DELETE FROM exams WHERE id=?";
+			String sql = "DELETE FROM Exams WHERE id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
 			prep.setInt(1, exam_id);
