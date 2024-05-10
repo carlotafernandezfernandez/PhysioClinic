@@ -34,7 +34,7 @@ private Connection c = null;
 			Statement stmt = c.createStatement();
 			
 			String sql = "CREATE TABLE Client ("
-					+ "client_id	INTEGER,"
+					+ "client_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "phone INTEGER NOT NULL,"
 					+ "name	TEXT NOT NULL,"
 					+ "doB	DATE NOT NULL,"
@@ -44,30 +44,27 @@ private Connection c = null;
 					+ "family_number	INTEGER,"
 					+ "email	TEXT,"
 					+ "Physiotherapist_id	INTEGER,"
-					+ "PRIMARY KEY(client_id),"
 					+ "FOREIGN KEY(Physiotherapist_id) REFERENCES Physiotherapist(physio_id)";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Engineer ("
-					+ "eng_id	INTEGER,"
+					+ "eng_id	INTEGER PRIMARY KEY,"
 					+ "eng_licence	BLOB NOT NULL,"
 					+ "eng_speciality	TEXT,"
 					+ "eng_email	TEXT UNIQUE,"
 					+ "eng_phone	INTEGER UNIQUE,"
 					+ "eng_name	TEXT NOT NULL UNIQUE,"
 					+ "eng_doB	DATE,"
-					+ "eng_salary	NUMERIC(11, 2),"
-					+ "PRIMARY KEY(eng_id)"
+					+ "eng_salary	NUMERIC(11, 2)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Exams ("
-					+ "ex_id	INTEGER,"
+					+ "ex_id	INTEGER PRIMARY KEY,"
 					+ "ex_type	TEXT NOT NULL,"
 					+ "ex_clientFrom	TEXT,"
 					+ "ex_doB	DATE,"
 					+ "Machine_id INTEGER,"
-					+ "PRIMARY KEY(ex_id),"
 					+ "FOREIGN KEY(Machine_id) REFERENCES Machine(Machine_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
@@ -84,28 +81,26 @@ private Connection c = null;
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Physiotherapist ("
-					+ "physio_id	INTEGER,"
+					+ "physio_id	INTEGER PRIMARY KEY,"
 					+ "physio_name	TEXT NOT NULL,"
 					+ "physio_speciality	TEXT CHECK(physio_speciality IN (superior limbs, inferior limbs, spinal column)),"
 					+ "physio_phone	INTEGER NOT NULL UNIQUE,"
 					+ "physio_email	TEXT NOT NULL UNIQUE,"
 					+ "physio_licence	BLOB NOT NULL,"
 					+ "physio_salary NUMERIC(11, 2),"
-					+ "physio_doB	DATE NOT NULL,"
-					+ "PRIMARY KEY(physio_id)"
+					+ "physio_doB	DATE NOT NULL"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Products ("
-					+ "	prod_id	INTEGER,"
+					+ "	prod_id	INTEGER PRIMARY KEY,"
 					+ "	availability	INTEGER DEFAULT 1 CHECK(availability IN (0, 1)),"
-					+ "	n_available	INTEGER NOT NULL,"
-					+ "	PRIMARY KEY(\"prod_id\")"
+					+ "	n_available	INTEGER NOT NULL"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Prosthetics ("
-					+ "prost_id	INTEGER,"
+					+ "prost_id	INTEGER PRIMARY KEY,"
 					+ "prost_type	TEXT NOT NULL,"
 					+ "prost_doB	DATE,"
 					+ "prost_dateBought DATE DEFAULT CURRENT_DATE,"
@@ -113,38 +108,34 @@ private Connection c = null;
 					+ "eng_id	INTEGER,"
 					+ "client_id	INTEGER,"
 					+ "FOREIGN KEY(eng_id) REFERENCES Engineer(eng_id),"
-					+ "FOREIGN KEY(client_id) REFERENCES Client(client_id),"
-					+ "PRIMARY KEY(prost_id)"
+					+ "FOREIGN KEY(client_id) REFERENCES Client(client_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE OrderEngProd ("
-					+ "	orderEP_id	INTEGER,"
+					+ "	orderEP_id	INTEGER PRIMARY KEY,"
 					+ "	id_engineer	INTEGER NOT NULL,"
 					+ "	id_product INTEGER NOT NULL,"
-					+ "	PRIMARY KEY(orderEP_id),"
 					+ "	FOREIGN KEY(id_engineer) REFERENCES Engineer(eng_id),"
 					+ "	FOREIGN KEY(id_product) REFERENCES Products(prod_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE OrderPhysioExam ("
-					+ "orderExamP_id	INTEGER,"
+					+ "orderExamP_id	INTEGER PRIMARY KEY,"
 					+ "id_physio	INTEGER NOT NULL,"
 					+ "id_exams	INTEGER NOT NULL,"
 					+ "FOREIGN KEY(id_physio) REFERENCES Physiotherapist(Physiotherapist_id),"
-					+ "FOREIGN KEY(id_exams) REFERENCES Exams(ex_id),"
-					+ "PRIMARY KEY(orderExamP_id)"
+					+ "FOREIGN KEY(id_exams) REFERENCES Exams(ex_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE OrderPhysioProd ("
-					+ "orderPP_id	INTEGER,"
+					+ "orderPP_id	INTEGER PRIMARY KEY,"
 					+ "id_physio	INTEGER NOT NULL,"
 					+ "id_product	INTEGER NOT NULL,"
 					+ "FOREIGN KEY(id_product) REFERENCES Products(prod_id),"
-					+ "FOREIGN KEY(id_physio) REFERENCES Physiotherapist(Physiotherapist_id),"
-					+ "PRIMARY KEY(orderPP_id)"
+					+ "FOREIGN KEY(id_physio) REFERENCES Physiotherapist(Physiotherapist_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			

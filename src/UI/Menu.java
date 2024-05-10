@@ -14,6 +14,7 @@ import PhysioClinicIFaces.*;
 import PhysioClinicJDBC.*;
 import PhysioClinicJPA.*;
 import PhysioClinicPOJOs.*;
+import PhysioClinicEncription.Encription;
 
 public class Menu {
 
@@ -87,9 +88,10 @@ public class Menu {
 		
 		System.out.println("Password: ");
 		String passwd = reader.readLine();
+		String encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
 		
 		
-		User u = usermanager.checkPassword(email, passwd);
+		User u = usermanager.checkPassword(email, encrypted_passwd);
 		
 		if(u!=null & u.getRole().getName().equals("Physiotherapist"))
 		{
@@ -112,11 +114,13 @@ public class Menu {
 		try {
 			System.out.println("Introduce email: ");
 			String email = reader.readLine();
+			
 			System.out.println("Introduce the password");
-			String password = reader.readLine();
+			String passwd = reader.readLine();
+			String encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
 			
 			MessageDigest md= MessageDigest.getInstance("MD5");
-			md.update(password.getBytes());
+			md.update(encrypted_passwd.getBytes());
 			byte[] pass = md.digest();
 			
 			System.out.println("Introduce the role of the user. 1: physiotherapist, 2: client, 3:engineer");
@@ -223,15 +227,18 @@ public class Menu {
 				
 		System.out.println("Enter current Password: ");
 		String passwd = reader.readLine();
+		String encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
 		
-		User u = usermanager.checkPassword(email, passwd);
+		User u = usermanager.checkPassword(email, encrypted_passwd);
 		
 		if(u!=null)
 		{
 			System.out.println("Enter new Password: ");
 			String new_passwd = reader.readLine();
+			String newEncrypted_passwd = PhysioClinicEncription.Encription.encrypt(new_passwd);
+			
 			System.out.println("Login of owner successful!");
-			usermanager.changePassword(email, new_passwd);
+			usermanager.changePassword(email, newEncrypted_passwd);
 		}
 				
 	}
