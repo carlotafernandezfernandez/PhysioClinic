@@ -132,10 +132,13 @@ public class Menu {
 			usermanager.newUser(u);
 			
 			if(u!=null & u.getRole().getName().equals("Physiotherapist")){
+				System.out.println("INSERT NEW USER´S INFORMATION ->");
 				createPhys(); 
 			} else if(u!=null & u.getRole().getName().equals("Client")){
+				System.out.println("INSERT NEW USER´S INFORMATION -> ");
 				createClient();
 			} else if (u!=null & u.getRole().getName().equals("Engineer")){
+				System.out.println("INSERT NEW USER´S INFORMATION -> ");
 				createEng(); 
 			}
 			
@@ -145,7 +148,7 @@ public class Menu {
     
     private static void createClient() throws Exception {
     	Client c = null; 
-    	
+
     	System.out.println("Type the id of the client");
 		Integer id = Integer.parseInt(reader.readLine());
     	System.out.println("Type the name of the client");
