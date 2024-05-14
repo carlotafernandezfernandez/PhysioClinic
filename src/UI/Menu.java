@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
-import java.sql.Date;
+import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -62,11 +62,11 @@ public class Menu {
 					login(); break; 			
 					
 				case 2:
-					System.out.println("Add info of new user.");
+					System.out.println("Add info of new user:");
 					signUpUser(); break; 
 				
 				case 3: 
-					System.out.println("Udpate the password of an exissting user.");
+					System.out.println("Udpate the password of an exissting user:");
 					updatePassword(); break; 
 				
 				case 0:
@@ -88,7 +88,7 @@ public class Menu {
 		
 		System.out.println("Password: ");
 		String passwd = reader.readLine();
-		String encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
+		byte[] encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
 		
 		
 		User u = usermanager.checkPassword(email, encrypted_passwd);
@@ -117,29 +117,31 @@ public class Menu {
 			
 			System.out.println("Introduce the password");
 			String passwd = reader.readLine();
-			String encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
+			byte[] encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
 			
-			MessageDigest md= MessageDigest.getInstance("MD5");
-			md.update(encrypted_passwd.getBytes());
-			byte[] pass = md.digest();
+			//MessageDigest md= MessageDigest.getInstance("MD5");
+			//md.update(encrypted_passwd.getBytes());
 			
 			System.out.println("Introduce the role of the user. 1: physiotherapist, 2: client, 3:engineer");
 			Integer rol = Integer.parseInt(reader.readLine());
 			Role r = usermanager.getRole(rol);
 			
-			User u = new User(email, pass, r);
+			User u = new User(email, encrypted_passwd, r);
 			
 			usermanager.newUser(u);
 			
 			if(u!=null & u.getRole().getName().equals("Physiotherapist")){
-				System.out.println("INSERT NEW USER´S INFORMATION ->");
+				System.out.println("Insert new physiotherpist´s information ->");
 				createPhys(); 
+				
 			} else if(u!=null & u.getRole().getName().equals("Client")){
-				System.out.println("INSERT NEW USER´S INFORMATION -> ");
+				System.out.println("Insert new client´s information -> ");
 				createClient();
+				
 			} else if (u!=null & u.getRole().getName().equals("Engineer")){
-				System.out.println("INSERT NEW USER´S INFORMATION -> ");
-				createEng(); 
+				System.out.println("Insert new engineer´s information -> ");
+				createEng();
+				
 			}
 			
 			
@@ -154,11 +156,13 @@ public class Menu {
     	System.out.println("Type the name of the client");
 		String name = reader.readLine();
 		System.out.println("Type the phone of the client");
-		Integer phone = Integer.parseInt(reader.readLine());
+		String phone = reader.readLine();
+		
 		System.out.println("Type the dob of the client, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date dob = (Date) df.parse(dob_str);
+		
 		System.out.println("Type the cardnumber of the client");
 		Integer cardnumber = Integer.parseInt(reader.readLine());
 		System.out.println("Client has large family (YES:1, NO:0)");
@@ -174,7 +178,7 @@ public class Menu {
     	clientmanager.createClient(c);
     }
     
-    private static void createPhys() {
+    private static void createPhys() throws IllegalArgumentException, Exception {
     	Physio p = null; 
     	
     	System.out.println("Type the id of the physio");
@@ -182,11 +186,13 @@ public class Menu {
     	System.out.println("Type the name of the physio");
 		String name = reader.readLine();
 		System.out.println("Type the phone of the physio");
-		Integer phone = Integer.parseInt(reader.readLine());
+		String phone = reader.readLine();
+		
 		System.out.println("Type the dob of the physio, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date dob = (Date) df.parse(dob_str);
+		
 		System.out.println("Type the email of the physio");
 		String email = reader.readLine();
 		System.out.println("Type the salary of the physio");
@@ -194,12 +200,12 @@ public class Menu {
 		System.out.println("Type the speciality of the physio");
 		String specialty = reader.readLine();
     	
-		p = new Physio(id, name, phone, dob, specialty, email, salary, license¿?¿?);
+		p = new Physio(id, name, phone, dob, specialty, email, salary);
 		
     	physiomanager.createPhysio(p);
     }
     
-    private static void createEng() {
+    private static void createEng() throws NumberFormatException, Exception {
     	Engineer eng = null; 
     	
     	System.out.println("Type the id of the engineer");
@@ -207,19 +213,22 @@ public class Menu {
     	System.out.println("Type the name of the engineer");
 		String name = reader.readLine();
 		System.out.println("Type the phone of the engineer");
-		Integer phone = Integer.parseInt(reader.readLine());
+		String phone = reader.readLine();
+		
 		System.out.println("Type the dob of the engineer, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date dob = (Date) df.parse(dob_str);
+		
 		System.out.println("Type the email of the engineer");
 		String email = reader.readLine();
 		System.out.println("Type the salary of the engineer");
 		Float salary = Float.parseFloat(reader.readLine());
 		System.out.println("Type the speciality of the engineer");
 		String specialty = reader.readLine();
-    	
-		eng = new Engineer(id, name, phone, dob, specialty, email, salary, license¿?¿?);
+		
+		
+		eng = new Engineer(id, name, phone, dob, specialty, email, salary);
 		
 		engineermanager.createEngineer(eng);
     }
@@ -228,19 +237,20 @@ public class Menu {
 		System.out.println("Email: ");
 		String email = reader.readLine();
 				
-		System.out.println("Enter current Password: ");
+		System.out.println("Enter current password:");
 		String passwd = reader.readLine();
-		String encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
+		byte[] encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
 		
 		User u = usermanager.checkPassword(email, encrypted_passwd);
 		
 		if(u!=null)
 		{
-			System.out.println("Enter new Password: ");
-			String new_passwd = reader.readLine();
-			String newEncrypted_passwd = PhysioClinicEncription.Encription.encrypt(new_passwd);
-			
 			System.out.println("Login of owner successful!");
+			
+			System.out.println("Enter new password: ");
+			String new_passwd = reader.readLine();
+			byte[] newEncrypted_passwd = PhysioClinicEncription.Encription.encrypt(new_passwd);
+			
 			usermanager.changePassword(email, newEncrypted_passwd);
 		}
 				
@@ -419,7 +429,7 @@ public class Menu {
     	System.out.println("Type the id of the engineer");
 		Integer id = Integer.parseInt(reader.readLine());
 		System.out.println("Type the new phone number of the engineer");
-		Integer new_ph = Integer.parseInt(reader.readLine());
+		String new_ph = reader.readLine();
 		
 		engineermanager.changeEngineerTelephoneByID(new_ph, id);
     }

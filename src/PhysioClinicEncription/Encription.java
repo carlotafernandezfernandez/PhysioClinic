@@ -5,24 +5,29 @@ import java.util.Base64;
 
 public class Encription {
 	
-	private static final String ALGORITMO = "AES";
-    private static final String CLAVE_SECRETA = "claveSecreta123451234567"; 
+	private static final String ALGRTHM = "AES";
+    //private static final String SECRET_KEY = "claveSecreta123451234567"; 
+    private static final String SECRET_KEY = "18563829ch2&b%bnd(&be/2?"; 
 	
-	 public static String encrypt(String contraseña) throws Exception {
-	        SecretKeySpec clave = new SecretKeySpec(CLAVE_SECRETA.getBytes(), ALGORITMO);
-	        Cipher cifrador = Cipher.getInstance(ALGORITMO);
-	        cifrador.init(Cipher.ENCRYPT_MODE, clave);
-	        byte[] textoCifrado = cifrador.doFinal(contraseña.getBytes());
-	        return Base64.getEncoder().encodeToString(textoCifrado);
+	 public static byte[] encrypt(String passwd) throws Exception {
+	        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(), ALGRTHM);
+	        Cipher ciph = Cipher.getInstance(ALGRTHM);
+	        ciph.init(Cipher.ENCRYPT_MODE, key);
+	        byte[] encryptedText = ciph.doFinal(passwd.getBytes());
+	        return encryptedText; 
+	    }
+
+	 public static String decrypt(byte[] encryptedPasswd) throws Exception {
+	        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(), ALGRTHM);
+	        Cipher ciph = Cipher.getInstance(ALGRTHM);
+	        ciph.init(Cipher.DECRYPT_MODE, key);
+	        byte[] passwd = ciph.doFinal(encryptedPasswd);
+	        return new String(passwd);
 	    }
 	 
-	 public static String decrypt(String contraseñaCifrada) throws Exception {
-	        SecretKeySpec clave = new SecretKeySpec(CLAVE_SECRETA.getBytes(), ALGORITMO);
-	        Cipher cifrador = Cipher.getInstance(ALGORITMO);
-	        cifrador.init(Cipher.DECRYPT_MODE, clave);
-	        byte[] textoPlano = cifrador.doFinal(Base64.getDecoder().decode(contraseñaCifrada));
-	        return new String(textoPlano);
-	    }
+	 public static String toStringCifrado(byte[] encryptedPasswd) throws Exception {
+		 return  Base64.getEncoder().encodeToString(encryptedPasswd);
+	 }
 	 
 }
 

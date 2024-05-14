@@ -8,7 +8,7 @@ public class Engineer implements Serializable {
 	
 	private int id; 
     private String name; 
-    private int phone; 
+    private String phone; 
     private Date doB; 
     private String specialty; 
     private String email; 
@@ -18,8 +18,7 @@ public class Engineer implements Serializable {
     private List<Machine> machines;
     private List<Prosthetics> prosthetics;
 	
-    public Engineer (String name, int phone, Date doB, String specialty, String email, float salary,
-			byte[] license) {
+    public Engineer (String name, String phone, Date doB, String specialty, String email, float salary) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -27,14 +26,12 @@ public class Engineer implements Serializable {
 		this.specialty = specialty;
 		this.email = email;
 		this.salary = salary;
-		this.license = license;
 		this.products = new ArrayList<Products>(); 
 		this.machines = new ArrayList<Machine>(); 
 		this.prosthetics = new ArrayList<Prosthetics>(); 
 	}
 
-	public Engineer(int id, String name, int phone, Date doB, String specialty, String email, float salary,
-			byte[] license) {
+	public Engineer(int id, String name, String phone, Date doB, String specialty, String email, float salary) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,7 +40,6 @@ public class Engineer implements Serializable {
 		this.specialty = specialty;
 		this.email = email;
 		this.salary = salary;
-		this.license = license;
 		this.products = new ArrayList<Products>(); 
 		this.machines = new ArrayList<Machine>(); 
 		this.prosthetics = new ArrayList<Prosthetics>(); 
@@ -72,11 +68,11 @@ public class Engineer implements Serializable {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

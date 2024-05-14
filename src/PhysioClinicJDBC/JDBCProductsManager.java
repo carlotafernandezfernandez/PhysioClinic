@@ -1,7 +1,6 @@
 package PhysioClinicJDBC;
 
 import java.sql.PreparedStatement;
-
 import PhysioClinicIFaces.ProductsManager;
 
 public class JDBCProductsManager implements ProductsManager{
@@ -28,6 +27,7 @@ public class JDBCProductsManager implements ProductsManager{
 			e.printStackTrace();
 			
 		}
+		
 	}
 		
 }

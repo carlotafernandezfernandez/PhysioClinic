@@ -10,6 +10,7 @@ public class Exams implements Serializable {
     private String type; 
     private Machine machine; 
     private Date doB; 
+    private byte[] exam; 
     private Client client; 
     private List<Physio> physios;
 	
@@ -53,6 +54,13 @@ public class Exams implements Serializable {
 	public void setPhysios(List<Physio> physios) {
 		this.physios = physios;
 	}
+	public byte[] getExam() {
+		return exam;
+	}
+	public void setExam(byte[] exam) {
+		this.exam = exam;
+	}	
+    
 	public Exams(String type, Machine machine, Date doB, Client client, int physio_id) {
 		super();
 		this.type = type;
@@ -77,12 +85,15 @@ public class Exams implements Serializable {
 		this.physios = new ArrayList<Physio>();
 		
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(client, doB, id, machine, physios, type);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(exam);
+		result = prime * result + Objects.hash(client, doB, id, machine, physios, type);
+		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -92,15 +103,15 @@ public class Exams implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Exams other = (Exams) obj;
-		return client == other.client && Objects.equals(doB, other.doB) && id == other.id
-				&& Objects.equals(machine, other.machine) && Objects.equals(physios, other.physios)
+		return Objects.equals(client, other.client) && Objects.equals(doB, other.doB) && Arrays.equals(exam, other.exam)
+				&& id == other.id && Objects.equals(machine, other.machine) && Objects.equals(physios, other.physios)
 				&& Objects.equals(type, other.type);
 	}
 	@Override
 	public String toString() {
 		return "Exams [id=" + id + ", type=" + type + ", machine=" + machine + ", doB=" + doB + ", client=" + client
 				+ "]";
-	}	
-    
+	}
+	
     
 }

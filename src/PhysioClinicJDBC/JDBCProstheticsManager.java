@@ -31,6 +31,8 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 	public List<Prosthetics> showAllProstheticsOfType(String type) {
 		// TODO Auto-generated method stub
 		List<Prosthetics> prosthetics = new ArrayList<Prosthetics>();
+		Engineer eng = null; 
+		Client client = null;
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
@@ -42,14 +44,11 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 			{
 				Integer id = rs.getInt("prost_id");
 				String p_type = rs.getString("prost_type");
-				Boolean cured = rs.getBoolean("cured");
 				Date doB = rs.getDate("prost_doB");
 				Date d_bought = rs.getDate("prost_dateBought");
 				String inspections = rs.getString("prost_inspections");
 				Integer eng_id = rs.getInt("eng_id");
-				Engineer eng = null; 
 				Integer client_id = rs.getInt("client_id");
-				Client client = null; 
 				eng = engineermanager.searchEngineerByID(eng_id);
 				client = clientmanager.searchClientByID(client_id);
 				

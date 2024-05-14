@@ -8,7 +8,7 @@ public class Client implements Serializable {
 	
     private int id; 
     private String name; 
-    private int phone; 
+    private String phone; 
     private Date doB; 
     private int card_n; 
     private List<String> allergies; 
@@ -37,11 +37,11 @@ public class Client implements Serializable {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public Physio getPhysio() {
@@ -126,7 +126,7 @@ public class Client implements Serializable {
 		
 	}
 
-	public Client(int id, Physio physio, String name, int phone, Date doB, int card_n, 
+	public Client(int id, Physio physio, String name, String phone, Date doB, int card_n, 
 			boolean large_family, String email) {
 		super();
 		this.id = id;
@@ -143,7 +143,7 @@ public class Client implements Serializable {
 		this.exams = new ArrayList<Exams>();
 	}
 
-	public Client(String name, Physio physio, int phone, Date doB, int card_n, boolean large_family, String email) {
+	public Client(String name, Physio physio, String phone, Date doB, int card_n, boolean large_family, String email) {
 		super();
 		this.name = name;
 		this.phone = phone;

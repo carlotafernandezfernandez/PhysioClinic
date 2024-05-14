@@ -8,7 +8,7 @@ public class Physio implements Serializable {
 	
     private int id; 
     private String name; 
-    private int phone; 
+    private String phone; 
     private Date doB; 
     private String specialty; 
     private String email; 
@@ -30,10 +30,10 @@ public class Physio implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public Date getDoB() {
@@ -87,8 +87,7 @@ public class Physio implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public Physio(int id, String name, int phone, Date doB, String specialty, String email, float salary,
-			byte[] license) {
+	public Physio(int id, String name, String phone, Date doB, String specialty, String email, float salary) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -97,13 +96,11 @@ public class Physio implements Serializable {
 		this.specialty = specialty;
 		this.email = email;
 		this.salary = salary;
-		this.license = license;
 		this.products = new ArrayList<Products>();
 		this.exams = new ArrayList<Exams>();;
 		this.clients = new ArrayList<Client>();;
 	} 
-	public Physio(String name, int phone, Date doB, String specialty, String email, float salary,
-			byte[] license) {
+	public Physio(String name, String phone, Date doB, String specialty, String email, float salary) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -111,7 +108,6 @@ public class Physio implements Serializable {
 		this.specialty = specialty;
 		this.email = email;
 		this.salary = salary;
-		this.license = license;
 		this.products = new ArrayList<Products>();
 		this.exams = new ArrayList<Exams>();;
 		this.clients = new ArrayList<Client>();;

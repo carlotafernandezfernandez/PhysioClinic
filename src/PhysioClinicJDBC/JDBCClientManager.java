@@ -36,7 +36,7 @@ public class JDBCClientManager implements ClientManager{
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, c.getId());
-			prep.setInt(2, c.getPhone());
+			prep.setString(2, c.getPhone());
 			prep.setString(3, c.getName());
 			prep.setDate(4, (Date) c.getDoB());
 			prep.setInt(5, c.getCard_n());
@@ -66,7 +66,7 @@ public class JDBCClientManager implements ClientManager{
 			while(rs.next())
 			{
 				Integer id = rs.getInt("client_id");
-				Integer phone = rs.getInt("phone");
+				String phone = rs.getString("phone");
 				String name = rs.getString("name");
 				Date doB = rs.getDate("doB");
 				Integer card_number = rs.getInt("card_number");
@@ -123,7 +123,7 @@ public class JDBCClientManager implements ClientManager{
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			Integer id = rs.getInt("client_id");
-			Integer phone = rs.getInt("phone");
+			String phone = rs.getString("phone");
 			String name = rs.getString("name");
 			Date doB = rs.getDate("doB");
 			Integer card_number = rs.getInt("card_number");
