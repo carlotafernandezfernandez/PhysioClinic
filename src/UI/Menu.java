@@ -1,10 +1,10 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.sql.Date; 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -445,13 +445,12 @@ public class Menu {
 		
 		System.out.println("Type the dob of the machine, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
-		DateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
-		java.util.Date dob = df1.parse(dob_str);
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date dob = (Date) df.parse(dob_str);
 		
 		System.out.println("Type in the date in which the machine was bought, format=yyyy/mm/dd");
 		String db_str = reader.readLine();
-		DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd");
-		java.util.Date db = df2.parse(db_str);
+		Date db = (Date) df.parse(db_str);
 		
 		System.out.println("Type the ID of the assigned engineer");
 		int engID = Integer.parseInt(reader.readLine());

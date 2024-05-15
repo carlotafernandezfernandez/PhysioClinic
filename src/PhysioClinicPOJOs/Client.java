@@ -1,5 +1,6 @@
 package PhysioClinicPOJOs; 
-import java.util.*; 
+import java.sql.Date; 
+import java.util.*;
 import java.io.Serializable;
 
 public class Client implements Serializable {

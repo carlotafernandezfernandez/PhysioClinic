@@ -1,7 +1,7 @@
 package PhysioClinicJDBC;
 
 import java.sql.PreparedStatement;
-
+import java.sql.Date; 
 import PhysioClinicIFaces.ExamsManager;
 
 public class JDBCExamsManager implements ExamsManager{
