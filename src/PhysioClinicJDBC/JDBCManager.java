@@ -64,6 +64,7 @@ private Connection c = null;
 					+ "ex_type	TEXT NOT NULL,"
 					+ "ex_clientFrom	TEXT,"
 					+ "ex_doB	DATE,"
+					+ "ex_image BLOB"
 					+ "Machine_id INTEGER,"
 					+ "FOREIGN KEY(Machine_id) REFERENCES Machine(Machine_id)"
 					+ ")";
