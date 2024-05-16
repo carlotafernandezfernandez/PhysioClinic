@@ -99,9 +99,6 @@ public class JPAUserManager implements UserManager{
 		q.setParameter(1, email);
 		
 		try {
-			//MessageDigest md = MessageDigest.getInstance("MD5");
-			//md.update(pass.getBytes());
-			//byte[] pw = md.digest();
 			q.setParameter(2, pass);
 			
 		}catch(Exception e)

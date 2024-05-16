@@ -1,5 +1,10 @@
 package PhysioClinicPOJOs; 
-import java.util.*; 
+import java.util.*;
+
+import javax.persistence.Basic;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
+
 import java.sql.Date; 
 import java.io.Serializable;
 
@@ -14,6 +19,8 @@ public class Engineer implements Serializable {
     private String specialty; 
     private String email; 
     private float salary; 
+    @Basic(fetch=FetchType.LAZY)
+    @Lob
     private byte[] license; 
     private List<Products> products; 
     private List<Machine> machines;

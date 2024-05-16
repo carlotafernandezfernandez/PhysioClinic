@@ -1,5 +1,10 @@
 package PhysioClinicPOJOs; 
 import java.util.*;
+
+import javax.persistence.Basic;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
+
 import java.sql.Date; 
 import java.io.Serializable;
 
@@ -11,7 +16,9 @@ public class Exams implements Serializable {
     private String type; 
     private Machine machine; 
     private Date doB; 
-    private byte[] exam; 
+    @Basic(fetch=FetchType.LAZY)
+    @Lob
+    private byte[] exam_image; 
     private Client client; 
     private List<Physio> physios;
 	
@@ -55,11 +62,11 @@ public class Exams implements Serializable {
 	public void setPhysios(List<Physio> physios) {
 		this.physios = physios;
 	}
-	public byte[] getExam() {
-		return exam;
+	public byte[] getExam_image() {
+		return exam_image;
 	}
-	public void setExam(byte[] exam) {
-		this.exam = exam;
+	public void setExam_image(byte[] exam) {
+		this.exam_image = exam;
 	}	
     
 	public Exams(String type, Machine machine, Date doB, Client client, int physio_id) {
@@ -91,7 +98,7 @@ public class Exams implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Arrays.hashCode(exam);
+		result = prime * result + Arrays.hashCode(exam_image);
 		result = prime * result + Objects.hash(client, doB, id, machine, physios, type);
 		return result;
 	}
@@ -104,7 +111,7 @@ public class Exams implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Exams other = (Exams) obj;
-		return Objects.equals(client, other.client) && Objects.equals(doB, other.doB) && Arrays.equals(exam, other.exam)
+		return Objects.equals(client, other.client) && Objects.equals(doB, other.doB) && Arrays.equals(exam_image, other.exam_image)
 				&& id == other.id && Objects.equals(machine, other.machine) && Objects.equals(physios, other.physios)
 				&& Objects.equals(type, other.type);
 	}

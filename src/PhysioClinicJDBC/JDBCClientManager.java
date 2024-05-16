@@ -11,7 +11,6 @@ import java.util.List;
 import PhysioClinicIFaces.ClientManager;
 import PhysioClinicIFaces.PhysioManager;
 import PhysioClinicPOJOs.Client;
-import PhysioClinicPOJOs.Engineer;
 import PhysioClinicPOJOs.Physio;
 
 public class JDBCClientManager implements ClientManager{

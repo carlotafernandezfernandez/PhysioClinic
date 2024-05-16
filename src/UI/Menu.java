@@ -9,7 +9,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.persistence.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
+import PhysioClinicGUI.*; 
 import PhysioClinicIFaces.*;
 import PhysioClinicJDBC.*;
 import PhysioClinicJPA.*;
@@ -17,6 +21,9 @@ import PhysioClinicPOJOs.*;
 import PhysioClinicEncription.Encription;
 
 public class Menu {
+	
+	private JLabel label;
+    private JButton loginButton, signUpButton, updateButton, exitButton;
 
 	private static JDBCManager jdbcmanager;
 	private static ClientManager clientmanager;
@@ -32,6 +39,7 @@ public class Menu {
 
     public static void main(String[] args) {
 		
+    	MainMenu mainmenu = null;
 		jdbcmanager = new JDBCManager();
 		clientmanager = new JDBCClientManager(jdbcmanager); 
 		engineermanager = new JDBCEngineerManager(jdbcmanager);
@@ -42,7 +50,9 @@ public class Menu {
         prostheticsmanager = new JDBCProstheticsManager(jdbcmanager);
         usermanager = new JPAUserManager();
 		
-		try {
+        new MainMenu().setVisible(true);}
+        
+        /*try {
 			
 			int choice;
 			
@@ -80,16 +90,22 @@ public class Menu {
 		} catch(Exception e){
 			e.printStackTrace();
 			}
-	} //límite main
-    
-    private static void login() throws Exception {
-		System.out.println("Email: ");
-		String email = reader.readLine();
-		
-		System.out.println("Password: ");
-		String passwd = reader.readLine();
-		byte[] encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
-		
+	} //límite main*/
+	
+       
+    public static void login() {
+    	String email = null; 
+    	String passwd = null; 
+    	byte [] encrypted_passwd = null; 
+    	
+		try {
+			System.out.println("Email: ");
+			email = reader.readLine();
+			
+			System.out.println("Password: ");
+			passwd = reader.readLine();
+			encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
+		}catch(Exception e){e.printStackTrace();}
 		
 		User u = usermanager.checkPassword(email, encrypted_passwd);
 		
@@ -97,20 +113,23 @@ public class Menu {
 		{
 			System.out.println("Login of owner successful!");
 			//call for physiotherapist submenu;
-			physioMenu(email);
+			new PhysioMenu().setVisible(true);
+			//physioMenu(email);
 		} else if(u!=null & u.getRole().getName().equals("Client")){
 			System.out.println("Login of owner successful!");
 			//call for client submenu;
-			clientMenu(email);
+			new ClientMenu().setVisible(true);
+			//clientMenu(email);
 		} else if (u!=null & u.getRole().getName().equals("Engineer")){
 			System.out.println("Login of owner successful!");
 			//call for engineer submenu;
-			engMenu(email);
+			//engMenu(email);
+			new EngMenu().setVisible(true);
 		}
 		
 	}
     
-    private static void signUpUser() {
+    public static void signUpUser() {
 		try {
 			System.out.println("Introduce email: ");
 			String email = reader.readLine();
@@ -148,7 +167,7 @@ public class Menu {
 		}catch(Exception e){e.printStackTrace();}
 	}
     
-    private static void createClient() throws Exception {
+    public static void createClient() throws Exception {
     	Client c = null; 
 
     	System.out.println("Type the id of the client");
@@ -161,7 +180,7 @@ public class Menu {
 		System.out.println("Type the dob of the client, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df.parse(dob_str);
+		Date dob = (java.sql.Date) df.parse(dob_str);
 		
 		System.out.println("Type the cardnumber of the client");
 		Integer cardnumber = Integer.parseInt(reader.readLine());
@@ -218,7 +237,7 @@ public class Menu {
 		System.out.println("Type the dob of the engineer, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df.parse(dob_str);
+		Date dob = (java.sql.Date) df.parse(dob_str);
 		
 		System.out.println("Type the email of the engineer");
 		String email = reader.readLine();
@@ -233,30 +252,38 @@ public class Menu {
 		engineermanager.createEngineer(eng);
     }
       
-    private static void updatePassword() throws Exception {
-		System.out.println("Email: ");
-		String email = reader.readLine();
-				
-		System.out.println("Enter current password:");
-		String passwd = reader.readLine();
-		byte[] encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
+    public static void updatePassword() {
+    	String email = null; 
+    	String passwd = null; 
+    	byte[] encrypted_passwd = null; 
+    	
+    	try {
+    		System.out.println("Email: ");
+    		email = reader.readLine();
+    				
+    		System.out.println("Enter current password:");
+    		passwd = reader.readLine();
+    		encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
+    	}catch(Exception e){e.printStackTrace();}
+		
 		
 		User u = usermanager.checkPassword(email, encrypted_passwd);
 		
-		if(u!=null)
-		{
-			System.out.println("Login of owner successful!");
-			
-			System.out.println("Enter new password: ");
-			String new_passwd = reader.readLine();
-			byte[] newEncrypted_passwd = PhysioClinicEncription.Encription.encrypt(new_passwd);
-			
-			usermanager.changePassword(email, newEncrypted_passwd);
+		if(u!=null) {
+			try {
+				System.out.println("Login of owner successful!");
+				
+				System.out.println("Enter new password: ");
+				String new_passwd = reader.readLine();
+				byte[] newEncrypted_passwd = PhysioClinicEncription.Encription.encrypt(new_passwd);
+				
+				usermanager.changePassword(email, newEncrypted_passwd);
+			}catch (Exception e){e.printStackTrace();}
 		}
 				
 	}
     
-    private static void physioMenu(String email) {
+    public static void physioMenu(String email) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -301,7 +328,7 @@ public class Menu {
 		{e.printStackTrace();}
 	}
     
-    private static void showClients() {
+    public static void showClients() {
     	List<Client> clients = null;
 		
 		clients = clientmanager.showAllClients();
@@ -309,14 +336,14 @@ public class Menu {
 		System.out.println(clients);
     }
     
-    private static void deleteClient() throws NumberFormatException, Exception {
+    public static void deleteClient() throws NumberFormatException, Exception {
     	System.out.println("Type the id of the client");
 		Integer id = Integer.parseInt(reader.readLine());
 		
 		clientmanager.deleteClientByID(id);
     }
     
-    private static void searchClientID() throws NumberFormatException, Exception {
+    public static void searchClientID() throws NumberFormatException, Exception {
     	Client c = null; 
     	System.out.println("Type the id of the client");
 		Integer id = Integer.parseInt(reader.readLine());
@@ -325,7 +352,7 @@ public class Menu {
 		System.out.println(c);
     }
     
-    private static void searchEngID() throws NumberFormatException, Exception {
+    public static void searchEngID() throws NumberFormatException, Exception {
     	Engineer e = null; 
     	System.out.println("Type the id of the engineer");
 		Integer id = Integer.parseInt(reader.readLine());
