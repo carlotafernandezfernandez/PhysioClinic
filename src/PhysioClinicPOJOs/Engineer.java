@@ -1,21 +1,35 @@
 package PhysioClinicPOJOs; 
 import java.util.*; 
+
+//@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlRootElement("Engineer")
+//
 import java.io.Serializable;
 
 public class Engineer implements Serializable {
 	
 	private static final long serialVersionUID = -1861794938648642519L;
-	
+	//@XmlTransient
 	private int id; 
+	//@XmlAttribute
     private String name; 
+    //@XmlElement
     private int phone; 
+  //@XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
+  //@XmlTransient
     private String specialty; 
+  //@XmlTransient
     private String email; 
+  //@XmlTransient
     private float salary; 
+  //@XmlElement
     private byte[] license; 
-    private List<Products> products; 
+  //@XmlTransient
+    private List<Products> products;
+  //@XmlTransient
     private List<Machine> machines;
+  //@XmlElementWrapper(name = prosthetic)
     private List<Prosthetics> prosthetics;
 	
     public Engineer (String name, int phone, Date doB, String specialty, String email, float salary,

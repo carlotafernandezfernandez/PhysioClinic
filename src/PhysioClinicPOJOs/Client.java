@@ -1,21 +1,37 @@
 package PhysioClinicPOJOs; 
 import java.util.*; 
 import java.io.Serializable;
+/*
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Client")
+@XmlType(propOrder = {"nameOfClient", "phone", card_n", "dob})
+*/
+
 
 public class Client implements Serializable {
     
     private static final long serialVersionUID = -6746575861395147349L;
-	
+	//@XmlTransient
     private int id; 
+    //@XmlAttribute
     private String name; 
+    //@XmlElement(name = "phone_number", Required = "false")
     private int phone; 
+    //@XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
+    //@XmlElement
     private int card_n; 
+    //@XmlTransient
     private List<String> allergies; 
+  //@XmlElement
     private List<String> treatments_inprogress; 
+    //@XmlTransient
     private boolean large_family; 
+    //@XmlElement
     private String email; 
+  //@XmlElement
     private List<Prosthetics> prosthetics;
+  //@XmlElement
     private List<Exams> exams;  
     private Physio physio; 
     	
