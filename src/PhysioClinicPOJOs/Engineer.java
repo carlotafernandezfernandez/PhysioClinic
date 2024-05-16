@@ -1,35 +1,44 @@
 package PhysioClinicPOJOs; 
-import java.util.*; 
+import java.util.*;
 
-//@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlRootElement("Engineer")
-//
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.io.Serializable;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Engineer")
 
 public class Engineer implements Serializable {
 	
 	private static final long serialVersionUID = -1861794938648642519L;
-	//@XmlTransient
+	@XmlTransient
 	private int id; 
-	//@XmlAttribute
+	@XmlAttribute
     private String name; 
-    //@XmlElement
+    @XmlElement
     private int phone; 
-  //@XmlJavaTypeAdapter(SQLDateAdapter.class)
+    @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
-  //@XmlTransient
+    @XmlElement
     private String specialty; 
-  //@XmlTransient
+    @XmlTransient
     private String email; 
-  //@XmlTransient
+    @XmlElement
     private float salary; 
-  //@XmlElement
+    @XmlElement
     private byte[] license; 
-  //@XmlTransient
+    @XmlTransient
     private List<Products> products;
-  //@XmlTransient
+    @XmlTransient
     private List<Machine> machines;
-  //@XmlElementWrapper(name = prosthetic)
+    @XmlElementWrapper(name = "TypeofProsthetic")
     private List<Prosthetics> prosthetics;
 	
     public Engineer (String name, int phone, Date doB, String specialty, String email, float salary,
