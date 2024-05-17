@@ -18,7 +18,7 @@ public class PhysioMenu extends JFrame{
         setLayout(null);
 
         label = new JLabel("Choose an option:");
-        label.setBounds(20, 20, 280, 30);
+        label.setBounds(20, 20, 320, 30);
         label.setBackground(Color.BLUE); 
         label.setOpaque(true); 
         add(label);
@@ -87,9 +87,23 @@ public class PhysioMenu extends JFrame{
             }
         });
         add(updateButton);
+        
+        updateButton = new JButton("Print me to XML");
+        updateButton.setBounds(20, 260, 150, 30);
+        updateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+					Menu.printMe();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            }
+        });
+        add(updateButton);
 
         exitButton = new JButton("Back to main menu");
-        exitButton.setBounds(20, 260, 150, 30);
+        exitButton.setBounds(20, 300, 150, 30);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Exiting application.");

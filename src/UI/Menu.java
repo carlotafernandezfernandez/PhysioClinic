@@ -40,8 +40,6 @@ public class Menu {
 	private static XMLManager xmlmanager;
 
     public static void main(String[] args) {
-		
-    	MainMenu mainmenu = null;
 		jdbcmanager = new JDBCManager();
 		clientmanager = new JDBCClientManager(jdbcmanager); 
 		engineermanager = new JDBCEngineerManager(jdbcmanager);
@@ -292,6 +290,7 @@ public class Menu {
 
     public static void physioMenu(String email) {
 		// TODO Auto-generated method stub
+    	
 		try {
 			int choice;
 			do {
@@ -343,34 +342,6 @@ public class Menu {
 		xmlmanager.physio2xml(id);
 	
 	}
-
-	private static void createClient() throws Exception {
-    	Client c = null; 
-    	
-    	System.out.println("Type the id of the client");
-		Integer id = Integer.parseInt(reader.readLine());
-    	System.out.println("Type the name of the client");
-		String name = reader.readLine();
-		System.out.println("Type the phone of the client");
-		Integer phone = Integer.parseInt(reader.readLine());
-		System.out.println("Type the dob of the client, format=yyyy/mm/dd");
-		String dob_str = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df.parse(dob_str);
-		System.out.println("Type the cardnumber of the client");
-		Integer cardnumber = Integer.parseInt(reader.readLine());
-		System.out.println("Client has large family (YES:1, NO:0)");
-		Boolean largeFam = Boolean.valueOf(reader.readLine());
-		System.out.println("Type the email of the client");
-		String email = reader.readLine();
-		System.out.println("Type the ID of the assigned physiotherapist");
-		int physioID = Integer.parseInt(reader.readLine());
-		Physio p = physiomanager.searchPhysioByID(physioID);
-    	
-		c = new Client(id, p, name, phone, dob, cardnumber, largeFam, email);
-		
-    	clientmanager.createClient(c);
-    }
     
 
     public static void showClients() {
