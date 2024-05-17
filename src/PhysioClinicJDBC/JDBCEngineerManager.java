@@ -42,7 +42,7 @@ public class JDBCEngineerManager implements EngineerManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM Engineer WHERE id=" + eng_id;
+			String sql = "SELECT * FROM Engineer WHERE id= " + eng_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
