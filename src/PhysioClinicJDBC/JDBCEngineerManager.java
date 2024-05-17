@@ -68,19 +68,19 @@ public class JDBCEngineerManager implements EngineerManager{
 	
 	public void createEngineer(Engineer e) {
 		try {
-			String sql= "INSERT INTO Engineer (eng_id, eng_address, eng_license, "
+			String sql= "INSERT INTO Engineer (eng_id, "
 					+ "eng_speciality, eng_email, eng_phone, eng_name, eng_doB, "
 					+ "eng_salary)"
-					+ "VALUES (?,?,?,?,?,?,?,?,?)";
+					+ "VALUES (?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, e.getId());
-			prep.setString(4, e.getSpeciality());
-			prep.setString(5, e.getEmail());
-			prep.setString(6, e.getPhone());
-			prep.setString(7, e.getName());
-			prep.setDate(8, (Date) e.getDoB());
-			prep.setFloat(9, e.getSalary());
+			prep.setString(2, e.getSpeciality());
+			prep.setString(3, e.getEmail());
+			prep.setString(4, e.getPhone());
+			prep.setString(5, e.getName());
+			prep.setDate(6, (Date) e.getDoB());
+			prep.setFloat(7, e.getSalary());
 			
 			
 			prep.executeUpdate();				

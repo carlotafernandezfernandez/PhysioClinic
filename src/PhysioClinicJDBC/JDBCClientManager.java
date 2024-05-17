@@ -29,9 +29,9 @@ public class JDBCClientManager implements ClientManager{
 		// TODO Auto-generated method stub
 		try {
 			//NO SE NECESITARÍA EL ID??
-			String sql= "INSERT INTO Client (id, phone, name, doB, card_number, allergies, treatment, "
+			String sql= "INSERT INTO Client (client_id, phone, name, doB, card_number, allergies, treatment, "
 					+ "family_number, email)"
-					+ "VALUES (?,?,?,?,?,?,?,?)";
+					+ "VALUES (?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, c.getId());
@@ -117,7 +117,7 @@ public class JDBCClientManager implements ClientManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM Client WHERE id=" + client_id;
+			String sql = "SELECT * FROM Client WHERE client_id=" + client_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
