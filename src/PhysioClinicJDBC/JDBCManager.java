@@ -73,7 +73,7 @@ private Connection c = null;
 			sql = "CREATE TABLE Physiotherapist ("
 					+ "physio_id	INTEGER PRIMARY KEY,"
 					+ "physio_name	TEXT NOT NULL,"
-					+ "physio_speciality	TEXT CHECK(physio_speciality IN (superior limbs, inferior limbs, spinal column)),"
+					+ "physio_speciality	TEXT CHECK(physio_speciality IN ('superior limbs', 'inferior limbs', 'spinal column')),"
 					+ "physio_phone	TEXT NOT NULL UNIQUE,"
 					+ "physio_email	TEXT NOT NULL UNIQUE,"
 					+ "physio_licence	BLOB NOT NULL,"
