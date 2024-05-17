@@ -1,23 +1,51 @@
 package PhysioClinicPOJOs; 
+
+import java.util.*;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import PhysioClinicXMLutils.SQLDateAdapter;
 import java.sql.Date; 
 import java.util.*;
 import java.io.Serializable;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Client")
+@XmlType(propOrder = {"typeofClient", "physio", "phone_number","card_n", "treatments", "prosthetics", "exams"})
+
+
 public class Client implements Serializable {
     
     private static final long serialVersionUID = -6746575861395147349L;
-	
+	@XmlTransient
     private int id; 
+    @XmlAttribute
     private String name; 
-    private String phone; 
+    @XmlElement(name = "phone_number" ) //, Required = "false")
+    private String phone;     
+    @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
+    @XmlElement
     private int card_n; 
+    @XmlTransient
     private List<String> allergies; 
+    @XmlElement
     private List<String> treatments_inprogress; 
+    @XmlTransient
     private boolean large_family; 
+    @XmlTransient
     private String email; 
+    @XmlElement
     private List<Prosthetics> prosthetics;
-    private List<Exams> exams;  
+    @XmlElement
+    private List<Exams> exams; 
+    @XmlElement
     private Physio physio; 
     	
     

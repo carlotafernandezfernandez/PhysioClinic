@@ -1,6 +1,18 @@
 package PhysioClinicPOJOs; 
 import java.util.*;
 
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import PhysioClinicXMLutils.SQLDateAdapter;
+
 import javax.persistence.Basic;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
@@ -8,22 +20,35 @@ import javax.persistence.Lob;
 import java.sql.Date; 
 import java.io.Serializable;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Engineer")
+
 public class Engineer implements Serializable {
 	
 	private static final long serialVersionUID = -1861794938648642519L;
-	
+	@XmlTransient
 	private int id; 
+	@XmlAttribute
     private String name; 
+    @XmlElement
     private String phone; 
+    @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
+    @XmlElement
     private String specialty; 
+    @XmlTransient
     private String email; 
+    @XmlElement
     private float salary; 
+    @XmlElement
     @Basic(fetch=FetchType.LAZY)
     @Lob
     private byte[] license; 
-    private List<Products> products; 
+    @XmlTransient
+    private List<Products> products;
+    @XmlTransient
     private List<Machine> machines;
+    @XmlElementWrapper(name = "TypeofProsthetic")
     private List<Prosthetics> prosthetics;
 	
     public Engineer (String name, String phone, Date doB, String specialty, String email, float salary) {
