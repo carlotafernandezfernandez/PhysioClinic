@@ -35,11 +35,11 @@ private Connection c = null;
 			
 			String sql = "CREATE TABLE Client ("
 					+ "client_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
-					+ "phone TEXT NOT NULL,"
+					+ "phone TEXT,"
 					+ "name	TEXT NOT NULL,"
-					+ "doB	DATE NOT NULL,"
+					+ "doB	DATE,"
 					+ "card_number	INTEGER,"
-					+ "allergies	TEXT NOT NULL,"
+					+ "allergies	TEXT,"
 					+ "treatment	INTEGER CHECK(treatment IN (0, 1)),"
 					+ "family_number	INTEGER,"
 					+ "email	TEXT,"
@@ -49,7 +49,7 @@ private Connection c = null;
 			
 			sql = "CREATE TABLE Engineer ("
 					+ "eng_id	INTEGER PRIMARY KEY,"
-					+ "eng_licence	BLOB NOT NULL,"
+					+ "eng_licence	BLOB,"
 					+ "eng_speciality	TEXT,"
 					+ "eng_email	TEXT UNIQUE,"
 					+ "eng_phone	TEXT UNIQUE,"
@@ -74,9 +74,9 @@ private Connection c = null;
 					+ "physio_id	INTEGER PRIMARY KEY,"
 					+ "physio_name	TEXT NOT NULL,"
 					+ "physio_speciality	TEXT,"
-					+ "physio_phone	TEXT NOT NULL UNIQUE,"
-					+ "physio_email	TEXT NOT NULL UNIQUE,"
-					+ "physio_licence	BLOB NOT NULL,"
+					+ "physio_phone	TEXT,"
+					+ "physio_email	TEXT,"
+					+ "physio_licence	BLOB,"
 					+ "physio_salary NUMERIC(11, 2),"
 					+ "physio_doB	DATE NOT NULL"
 					+ ")";
@@ -117,6 +117,15 @@ private Connection c = null;
 					+ "id_exams	INTEGER NOT NULL,"
 					+ "FOREIGN KEY(id_physio) REFERENCES Physiotherapist(Physiotherapist_id),"
 					+ "FOREIGN KEY(id_exams) REFERENCES Exams(ex_id)"
+					+ ")";
+			stmt.executeUpdate(sql);
+			
+			sql = "CREATE TABLE OrderPhysioProd ("
+					+ "orderPP_id	INTEGER PRIMARY KEY,"
+					+ "id_physio	INTEGER NOT NULL,"
+					+ "id_product	INTEGER NOT NULL,"
+					+ "FOREIGN KEY(id_product) REFERENCES Products(prod_id),"
+					+ "FOREIGN KEY(id_physio) REFERENCES Physiotherapist(Physiotherapist_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			

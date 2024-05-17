@@ -18,7 +18,7 @@ public class ClientMenu extends JFrame{
 	private JLabel label;
     private JButton loginButton, signUpButton, updateButton, exitButton;
 
-    public ClientMenu()  {
+    public ClientMenu(int id)  {
         super("clientMenu");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

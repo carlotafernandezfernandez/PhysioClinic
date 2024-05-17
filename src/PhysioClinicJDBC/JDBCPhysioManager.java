@@ -23,20 +23,20 @@ public class JDBCPhysioManager implements PhysioManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM Physiotherapist WHERE id=" + physio_id;
+			String sql = "SELECT * FROM Physiotherapist WHERE physio_id=" + physio_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			Integer id = rs.getInt("physio_id");
 			String name = rs.getString("physio_name");
-			String specialty = rs.getString("physio_specialty");
+			String speciality = rs.getString("physio_speciality");
 			String email = rs.getString("physio_email");
 			String phone = rs.getString("physio_phone");
 			//byte[] license = rs.getBytes("physio_license");
 			Float salary = rs.getFloat("physio_salary");
 			Date doB = rs.getDate("physio_doB");
 			
-		    physio = new Physio(physio_id, name, phone, doB, specialty, email, salary);
+		    physio = new Physio(physio_id, name, phone, doB, speciality, email, salary);
 
 		    
 		    rs.close();
@@ -49,19 +49,18 @@ public class JDBCPhysioManager implements PhysioManager{
 
 	public void createPhysio(Physio p) {
 		try {
-			String sql= "INSERT INTO Physiotherapist (physio_id, physio_name, physio_specialty, "
-					+ "physio_phone, physio_email, physio_license, physio_salary, physio_doB, "
-					+ "physio_address)"
-					+ "VALUES (?,?,?,?,?,?,?,?,?)";
+			String sql= "INSERT INTO Physiotherapist (physio_id, physio_name, physio_speciality, "
+					+ "physio_phone, physio_email, physio_salary, physio_doB)"
+					+ "VALUES (?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, p.getId());
 			prep.setString(2, p.getName());
-			prep.setString(3, p.getSpecialty());
+			prep.setString(3, p.getSpeciality());
 			prep.setString(4, p.getPhone());
 			prep.setString(5, p.getEmail());
-			prep.setFloat(7, p.getSalary());
-			prep.setDate(8, (Date) p.getDoB());
+			prep.setFloat(6, p.getSalary());
+			prep.setDate(7, (Date) p.getDoB());
 			
 			prep.executeUpdate();				
 					

@@ -11,7 +11,7 @@ public class PhysioMenu extends JFrame{
 	private JLabel label;
     private JButton loginButton, signUpButton, updateButton, exitButton;
 
-    public PhysioMenu()  {
+    public PhysioMenu(int id)  {
         super("physioMenu");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,7 +93,7 @@ public class PhysioMenu extends JFrame{
         updateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					Menu.printMe();
+					Menu.printMe(id);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

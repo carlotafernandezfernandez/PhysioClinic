@@ -18,7 +18,7 @@ public class EngMenu extends JFrame{
 	private JLabel label;
     private JButton loginButton, signUpButton, updateButton, exitButton;
 
-    public EngMenu()  {
+    public EngMenu(int id)  {
         super("engMenu");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

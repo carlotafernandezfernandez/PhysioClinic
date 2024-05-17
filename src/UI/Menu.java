@@ -113,18 +113,18 @@ public class Menu {
 		{
 			System.out.println("Login of owner successful!");
 			//call for physiotherapist submenu
-			new PhysioMenu().setVisible(true);
+			new PhysioMenu(u.getId()).setVisible(true);
 			//physioMenu(email);
 		} else if(u!=null & u.getRole().getName().equals("Client")){
 			System.out.println("Login of owner successful!");
 			//call for client submenu;
-			new ClientMenu().setVisible(true);
+			new ClientMenu(u.getId()).setVisible(true);
 			//clientMenu(email);
 		} else if (u!=null & u.getRole().getName().equals("Engineer")){
 			System.out.println("Login of owner successful!");
 			//call for engineer submenu;
 			//engMenu(email);
-			new EngMenu().setVisible(true);
+			new EngMenu(u.getId()).setVisible(true);
 		}
 		
 	}
@@ -151,7 +151,7 @@ public class Menu {
 			
 			if(u!=null & u.getRole().getName().equals("Physiotherapist")){
 				System.out.println("Insert new physiotherpist´s information ->");
-				createPhys(); 
+				createPhys();
 				
 			} else if(u!=null & u.getRole().getName().equals("Client")){
 				System.out.println("Insert new client´s information -> ");
@@ -162,6 +162,7 @@ public class Menu {
 				createEng();
 				
 			}
+		
 			
 			
 		}catch(Exception e){e.printStackTrace();}
@@ -287,7 +288,7 @@ public class Menu {
 				
 	}
     
-
+    /*
     public static void physioMenu(String email) {
 		// TODO Auto-generated method stub
     	
@@ -300,7 +301,7 @@ public class Menu {
 				System.out.println("3. Delete client");
 				System.out.println("4. Search client by ID");
 				System.out.println("5. Search engineer by ID");
-				System.out.println("6. Print me to xml.");
+				System.out.println("6. Print me to xml");
 				System.out.println("0. Return.");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -335,9 +336,9 @@ public class Menu {
 			
 		}catch(Exception e)
 		{e.printStackTrace();}
-	}
+	}*/
     
-    private static void printMe(Integer id) {
+    public static void printMe(Integer id) {
 		// TODO Auto-generated method stub
 		xmlmanager.physio2xml(id);
 	

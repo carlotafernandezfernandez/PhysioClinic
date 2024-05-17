@@ -20,7 +20,7 @@ public class JDBCEngineerManager implements EngineerManager{
 	public void changeEngineerTelephoneByID (String phone, int eng_id) {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "UPDATE engineer SET eng_phone= ? WHERE id= ?;";
+			String sql = "UPDATE engineer SET eng_phone= ? WHERE eng_id= ?;";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			
 			prep.setString(1, phone);
@@ -42,20 +42,20 @@ public class JDBCEngineerManager implements EngineerManager{
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM Engineer WHERE id= " + eng_id;
+			String sql = "SELECT * FROM Engineer WHERE eng_id= " + eng_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
 			Integer e_id = rs.getInt("eng_id");
 			//byte[] license = rs.getBytes("eng_license");
-			String specialty = rs.getString("eng_specialty");
+			String speciality = rs.getString("eng_speciality");
 			String email = rs.getString("eng_email");
 			String phone = rs.getString("eng_phone");
 			String name = rs.getString("eng_name");
 			Date doB = rs.getDate("eng_doB");
 			Float salary = rs.getFloat("eng_salary");
 			
-		    eng = new Engineer (e_id, name, phone, doB, specialty, email, salary);
+		    eng = new Engineer (e_id, name, phone, doB, speciality, email, salary);
 		    
 		    rs.close();
 		    stmt.close();
@@ -75,7 +75,7 @@ public class JDBCEngineerManager implements EngineerManager{
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, e.getId());
-			prep.setString(4, e.getSpecialty());
+			prep.setString(4, e.getSpeciality());
 			prep.setString(5, e.getEmail());
 			prep.setString(6, e.getPhone());
 			prep.setString(7, e.getName());

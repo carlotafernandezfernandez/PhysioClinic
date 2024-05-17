@@ -16,7 +16,7 @@ public class Physio implements Serializable {
     private String name; 
     private String phone; 
     private Date doB; 
-    private String specialty; 
+    private String speciality; 
     private String email; 
     private float salary; 
     @Basic(fetch=FetchType.LAZY)
@@ -50,11 +50,11 @@ public class Physio implements Serializable {
 	public void setDoB(Date doB) {
 		this.doB = doB;
 	}
-	public String getSpecialty() {
-		return specialty;
+	public String getSpeciality() {
+		return speciality;
 	}
-	public void setSpecialty(String specialty) {
-		this.specialty = specialty;
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
 	}
 	public String getEmail() {
 		return email;
@@ -95,25 +95,25 @@ public class Physio implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public Physio(int id, String name, String phone, Date doB, String specialty, String email, float salary) {
+	public Physio(int id, String name, String phone, Date doB, String speciality, String email, float salary) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.doB = doB;
-		this.specialty = specialty;
+		this.speciality = speciality;
 		this.email = email;
 		this.salary = salary;
 		this.products = new ArrayList<Products>();
 		this.exams = new ArrayList<Exams>();;
 		this.clients = new ArrayList<Client>();;
 	} 
-	public Physio(String name, String phone, Date doB, String specialty, String email, float salary) {
+	public Physio(String name, String phone, Date doB, String speciality, String email, float salary) {
 		super();
 		this.name = name;
 		this.phone = phone;
 		this.doB = doB;
-		this.specialty = specialty;
+		this.speciality = speciality;
 		this.email = email;
 		this.salary = salary;
 		this.products = new ArrayList<Products>();
@@ -132,7 +132,7 @@ public class Physio implements Serializable {
 		int result = 1;
 		result = prime * result + Arrays.hashCode(license);
 		result = prime * result
-				+ Objects.hash(clients, doB, email, exams, id, name, phone, products, salary, specialty);
+				+ Objects.hash(clients, doB, email, exams, id, name, phone, products, salary, speciality);
 		return result;
 	}
 	
@@ -150,12 +150,12 @@ public class Physio implements Serializable {
 				&& Arrays.equals(license, other.license) && Objects.equals(name, other.name) && phone == other.phone
 				&& Objects.equals(products, other.products)
 				&& Float.floatToIntBits(salary) == Float.floatToIntBits(other.salary)
-				&& Objects.equals(specialty, other.specialty);
+				&& Objects.equals(speciality, other.speciality);
 	}
 	
 	@Override
 	public String toString() {
-		return "Physio [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", specialty=" + specialty
+		return "Physio [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", specialty=" + speciality
 				+ ", email=" + email + ", salary=" + salary + ", license=" + Arrays.toString(license) + ", products="
 				+ products + ", exams=" + exams + ", clients=" + clients + "]";
 	}

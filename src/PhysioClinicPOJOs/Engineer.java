@@ -35,7 +35,7 @@ public class Engineer implements Serializable {
     @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
     @XmlElement
-    private String specialty; 
+    private String speciality; 
     @XmlTransient
     private String email; 
     @XmlElement
@@ -51,12 +51,12 @@ public class Engineer implements Serializable {
     @XmlElementWrapper(name = "TypeofProsthetic")
     private List<Prosthetics> prosthetics;
 	
-    public Engineer (String name, String phone, Date doB, String specialty, String email, float salary) {
+    public Engineer (String name, String phone, Date doB, String speciality, String email, float salary) {
 		super();
 		this.name = name;
 		this.phone = phone;
 		this.doB = doB;
-		this.specialty = specialty;
+		this.speciality = speciality;
 		this.email = email;
 		this.salary = salary;
 		this.products = new ArrayList<Products>(); 
@@ -64,13 +64,13 @@ public class Engineer implements Serializable {
 		this.prosthetics = new ArrayList<Prosthetics>(); 
 	}
 
-	public Engineer(int id, String name, String phone, Date doB, String specialty, String email, float salary) {
+	public Engineer(int id, String name, String phone, Date doB, String speciality, String email, float salary) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.doB = doB;
-		this.specialty = specialty;
+		this.speciality = speciality;
 		this.email = email;
 		this.salary = salary;
 		this.products = new ArrayList<Products>(); 
@@ -117,12 +117,12 @@ public class Engineer implements Serializable {
 		this.doB = doB;
 	}
 
-	public String getSpecialty() {
-		return specialty;
+	public String getSpeciality() {
+		return speciality;
 	}
 
-	public void setSpecialty(String specialty) {
-		this.specialty = specialty;
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
 	}
 
 	public String getEmail() {
@@ -183,7 +183,7 @@ public class Engineer implements Serializable {
 		int result = 1;
 		result = prime * result + Arrays.hashCode(license);
 		result = prime * result
-				+ Objects.hash(doB, email, id, machines, name, phone, products, prosthetics, salary, specialty);
+				+ Objects.hash(doB, email, id, machines, name, phone, products, prosthetics, salary, speciality);
 		return result;
 	}
 
@@ -201,13 +201,13 @@ public class Engineer implements Serializable {
 				&& Objects.equals(name, other.name) && phone == other.phone && Objects.equals(products, other.products)
 				&& Objects.equals(prosthetics, other.prosthetics)
 				&& Float.floatToIntBits(salary) == Float.floatToIntBits(other.salary)
-				&& Objects.equals(specialty, other.specialty);
+				&& Objects.equals(speciality, other.speciality);
 	}
 
 	@Override
 	public String toString() {
-		return "Engineer [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", specialty="
-				+ specialty + ", email=" + email + ", salary=" + salary + ", license=" + Arrays.toString(license)
+		return "Engineer [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", speciality="
+				+ speciality + ", email=" + email + ", salary=" + salary + ", license=" + Arrays.toString(license)
 				+ ", products=" + products + ", machines=" + machines + "]";
 	}    
     

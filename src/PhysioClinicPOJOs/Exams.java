@@ -16,8 +16,6 @@ public class Exams implements Serializable {
     private String type; 
     private Machine machine; 
     private Date doB; 
-    @Basic(fetch=FetchType.LAZY)
-    @Lob
     private byte[] exam_image; 
     private Client client; 
     private List<Physio> physios;
