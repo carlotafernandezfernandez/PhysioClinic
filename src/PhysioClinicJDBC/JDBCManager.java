@@ -138,6 +138,19 @@ private Connection c = null;
 					+ ")";
 			stmt.executeUpdate(sql);
 			
+			sql = "CREATE TABLE Exam ("
+					+ "ex_id INTEGER PRIMARY KEY,"
+					+ "ex_type TEXT,"
+					+ "client_id INTEGER,"
+					+ "ex_doB DATE,"
+					+ "ex_image BLOB,"
+					+ "Machine_id INTEGER,"
+					+ "FOREIGN KEY (\"Machine_id\") REFERENCES Machine (\"Machine_id\"),"
+					+ "FOREIGN KEY (client_id) REFERENCES Client (\"client_id\")"
+					+ ")";
+			stmt.executeUpdate(sql);
+
+			
 			
 		}catch(SQLException e) {
 			if(!e.getMessage().contains("already exists")) 
