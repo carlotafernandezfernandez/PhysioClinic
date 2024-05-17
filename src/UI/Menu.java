@@ -1,12 +1,14 @@
 package UI;
 
 import java.io.BufferedReader;
-import java.sql.Date; 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.*;
 import javax.swing.JButton;
@@ -179,8 +181,9 @@ public class Menu {
 		
 		System.out.println("Type the dob of the client, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (java.sql.Date) df.parse(dob_str);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate dob_LC = LocalDate.parse(dob_str, formatter);
+		Date dob = Date.valueOf(dob_LC);
 		
 		System.out.println("Type the cardnumber of the client");
 		Integer cardnumber = Integer.parseInt(reader.readLine());
@@ -206,11 +209,12 @@ public class Menu {
 		String name = reader.readLine();
 		System.out.println("Type the phone of the physio");
 		String phone = reader.readLine();
-		
-		System.out.println("Type the dob of the physio, format=yyyy/mm/dd");
+
+		System.out.println("Type the dob of the engineer, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df.parse(dob_str);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate dob_LC = LocalDate.parse(dob_str, formatter);
+		Date dob = Date.valueOf(dob_LC);
 		
 		System.out.println("Type the email of the physio");
 		String email = reader.readLine();
@@ -234,10 +238,12 @@ public class Menu {
 		System.out.println("Type the phone of the engineer");
 		String phone = reader.readLine();
 		
+
 		System.out.println("Type the dob of the engineer, format=yyyy/mm/dd");
 		String dob_str = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (java.sql.Date) df.parse(dob_str);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate dob_LC = LocalDate.parse(dob_str, formatter);
+		Date dob = Date.valueOf(dob_LC);
 		
 		System.out.println("Type the email of the engineer");
 		String email = reader.readLine();
