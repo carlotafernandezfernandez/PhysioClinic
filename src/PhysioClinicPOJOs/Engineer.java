@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import PhysioClinicXMLutils.SQLDateAdapter;
+
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
