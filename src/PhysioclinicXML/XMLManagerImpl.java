@@ -22,7 +22,7 @@ public class XMLManagerImpl implements XMLManager{
 	ClientManager clientmanager;
 	
 	@Override
-	public void engineer2xml(Integer id) {
+	public void physio2xml(Integer id) {
 		// TODO Auto-generated method stub
 		Physio p = null;
 		List<Client> clients = new ArrayList<Client>();

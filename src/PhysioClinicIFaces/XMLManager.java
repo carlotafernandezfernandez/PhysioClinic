@@ -5,7 +5,7 @@ import java.io.File;
 import PhysioClinicPOJOs.Client;
 
 public interface XMLManager {
-	public void engineer2xml (Integer id);
+	public void physio2xml (Integer id);
 	public Client xml2Client (File xml);
 	
 }

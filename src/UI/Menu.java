@@ -27,7 +27,7 @@ public class Menu {
     private static ProductsManager productsmanager;
     private static ProstheticsManager prostheticsmanager;
     private static BufferedReader reader = new BufferedReader (new InputStreamReader(System.in));
-	
+	private static XMLManager xmlmanager;
 
     public static void main(String[] args) {
 		
@@ -93,7 +93,7 @@ public class Menu {
 		{
 			System.out.println("Login of owner successful!");
 			//call for physiotherapist submenu;
-			physioMenu(email);
+			physioMenu(u.getId());
 		} else if(u!=null & u.getRole().getName().equals("client")){
 			System.out.println("Login of owner successful!");
 			//call for client submenu;
@@ -146,7 +146,7 @@ public class Menu {
 				
 	}
     
-    private static void physioMenu(String email) {
+    private static void physioMenu(Integer id) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -157,6 +157,7 @@ public class Menu {
 				System.out.println("3. Delete client");
 				System.out.println("4. Search client by ID");
 				System.out.println("5. Search engineer by ID");
+				System.out.println("6. Print me to xml.");
 				System.out.println("0. Return.");
 				
 				choice = Integer.parseInt(reader.readLine());
@@ -179,6 +180,8 @@ public class Menu {
 				case 5:
 					searchEngID();
 					break;
+				case 6: 
+					printMe(id);
 				case 0:
 					System.out.println("Back to main menu");
 					
@@ -191,7 +194,13 @@ public class Menu {
 		{e.printStackTrace();}
 	}
     
-    private static void createClient() throws Exception {
+    private static void printMe(Integer id) {
+		// TODO Auto-generated method stub
+		xmlmanager.physio2xml(id);
+	
+	}
+
+	private static void createClient() throws Exception {
     	Client c = null; 
     	
     	System.out.println("Type the id of the client");
