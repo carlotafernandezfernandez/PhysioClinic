@@ -1,5 +1,7 @@
 package PhysioClinicPOJOs; 
-import java.util.*; 
+import java.util.*;
+
+import java.sql.Date;  
 import java.io.Serializable;
 
 public class Prosthetics implements Serializable {
@@ -83,6 +85,7 @@ public class Prosthetics implements Serializable {
 	public void setDate_bought(Date date_bought) {
 		this.date_bought = date_bought;
 	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(client, date_bought, doB, engineer, id, inspections, type);

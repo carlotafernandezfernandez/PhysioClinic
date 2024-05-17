@@ -1,6 +1,7 @@
 package PhysioClinicPOJOs; 
 import java.util.*;
 
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,6 +13,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import PhysioClinicXMLutils.SQLDateAdapter;
 
+import javax.persistence.Basic;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
+
+import java.sql.Date; 
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -25,7 +31,7 @@ public class Engineer implements Serializable {
 	@XmlAttribute
     private String name; 
     @XmlElement
-    private int phone; 
+    private String phone; 
     @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
     @XmlElement
@@ -35,6 +41,8 @@ public class Engineer implements Serializable {
     @XmlElement
     private float salary; 
     @XmlElement
+    @Basic(fetch=FetchType.LAZY)
+    @Lob
     private byte[] license; 
     @XmlTransient
     private List<Products> products;
@@ -43,8 +51,7 @@ public class Engineer implements Serializable {
     @XmlElementWrapper(name = "TypeofProsthetic")
     private List<Prosthetics> prosthetics;
 	
-    public Engineer (String name, int phone, Date doB, String specialty, String email, float salary,
-			byte[] license) {
+    public Engineer (String name, String phone, Date doB, String specialty, String email, float salary) {
 		super();
 		this.name = name;
 		this.phone = phone;
@@ -52,14 +59,12 @@ public class Engineer implements Serializable {
 		this.specialty = specialty;
 		this.email = email;
 		this.salary = salary;
-		this.license = license;
 		this.products = new ArrayList<Products>(); 
 		this.machines = new ArrayList<Machine>(); 
 		this.prosthetics = new ArrayList<Prosthetics>(); 
 	}
 
-	public Engineer(int id, String name, int phone, Date doB, String specialty, String email, float salary,
-			byte[] license) {
+	public Engineer(int id, String name, String phone, Date doB, String specialty, String email, float salary) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -68,7 +73,6 @@ public class Engineer implements Serializable {
 		this.specialty = specialty;
 		this.email = email;
 		this.salary = salary;
-		this.license = license;
 		this.products = new ArrayList<Products>(); 
 		this.machines = new ArrayList<Machine>(); 
 		this.prosthetics = new ArrayList<Prosthetics>(); 
@@ -97,11 +101,11 @@ public class Engineer implements Serializable {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

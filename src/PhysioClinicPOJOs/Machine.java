@@ -1,5 +1,6 @@
 package PhysioClinicPOJOs; 
-import java.util.*; 
+import java.util.*;
+import java.sql.Date;  
 import java.io.Serializable;
 
 public class Machine implements Serializable {
@@ -11,7 +12,7 @@ public class Machine implements Serializable {
     private Date doB; 
     private Date dBought; 
     private List<Exams> exams;
-    private Engineer engineer; 
+    private Engineer engineer; 	
 	
     public int getId() {
 		return id;
@@ -53,12 +54,12 @@ public class Machine implements Serializable {
 		return serialVersionUID;
 	}
 	
-	public Machine(int id, String type, Date doB, Date dBought, Engineer engineer) {
+	public Machine(int id, String type, java.sql.Date dob2, java.sql.Date db, Engineer engineer) {
 		super();
 		this.id = id;
 		this.type = type;
-		this.doB = doB;
-		this.dBought = dBought;
+		this.doB = dob2;
+		this.dBought = db;
 		this.engineer = engineer; 
 		this.exams = new ArrayList<Exams>();
 	}

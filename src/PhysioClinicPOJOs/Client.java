@@ -1,4 +1,5 @@
 package PhysioClinicPOJOs; 
+
 import java.util.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,6 +11,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import PhysioClinicXMLutils.SQLDateAdapter;
+import java.sql.Date; 
+import java.util.*;
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -25,7 +28,7 @@ public class Client implements Serializable {
     @XmlAttribute
     private String name; 
     @XmlElement(name = "phone_number" ) //, Required = "false")
-    private int phone; 
+    private String phone;     
     @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
     @XmlElement
@@ -63,11 +66,11 @@ public class Client implements Serializable {
 		this.name = name;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public Physio getPhysio() {
@@ -152,7 +155,7 @@ public class Client implements Serializable {
 		
 	}
 
-	public Client(int id, Physio physio, String name, int phone, Date doB, int card_n, 
+	public Client(int id, Physio physio, String name, String phone, Date doB, int card_n, 
 			boolean large_family, String email) {
 		super();
 		this.id = id;
@@ -169,7 +172,7 @@ public class Client implements Serializable {
 		this.exams = new ArrayList<Exams>();
 	}
 
-	public Client(String name, Physio physio, int phone, Date doB, int card_n, boolean large_family, String email) {
+	public Client(String name, Physio physio, String phone, Date doB, int card_n, boolean large_family, String email) {
 		super();
 		this.name = name;
 		this.phone = phone;

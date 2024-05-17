@@ -13,7 +13,7 @@ public interface UserManager {
 	public List<Role> getRoles();
 	public Role getRole(Integer id);
 	public User getUser(String email);
-	public User checkPassword(String email, String pass);
-	public void changePassword(String email, String new_passwd);
+	public User checkPassword(String email, byte[] pass);
+	public void changePassword(String email, byte[] new_passwd);
 
 }

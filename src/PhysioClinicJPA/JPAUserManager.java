@@ -23,7 +23,6 @@ public class JPAUserManager implements UserManager{
 	@Override
 	public void connect() {
 		// TODO Auto-generated method stub
-		//PHYSIOCLINIC-PROVIDER QUE ES
 		em = Persistence.createEntityManagerFactory("physioclinic-provider").createEntityManager();
 		
 		em.getTransaction().begin();
@@ -39,7 +38,6 @@ public class JPAUserManager implements UserManager{
 			this.newRole(client);
 			this.newRole(engineer);
 		}
-		
 	}
 	
 	@Override
@@ -93,7 +91,7 @@ public class JPAUserManager implements UserManager{
 	}
 	
 	@Override
-	public User checkPassword(String email, String pass) {
+	public User checkPassword(String email, byte[] pass) {
 		// TODO Auto-generated method stub
 		User u = null;
 		
@@ -101,12 +99,7 @@ public class JPAUserManager implements UserManager{
 		q.setParameter(1, email);
 		
 		try {
-			
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(pass.getBytes());
-			byte[] pw = md.digest();
-			
-			q.setParameter(2, pw);
+			q.setParameter(2, pass);
 			
 		}catch(Exception e)
 		{e.printStackTrace();}
@@ -121,11 +114,16 @@ public class JPAUserManager implements UserManager{
 	}
 	
 	@Override
-	public void changePassword(String email, String new_passwd) {
+	public void changePassword(String email, byte[] new_passwd) {
 		try {
-			Query q = em.createNativeQuery("UPDATE users SET password= ? WHERE email= ?;", User.class);
-			q.setParameter(1, new_passwd);
-			q.setParameter(2, email);
+			
+			Query q2 = em.createNativeQuery("SELECT * FROM users WHERE email = ?", User.class);
+			q2.setParameter(1, email);
+			User user = (User) q2.getSingleResult();
+			
+			em.getTransaction().begin();
+			user.setPassword(new_passwd);
+			em.getTransaction().commit();
 			
 		}
 		catch(Exception e){
