@@ -44,7 +44,7 @@ private Connection c = null;
 					+ "family_number	INTEGER,"
 					+ "email	TEXT,"
 					+ "Physiotherapist_id	INTEGER,"
-					+ "FOREIGN KEY(Physiotherapist_id) REFERENCES Physiotherapist(physio_id)";
+					+ "FOREIGN KEY(Physiotherapist_id) REFERENCES Physiotherapist(physio_id))";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Engineer ("
@@ -56,17 +56,6 @@ private Connection c = null;
 					+ "eng_name	TEXT NOT NULL UNIQUE,"
 					+ "eng_doB	DATE,"
 					+ "eng_salary	NUMERIC(11, 2)"
-					+ ")";
-			stmt.executeUpdate(sql);
-			
-			sql = "CREATE TABLE Exams ("
-					+ "ex_id	INTEGER PRIMARY KEY,"
-					+ "ex_type	TEXT NOT NULL,"
-					+ "ex_clientFrom	TEXT,"
-					+ "ex_doB	DATE,"
-					+ "ex_image BLOB"
-					+ "Machine_id INTEGER,"
-					+ "FOREIGN KEY(Machine_id) REFERENCES Machine(Machine_id)"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
