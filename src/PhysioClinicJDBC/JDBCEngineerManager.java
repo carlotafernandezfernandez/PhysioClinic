@@ -26,7 +26,7 @@ public class JDBCEngineerManager implements EngineerManager{
 			prep.setString(1, phone);
 			prep.setInt(2, eng_id);
 			
-			prep.executeQuery();
+			prep.executeUpdate();
 		}
 		catch(Exception e){
 			e.printStackTrace();

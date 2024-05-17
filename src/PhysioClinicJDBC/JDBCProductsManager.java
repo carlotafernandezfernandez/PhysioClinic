@@ -21,7 +21,7 @@ public class JDBCProductsManager implements ProductsManager{
 			prep.setFloat(1, n_available);
 			prep.setInt(2, product_id);
 			
-			prep.executeQuery();
+			prep.executeUpdate();
 		}
 		catch(Exception e){
 			e.printStackTrace();

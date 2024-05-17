@@ -11,6 +11,10 @@ import javax.swing.JLabel;
 import UI.Menu;
 
 public class EngMenu extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel label;
     private JButton loginButton, signUpButton, updateButton, exitButton;
 
