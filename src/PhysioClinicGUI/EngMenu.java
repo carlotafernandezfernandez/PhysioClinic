@@ -1,13 +1,23 @@
 package PhysioClinicGUI;
 
+import java.awt.Checkbox;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
+import PhysioClinicPOJOs.Client;
+import PhysioClinicPOJOs.Engineer;
+import PhysioClinicPOJOs.Physio;
 import UI.Menu;
 
 public class EngMenu extends JFrame{
@@ -111,4 +121,92 @@ public class EngMenu extends JFrame{
         });
         add(exitButton);
     }
+    
+    public static Engineer CreateEngineerGUI() {
+   	 JFrame frame;
+   	 JTextField idField, nameField, phoneField, dobField, salaryField, emailField, physioIdField, specialityField;
+   	 Engineer eng; 
+   	
+       frame = new JFrame("Create Engineer");
+       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       frame.setSize(400, 400);
+       frame.setLayout(new GridLayout(10, 2));
+
+       frame.add(new JLabel("Engineer ID:"));
+       idField = new JTextField();
+       frame.add(idField);
+
+       frame.add(new JLabel("Name:"));
+       nameField = new JTextField();
+       frame.add(nameField);
+
+       frame.add(new JLabel("Phone:"));
+       phoneField = new JTextField();
+       frame.add(phoneField);
+
+       frame.add(new JLabel("Date of Birth (yyyy/MM/dd):"));
+       dobField = new JTextField();
+       frame.add(dobField);
+
+       frame.add(new JLabel("Email:"));
+       emailField = new JTextField();
+       frame.add(emailField);
+
+       frame.add(new JLabel("Salary:"));
+       salaryField = new JTextField();
+       frame.add(salaryField);
+
+       frame.add(new JLabel("Speciality:"));
+       specialityField = new JTextField();
+       frame.add(specialityField);
+
+       JButton submitButton = new JButton("Create Engineer");
+       frame.add(submitButton);
+       
+       frame.add(new JLabel(""));
+       final Engineer[] engineer = {};
+
+       submitButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               try {
+                   int id = Integer.parseInt(idField.getText());
+                   String name = nameField.getText();
+                   String phone = phoneField.getText();
+                   
+                   String dobStr = dobField.getText();
+                   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                   LocalDate dobLC = LocalDate.parse(dobStr, formatter);
+                   Date dob = Date.valueOf(dobLC);
+
+                   String email = emailField.getText();
+                   float salary = Float.parseFloat(salaryField.getText());
+                   String speciality = phoneField.getText();
+                   
+                   Engineer eng = new Engineer(id, name, phone, dob, speciality, email, salary); 
+
+                   engineer[0] = eng; 
+                   
+                   JOptionPane.showMessageDialog(frame, "Engineer created successfully!");
+                   frame.dispose();
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+               }
+           }
+           
+       });
+
+
+
+       frame.setVisible(true);
+       while (frame.isVisible()) {
+           try {
+               Thread.sleep(100); 
+           } catch (InterruptedException ex) {
+               ex.printStackTrace();
+           }
+       }
+       return engineer[0]; 
+   }
+
 }

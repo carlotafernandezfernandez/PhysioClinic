@@ -20,12 +20,13 @@ import PhysioClinicIFaces.*;
 import PhysioClinicJDBC.*;
 import PhysioClinicJPA.*;
 import PhysioClinicPOJOs.*;
+import PhysioclinicXML.XMLManagerImpl;
 import PhysioClinicEncription.Encription;
 
 public class Menu {
 	
-	private JLabel label;
-    private JButton loginButton, signUpButton, updateButton, exitButton;
+	//private JLabel label;
+    //private JButton loginButton, signUpButton, updateButton, exitButton;
 
 	private static JDBCManager jdbcmanager;
 	private static ClientManager clientmanager;
@@ -49,7 +50,7 @@ public class Menu {
         productsmanager = new JDBCProductsManager(jdbcmanager);
         prostheticsmanager = new JDBCProstheticsManager(jdbcmanager);
         usermanager = new JPAUserManager();
-	xmlmanager = new XMLManagerImpl();
+        xmlmanager = new XMLManagerImpl();
 		
         new MainMenu().setVisible(true);}
         
@@ -151,16 +152,23 @@ public class Menu {
 			usermanager.newUser(u);
 			
 			if(u!=null & u.getRole().getName().equals("Physiotherapist")){
-				System.out.println("Insert new physiotherpist´s information ->");
-				createPhys();
+				Physio p = PhysioMenu.CreatePhysioGUI();
+				physiomanager.createPhysio(p);
 				
 			} else if(u!=null & u.getRole().getName().equals("Client")){
 				System.out.println("Insert new client´s information -> ");
-				createClient();
+				//createClient();
+				try {
+					Client c = ClientMenu.CreateClientGUI();
+					clientmanager.createClient(c);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			} else if (u!=null & u.getRole().getName().equals("Engineer")){
-				System.out.println("Insert new engineer´s information -> ");
-				createEng();
+				Engineer eng = EngMenu.CreateEngineerGUI();
+				engineermanager.createEngineer(eng);
 				
 			}
 		
@@ -169,7 +177,7 @@ public class Menu {
 		}catch(Exception e){e.printStackTrace();}
 	}
     
-    public static void createClient() throws Exception {
+    /*public static void createClient() throws Exception {
     	Client c = null; 
 
     	System.out.println("Type the id of the client");
@@ -256,7 +264,7 @@ public class Menu {
 		eng = new Engineer(id, name, phone, dob, specialty, email, salary);
 		
 		engineermanager.createEngineer(eng);
-    }
+    }*/
       
     public static void updatePassword() {
     	String email = null; 

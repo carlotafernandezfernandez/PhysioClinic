@@ -16,7 +16,6 @@ public class JDBCPhysioManager implements PhysioManager{
 		this.manager = m;
 	}
 
-	@Override
 	public Physio searchPhysioByID (int physio_id) {
 		// TODO Auto-generated method stub
 		Physio physio = null;
@@ -36,7 +35,7 @@ public class JDBCPhysioManager implements PhysioManager{
 			Float salary = rs.getFloat("physio_salary");
 			Date doB = rs.getDate("physio_doB");
 			
-		    physio = new Physio(physio_id, name, phone, doB, speciality, email, salary);
+		    physio = new Physio(id, name, phone, doB, speciality, email, salary);
 
 		    
 		    rs.close();
@@ -46,6 +45,8 @@ public class JDBCPhysioManager implements PhysioManager{
 		
 		return physio;
 	}
+	
+	
 
 	public void createPhysio(Physio p) {
 		try {
@@ -70,5 +71,6 @@ public class JDBCPhysioManager implements PhysioManager{
 			e.printStackTrace();
 		}
 	}
+	
 }
 		

@@ -56,6 +56,8 @@ public class MainMenu extends JFrame {
             }
         });
         add(exitButton);
+       
     }
+    
     
 }
