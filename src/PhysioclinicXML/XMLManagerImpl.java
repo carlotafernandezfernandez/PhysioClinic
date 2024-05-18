@@ -53,6 +53,22 @@ public class XMLManagerImpl implements XMLManager{
 	@Override
 	public Client xml2Client(File xml) {
 		// TODO Auto-generated method stub
+		Client c = null;
+		manager = new JDBCManager();
+		clientmanager = new JDBCClientManager(manager);
+		
+		try{
+		//read client form xml file
+		JAXBContext jaxbContext = JAXBContext.newInstance(Client.class);
+		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+		c = (Client) unmarshaller.unmarshall(xml);
+		clientmanager.createClient(c);
+		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 
