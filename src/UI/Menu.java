@@ -378,7 +378,7 @@ public class Menu {
 		System.out.println(e);
     }
     
-    private static void clientMenu(String email) {
+    /*private static void clientMenu(String email) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -408,7 +408,7 @@ public class Menu {
 			
 		}catch(Exception e)
 		{e.printStackTrace();}
-	}
+	}*/
     
     public static void searchPhysioID() throws NumberFormatException, Exception {
     	Physio p = null; 
@@ -426,7 +426,7 @@ public class Menu {
 		examsmanager.deleteExamByID(id);
     }
     
-    private static void engMenu(String email) {
+    /*private static void engMenu(String email) {
 		// TODO Auto-generated method stub
 		try {
 			int choice;
@@ -467,7 +467,7 @@ public class Menu {
 			
 		}catch(Exception e)
 		{e.printStackTrace();}
-	}
+	}*/
     
     public static void changeEngPhoneID() throws NumberFormatException, Exception {
     	System.out.println("Type the id of the engineer");
