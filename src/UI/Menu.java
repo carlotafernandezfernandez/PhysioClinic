@@ -49,6 +49,7 @@ public class Menu {
         productsmanager = new JDBCProductsManager(jdbcmanager);
         prostheticsmanager = new JDBCProstheticsManager(jdbcmanager);
         usermanager = new JPAUserManager();
+	xmlmanager = new XMLManagerImpl();
 		
         new MainMenu().setVisible(true);}
         
