@@ -30,17 +30,17 @@ public class XMLManagerImpl implements XMLManager{
 		physiomanager = new JDBCPhysioManager(manager);
 		clientmanager = new JDBCClientManager(manager);
 		try {
-			//Do a SQL query to get the owner by the id
+			//Do a SQL query to get the physio by the id
 			p = physiomanager.searchPhysioByID(id);
-			//search for the pets of the owner
+			//search for the clients of the physio
 			clients = clientmanager.showAllClients();
 			p.setClients(clients);
 			
-			//export the owner to an xml file
+			//export the physio to an xml file
 			JAXBContext jaxbContext = JAXBContext.newInstance(Physio.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			
-			File file = new File("Owner.xml");
+			File file = new File("./xmls/Physio.xml");
 			marshaller.marshal(p, file);
 			System.out.print(p);
 		}
