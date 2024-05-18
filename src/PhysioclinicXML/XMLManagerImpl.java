@@ -40,7 +40,7 @@ public class XMLManagerImpl implements XMLManager{
 			JAXBContext jaxbContext = JAXBContext.newInstance(Physio.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
 			
-			File file = new File("./xmls/Physio.xml");
+			File file = new File("Physio.xml");
 			marshaller.marshal(p, file);
 			System.out.print(p);
 		}
