@@ -53,7 +53,8 @@ public class Menu {
         usermanager = new JPAUserManager();
         xmlmanager = new XMLManagerImpl();
         
-        new PhysioMenu(23).setVisible(true);
+        optionsMM.LoginGUI();
+        
         //new MainMenu().setVisible(true);
         
     }
@@ -102,7 +103,7 @@ public class Menu {
     public static void login() {
     	String email = null; 
     	String passwd = null; 
-    	byte [] encrypted_passwd = null; 
+    	byte [] encrypted_passwd = null;
     	
 		try {
 			System.out.println("Email: ");
@@ -156,20 +157,14 @@ public class Menu {
 			usermanager.newUser(u);
 			
 			if(u!=null & u.getRole().getName().equals("Physiotherapist")){
-				createPhys();
+				createPhys(u.getEmail());
 				
 			} else if(u!=null & u.getRole().getName().equals("Client")){
-				System.out.println("Insert new client´s information -> ");
-				createClient();
-				try {
-					createClient();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				//System.out.println("Insert new client´s information -> ");
+				createClient(u.getEmail());
 				
 			} else if (u!=null & u.getRole().getName().equals("Engineer")){
-				createEng();
+				createEng(u.getEmail());
 				
 			}
 		
@@ -178,7 +173,7 @@ public class Menu {
 		}catch(Exception e){e.printStackTrace();}
 	}
     
-    public static void createClient() throws Exception {
+    public static void createClient(String email) throws Exception {
     	Client c = null; 
     	
     	
@@ -199,17 +194,17 @@ public class Menu {
 		Integer cardnumber = Integer.parseInt(reader.readLine());
 		System.out.println("Client has large family (YES:1, NO:0)");
 		Boolean largeFam = Boolean.valueOf(reader.readLine());
-		System.out.println("Type the email of the client");
-		String email = reader.readLine();
+		//System.out.println("Type the email of the client");
+		//String email = reader.readLine();
 		System.out.println("Type the ID of the assigned physiotherapist");
 		int physioID = Integer.parseInt(reader.readLine());
 		Physio p = physiomanager.searchPhysioByID(physioID);
     	
-		c = ClientMenu.CreateClientGUI();
+		//c = ClientMenu.CreateClientGUI(email);
     	clientmanager.createClient(c);
     }
     
-    private static void createPhys() throws IllegalArgumentException, Exception {
+    private static void createPhys(String email) throws IllegalArgumentException, Exception {
     	Physio p = null; 
     	
     	System.out.println("Type the id of the physio");
@@ -225,18 +220,18 @@ public class Menu {
 		LocalDate dob_LC = LocalDate.parse(dob_str, formatter);
 		Date dob = Date.valueOf(dob_LC);
 		
-		System.out.println("Type the email of the physio");
-		String email = reader.readLine();
+		//System.out.println("Type the email of the physio");
+		//String email = reader.readLine();
 		System.out.println("Type the salary of the physio");
 		Float salary = Float.parseFloat(reader.readLine());
 		System.out.println("Type the speciality of the physio");
 		String specialty = reader.readLine();
     	
-		//p = PhysioMenu.CreatePhysioGUI();	
+		//p = PhysioMenu.CreatePhysioGUI(email);	
     	physiomanager.createPhysio(p);
     }
     
-    private static void createEng() throws NumberFormatException, Exception {
+    private static void createEng(String email) throws NumberFormatException, Exception {
     	Engineer eng = null; 
     	
     	System.out.println("Type the id of the engineer");
@@ -253,15 +248,15 @@ public class Menu {
 		LocalDate dob_LC = LocalDate.parse(dob_str, formatter);
 		Date dob = Date.valueOf(dob_LC);
 		
-		System.out.println("Type the email of the engineer");
-		String email = reader.readLine();
+		//System.out.println("Type the email of the engineer");
+		//String email = reader.readLine();
 		System.out.println("Type the salary of the engineer");
 		Float salary = Float.parseFloat(reader.readLine());
 		System.out.println("Type the speciality of the engineer");
 		String specialty = reader.readLine();
 		
 		
-		//eng = EngMenu.CreateEngineerGUI();
+		//eng = EngMenu.CreateEngineerGUI(email);
 		engineermanager.createEngineer(eng);
     }
       

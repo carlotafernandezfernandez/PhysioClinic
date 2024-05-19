@@ -39,7 +39,7 @@ public class PhysioMenu extends JFrame{
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                	Client c = ClientMenu.CreateClientGUI();
+                	Client c = CreateGUI.CreateClientGUI();
 					clientmanager.createClient(c);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -140,95 +140,7 @@ public class PhysioMenu extends JFrame{
         add(exitButton);
     }
     
-    public static Physio CreatePhysioGUI() {
-      	 JFrame frame;
-      	 JTextField idField, nameField, phoneField, dobField, salaryField, emailField, physioIdField, specialityField;
-      	 Physio p; 
-      	
-          frame = new JFrame("Create Physiotherapist");
-          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-          frame.setSize(400, 400);
-          frame.setLayout(new GridLayout(10, 2));
-
-          frame.add(new JLabel("Physiotherapist ID:"));
-          idField = new JTextField();
-          frame.add(idField);
-          
-          frame.add(new JLabel("Name:"));
-          nameField = new JTextField();
-          frame.add(nameField);
-
-          frame.add(new JLabel("Phone:"));
-          phoneField = new JTextField();
-          frame.add(phoneField);
-
-          frame.add(new JLabel("Date of Birth (yyyy/MM/dd):"));
-          dobField = new JTextField();
-          frame.add(dobField);
-
-          frame.add(new JLabel("Email:"));
-          emailField = new JTextField();
-          frame.add(emailField);
-
-          frame.add(new JLabel("Salary:"));
-          salaryField = new JTextField();
-          frame.add(salaryField);
-
-          frame.add(new JLabel("Speciality:"));
-          specialityField = new JTextField();
-          frame.add(specialityField);
-
-          // Create the submit button
-          JButton submitButton = new JButton("Create Physiotherapist");
-          frame.add(submitButton);
-          
-
-          // Add empty label for alignment
-          frame.add(new JLabel(""));
-          final Physio[] physio = {};
-
-          submitButton.addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                  try {
-                      int id = Integer.parseInt(idField.getText());
-                      String name = nameField.getText();
-                      String phone = phoneField.getText();
-                      
-                      String dobStr = dobField.getText();
-                      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                      LocalDate dobLC = LocalDate.parse(dobStr, formatter);
-                      Date dob = Date.valueOf(dobLC);
-
-                      String email = emailField.getText();
-                      float salary = Float.parseFloat(salaryField.getText());
-                      String speciality = phoneField.getText();
-                      
-                      Physio p = new Physio(id, name, phone, dob, speciality, email, salary); 
-
-                      physio[0] = p; 
-                      
-                      JOptionPane.showMessageDialog(frame, "Physiotherapist created successfully!");
-                      frame.dispose();
-                  } catch (Exception ex) {
-                      JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                  }
-              }
-              
-          });
-
-
-
-          frame.setVisible(true);
-          while (frame.isVisible()) {
-              try {
-                  Thread.sleep(100); 
-              } catch (InterruptedException ex) {
-                  ex.printStackTrace();
-              }
-          }
-          return physio[0]; 
-      }
+    
     
 
 }

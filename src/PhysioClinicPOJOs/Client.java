@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Client")
-@XmlType(propOrder = {"typeofClient", "physio", "phone_number","card_n", "treatments", "prosthetics", "exams"})
+@XmlType(propOrder = {"physio", "phone_number","card_n", "treatments_inprogress", "prosthetics", "exams","dob"})
 
 
 public class Client implements Serializable {

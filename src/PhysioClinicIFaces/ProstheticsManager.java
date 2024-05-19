@@ -8,4 +8,5 @@ public interface ProstheticsManager {
 	//public List<Prosthetics> showAllProsthetics();
 	//public void deleteprostheticByID(int prosthetic_id);
 	public List<Prosthetics> showAllProstheticsOfType(String type);
+	
 }
