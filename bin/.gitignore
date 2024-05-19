@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-=======
+/PhysioClinicJDBC/
+/PhysioClinicJPA/
+/PhysioClinicPOJOs/
 /PhysioClinicXMLutils/
 /PhysioclinicXML/
-/PhysioClinicIFaces/
 /UI/
-/PhysioClinicJDBC/
->>>>>>> branch 'master' of https://github.com/carlotafernandezfernandez/PhysioClinic
 /PhysioClinicGUI/
-/PhysioClinicPOJOs/

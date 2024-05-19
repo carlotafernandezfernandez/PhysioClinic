@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import PhysioClinicIFaces.ClientManager;
 import PhysioClinicIFaces.PhysioManager;
@@ -62,7 +63,7 @@ public class XMLManagerImpl implements XMLManager{
 		JAXBContext jaxbContext = JAXBContext.newInstance(Client.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
-		c = (Client) unmarshaller.unmarshall(xml);
+		c = (Client) unmarshaller.unmarshal(xml);
 		clientmanager.createClient(c);
 		
 		}
