@@ -27,7 +27,6 @@ public class Menu {
 	
 	//private JLabel label;
     //private JButton loginButton, signUpButton, updateButton, exitButton;
-
 	private static JDBCManager jdbcmanager;
 	private static ClientManager clientmanager;
 	private static EngineerManager engineermanager;
@@ -51,8 +50,10 @@ public class Menu {
         prostheticsmanager = new JDBCProstheticsManager(jdbcmanager);
         usermanager = new JPAUserManager();
         xmlmanager = new XMLManagerImpl();
-		
-        new MainMenu().setVisible(true);}
+        
+        new MainMenu().setVisible(true);
+        
+    }
         
         /*try {
 			
@@ -430,8 +431,8 @@ public class Menu {
     public static void deleteExamID() throws NumberFormatException, Exception {
     	//System.out.println("Type the id of the exam");
 		//Integer id = Integer.parseInt(reader.readLine());
-    	
-		examsmanager.deleteExamByID(MainMenu.getIntGUI("ID"));
+    	int id = MainMenu.getIntGUI("ID");
+		examsmanager.deleteExamByID(id);
     }
     
     /*private static void engMenu(String email) {
