@@ -24,12 +24,12 @@ public class PhysioMenu extends JFrame{
 
     public PhysioMenu(int id)  {
         super("physioMenu");
-        setSize(400, 300);
+        setSize(400, 450);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
         label = new JLabel("Choose an option:");
-        label.setBounds(20, 20, 320, 30);
+        label.setBounds(20, 20, 200, 30);
         label.setBackground(Color.BLUE); 
         label.setOpaque(true); 
         add(label);
@@ -105,6 +105,20 @@ public class PhysioMenu extends JFrame{
         updateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
+					Menu.loadClients(id);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            }
+        });
+        add(updateButton);
+        
+        updateButton = new JButton("Load clients from XML file");
+        updateButton.setBounds(20, 300, 150, 30);
+        updateButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
 					Menu.printMe(id);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -115,7 +129,7 @@ public class PhysioMenu extends JFrame{
         add(updateButton);
 
         exitButton = new JButton("Back to main menu");
-        exitButton.setBounds(20, 300, 150, 30);
+        exitButton.setBounds(20, 340, 150, 30);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Exiting application.");

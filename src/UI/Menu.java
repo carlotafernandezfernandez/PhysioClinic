@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.*;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.SwingUtilities;
 
 import PhysioClinicGUI.*; 
@@ -51,7 +52,8 @@ public class Menu {
         usermanager = new JPAUserManager();
         xmlmanager = new XMLManagerImpl();
         
-        new MainMenu().setVisible(true);
+        new PhysioMenu(23).setVisible(true);
+        //new MainMenu().setVisible(true);
         
     }
         
@@ -202,7 +204,7 @@ public class Menu {
 		int physioID = Integer.parseInt(reader.readLine());
 		Physio p = physiomanager.searchPhysioByID(physioID);
     	
-		//c = ClientMenu.CreateClientGUI();
+		c = ClientMenu.CreateClientGUI();
     	clientmanager.createClient(c);
     }
     
@@ -380,7 +382,7 @@ public class Menu {
     	Engineer e = null; 
     	System.out.println("Type the id of the engineer");
 		Integer id = Integer.parseInt(reader.readLine());
-    	//int id = MainMenu.getIntGUI("ID");
+    	//int id = new getIdGUI("ID");
     	
 		e = engineermanager.searchEngineerByID(id);
 		System.out.println(e);
@@ -419,13 +421,15 @@ public class Menu {
 	}*/
     
     public static void searchPhysioID() throws NumberFormatException, Exception {
-    	Physio p = null; 
-    	System.out.println("Type the id of the physio");
-		Integer id = Integer.parseInt(reader.readLine());
+    	Physio p = null;
+    	//System.out.println("Type the id of the physio");
+		//Integer id = Integer.parseInt(reader.readLine());
     	//int id = MainMenu.getIntGUI("ID");
-		
-		p = physiomanager.searchPhysioByID(id);
-		System.out.println(p);
+    	
+    	//int id = new getIntGUI().setVisible(true);
+    	//p = physiomanager.searchPhysioByID(id);
+		System.out.println(p); 
+	
     }
     
     public static void deleteExamID() throws NumberFormatException, Exception {
@@ -544,5 +548,10 @@ public class Menu {
 		
 		prostheticsmanager.showAllProstheticsOfType(type);
     }
+    
+    public static int getIntGUIMenu(String what) {
+    	int n = getDataGUI.getInt(what);
+    	return n;  
+    }
 
-}//limite menu
+} //limite menu
