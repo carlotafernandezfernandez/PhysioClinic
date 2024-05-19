@@ -1,6 +1,7 @@
 package UI;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
@@ -351,6 +352,12 @@ public class Menu {
 	
 	}
     
+    public static void loadClients() {
+    	Client c = null;
+    	File file = new File("./xmls/External-Client.xml");
+    	c = xmlmanager.xml2Client(file);
+    	System.out.print(c);
+    }
 
     public static void showClients() {
     	List<Client> clients = null;

@@ -105,7 +105,7 @@ public class PhysioMenu extends JFrame{
         updateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					Menu.loadClients(id);
+					Menu.loadClients();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
