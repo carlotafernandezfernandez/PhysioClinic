@@ -156,7 +156,7 @@ public class ClientMenu extends JFrame{
                     String email = emailField.getText();
                     int physioID = Integer.parseInt(physioIdField.getText());
                     Physio p = physiomanager.searchPhysioByID(physioID);
-                    System.out.println(p);
+                    //System.out.println(p);
                     
                     Client c = new Client(id, p, name, phone, dob, cardNumber, largeFamily, email);
 
@@ -184,52 +184,7 @@ public class ClientMenu extends JFrame{
         return client[0]; 
     }
 
-    public static int getID() {
-        JFrame frame = new JFrame("Insert ID");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-        frame.setLayout(new GridLayout(3, 2));
-
-        JTextField idField = new JTextField();
-        frame.add(new JLabel("ID:"));
-        frame.add(idField);
-
-        JButton submitButton = new JButton("Submit");
-        frame.add(submitButton);
-
-        final int[] id = {0};
-
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    id[0] = Integer.parseInt(idField.getText());
-                    
-                    frame.dispose();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
-                }
-            }
-        });
-
-        frame.setVisible(true);
-        
-        while (frame.isVisible()) {
-            try {
-                Thread.sleep(100); 
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
-        
-        return id[0]; 
-    }
     
-    public static void main (String [] args) {
-    	int id = getID();
-        System.out.println("ID entered by the user: " + id);
-
-    }
     
  }
   
