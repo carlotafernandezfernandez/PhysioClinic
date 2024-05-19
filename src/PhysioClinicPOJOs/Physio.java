@@ -18,9 +18,7 @@ public class Physio implements Serializable {
     private Date doB; 
     private String speciality; 
     private String email; 
-    private float salary; 
-    @Basic(fetch=FetchType.LAZY)
-    @Lob
+    private float salary;
     private byte[] license; 
     private List<Products> products; 
     private List<Exams> exams;
