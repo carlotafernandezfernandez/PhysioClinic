@@ -47,6 +47,8 @@ public class MainMenu extends JFrame {
             }
         });
         add(updateButton);
+        
+        
 
         exitButton = new JButton("Exit");
         exitButton.setBounds(20, 180, 150, 30);

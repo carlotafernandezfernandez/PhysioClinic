@@ -157,7 +157,7 @@ public class Menu {
 				
 			} else if(u!=null & u.getRole().getName().equals("Client")){
 				System.out.println("Insert new client´s information -> ");
-				//createClient();
+				createClient();
 				try {
 					createClient();
 				} catch (Exception e) {
@@ -178,7 +178,7 @@ public class Menu {
     public static void createClient() throws Exception {
     	Client c = null; 
     	
-    	/*
+    	
     	System.out.println("Type the id of the client");
 		Integer id = Integer.parseInt(reader.readLine());
     	System.out.println("Type the name of the client");
@@ -200,15 +200,15 @@ public class Menu {
 		String email = reader.readLine();
 		System.out.println("Type the ID of the assigned physiotherapist");
 		int physioID = Integer.parseInt(reader.readLine());
-		Physio p = physiomanager.searchPhysioByID(physioID);*/
+		Physio p = physiomanager.searchPhysioByID(physioID);
     	
-		c = ClientMenu.CreateClientGUI();
+		//c = ClientMenu.CreateClientGUI();
     	clientmanager.createClient(c);
     }
     
     private static void createPhys() throws IllegalArgumentException, Exception {
     	Physio p = null; 
-    	/*
+    	
     	System.out.println("Type the id of the physio");
 		Integer id = Integer.parseInt(reader.readLine());
     	System.out.println("Type the name of the physio");
@@ -227,15 +227,15 @@ public class Menu {
 		System.out.println("Type the salary of the physio");
 		Float salary = Float.parseFloat(reader.readLine());
 		System.out.println("Type the speciality of the physio");
-		String specialty = reader.readLine();*/
+		String specialty = reader.readLine();
     	
-		p = PhysioMenu.CreatePhysioGUI();	
+		//p = PhysioMenu.CreatePhysioGUI();	
     	physiomanager.createPhysio(p);
     }
     
     private static void createEng() throws NumberFormatException, Exception {
     	Engineer eng = null; 
-    	/*
+    	
     	System.out.println("Type the id of the engineer");
 		Integer id = Integer.parseInt(reader.readLine());
     	System.out.println("Type the name of the engineer");
@@ -255,10 +255,10 @@ public class Menu {
 		System.out.println("Type the salary of the engineer");
 		Float salary = Float.parseFloat(reader.readLine());
 		System.out.println("Type the speciality of the engineer");
-		String specialty = reader.readLine();*/
+		String specialty = reader.readLine();
 		
 		
-		eng = EngMenu.CreateEngineerGUI();
+		//eng = EngMenu.CreateEngineerGUI();
 		engineermanager.createEngineer(eng);
     }
       
@@ -359,18 +359,18 @@ public class Menu {
     }
     
     public static void deleteClient() throws NumberFormatException, Exception {
-    	int id = MainMenu.getIntGUI("ID");
-    	//System.out.println("Type the id of the client");
-		//Integer id = Integer.parseInt(reader.readLine());
+    	//int id = MainMenu.getIntGUI("ID");
+    	System.out.println("Type the id of the client");
+		Integer id = Integer.parseInt(reader.readLine());
 		
 		clientmanager.deleteClientByID(id);
     }
     
     public static void searchClientID() throws NumberFormatException, Exception {
     	Client c = null; 
-    	//System.out.println("Type the id of the client");
-		//Integer id = Integer.parseInt(reader.readLine());
-    	int id = MainMenu.getIntGUI("ID");
+    	System.out.println("Type the id of the client");
+		Integer id = Integer.parseInt(reader.readLine());
+    	//int id = MainMenu.getIntGUI("ID");
 		
 		c = clientmanager.searchClientByID(id);
 		System.out.println(c);
@@ -378,9 +378,9 @@ public class Menu {
     
     public static void searchEngID() throws NumberFormatException, Exception {
     	Engineer e = null; 
-    	//System.out.println("Type the id of the engineer");
-		//Integer id = Integer.parseInt(reader.readLine());
-    	int id = MainMenu.getIntGUI("ID");
+    	System.out.println("Type the id of the engineer");
+		Integer id = Integer.parseInt(reader.readLine());
+    	//int id = MainMenu.getIntGUI("ID");
     	
 		e = engineermanager.searchEngineerByID(id);
 		System.out.println(e);
@@ -420,18 +420,18 @@ public class Menu {
     
     public static void searchPhysioID() throws NumberFormatException, Exception {
     	Physio p = null; 
-    	//System.out.println("Type the id of the physio");
-		//Integer id = Integer.parseInt(reader.readLine());
-    	int id = MainMenu.getIntGUI("ID");
+    	System.out.println("Type the id of the physio");
+		Integer id = Integer.parseInt(reader.readLine());
+    	//int id = MainMenu.getIntGUI("ID");
 		
 		p = physiomanager.searchPhysioByID(id);
 		System.out.println(p);
     }
     
     public static void deleteExamID() throws NumberFormatException, Exception {
-    	//System.out.println("Type the id of the exam");
-		//Integer id = Integer.parseInt(reader.readLine());
-    	int id = MainMenu.getIntGUI("ID");
+    	System.out.println("Type the id of the exam");
+		Integer id = Integer.parseInt(reader.readLine());
+    	//int id = MainMenu.getIntGUI("ID");
 		examsmanager.deleteExamByID(id);
     }
     
@@ -479,13 +479,13 @@ public class Menu {
 	}*/
     
     public static void changeEngPhoneID() throws NumberFormatException, Exception {
-    	//System.out.println("Type the id of the engineer");
-		//Integer id = Integer.parseInt(reader.readLine());
-    	int id = MainMenu.getIntGUI("ID");
+    	System.out.println("Type the id of the engineer");
+		Integer id = Integer.parseInt(reader.readLine());
+    	//int id = MainMenu.getIntGUI("ID");
     	
-		//System.out.println("Type the new phone number of the engineer");
-		//String new_ph = reader.readLine();
-    	String new_ph = MainMenu.getStringGUI("new phone number");
+		System.out.println("Type the new phone number of the engineer");
+		String new_ph = reader.readLine();
+    	//String new_ph = MainMenu.getStringGUI("new phone number");
     	
 		engineermanager.changeEngineerTelephoneByID(new_ph, id);
     }
@@ -493,7 +493,7 @@ public class Menu {
     public static void createMachine() throws NumberFormatException, Exception {
     	Machine m = null; 
     	
-    	/*System.out.println("Type the id of the machine");
+    	System.out.println("Type the id of the machine");
 		Integer id = Integer.parseInt(reader.readLine());
     	
 		System.out.println("Type in the type of the machine");
@@ -512,9 +512,9 @@ public class Menu {
 		int engID = Integer.parseInt(reader.readLine());
 		Engineer e = engineermanager.searchEngineerByID(engID);
 		
-		m = new Machine(id, type, dob, db, e);*/
+		m = new Machine(id, type, dob, db, e);
 		
-    	m = MachineMenu.CreateMachineGUI();
+    	//m = MachineMenu.CreateMachineGUI();
     	machinemanager.createMachine(m);
     }
     
@@ -527,20 +527,20 @@ public class Menu {
     }
     
     public static void changeProdAvailability() throws NumberFormatException, Exception {
-    	int id = MainMenu.getIntGUI("ID");
-    	//System.out.println("Type the id of the product");
-		//Integer id = Integer.parseInt(reader.readLine());
-    	int newN_available = MainMenu.getIntGUI("new number of available products");
-		//System.out.println("Type new number of available product");
-		//Integer newN_available = Integer.parseInt(reader.readLine());
+    	//int id = MainMenu.getIntGUI("ID");
+    	System.out.println("Type the id of the product");
+		Integer id = Integer.parseInt(reader.readLine());
+    	//int newN_available = MainMenu.getIntGUI("new number of available products");
+		System.out.println("Type new number of available product");
+		Integer newN_available = Integer.parseInt(reader.readLine());
 		
 		productsmanager.changeProductNAvailable(id, newN_available);
     }
     
     public static void prostheticsType() throws Exception {
-    	String type = MainMenu.getStringGUI("type of prosthetics to be shown");
-    	//System.out.println("Type in the type of the prosthetic");
-		//String type = reader.readLine();
+    	//String type = MainMenu.getStringGUI("type of prosthetics to be shown");
+    	System.out.println("Type in the type of the prosthetic");
+		String type = reader.readLine();
 		
 		prostheticsmanager.showAllProstheticsOfType(type);
     }

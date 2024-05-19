@@ -70,7 +70,7 @@ public class XMLManagerImpl implements XMLManager{
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		return null;
+		return c;
 	}
 
 }
