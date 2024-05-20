@@ -53,9 +53,9 @@ public class Menu {
         usermanager = new JPAUserManager();
         xmlmanager = new XMLManagerImpl();
         
-        optionsMM.LoginGUI();
+        //optionsMM.LoginGUI();
         
-        //new MainMenu().setVisible(true);
+        new MainMenu().setVisible(true);
         
     }
         
@@ -424,12 +424,12 @@ public class Menu {
     
     public static void searchPhysioID() throws NumberFormatException, Exception {
     	Physio p = null;
-    	//System.out.println("Type the id of the physio");
-		//Integer id = Integer.parseInt(reader.readLine());
+    	System.out.println("Type the id of the physio");
+		Integer id = Integer.parseInt(reader.readLine());
     	//int id = MainMenu.getIntGUI("ID");
     	
     	//int id = new getIntGUI().setVisible(true);
-    	//p = physiomanager.searchPhysioByID(id);
+    	p = physiomanager.searchPhysioByID(id);
 		System.out.println(p); 
 	
     }
@@ -556,4 +556,4 @@ public class Menu {
     	return n;  
     }
 
-} //limite menu
+} //final 
