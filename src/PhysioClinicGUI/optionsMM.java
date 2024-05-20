@@ -26,7 +26,7 @@ public class optionsMM extends JFrame{
     
 	public static void LoginGUI() {
 		
-	   	 	JTextField emailField, passwdField;
+	   	 JTextField emailField, passwdField;
 	   		   	
 	       JFrame frame = new JFrame("");
 	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,6 +81,7 @@ public class optionsMM extends JFrame{
 	           }
 	           
 	       });
+	       frame.setVisible(true);
 	}
 	
 	public static void main (String []args ) {
