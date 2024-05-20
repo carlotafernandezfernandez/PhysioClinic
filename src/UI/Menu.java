@@ -59,8 +59,8 @@ public class Menu {
         xmlmanager = new XMLManagerImpl();
         
         //int n = getInt("what");
-        LoginGUI();
-    	//MainMenu();
+       
+    	MainMenu();
         
     }
 
@@ -574,8 +574,8 @@ public class Menu {
         CClientButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                	Client c = CreateClientGUIforPHYSIO();
-					clientmanager.createClient(c);
+                	CreateClientGUIforPHYSIO();
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -674,7 +674,7 @@ public class Menu {
         frame.setVisible(true);
     }
     
-    public static Client CreateClientGUIforPHYSIO() {
+    public static void CreateClientGUIforPHYSIO() {
      	 JFrame frame;
      	 JTextField idField, nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
      	 Checkbox largeFamilyCheckbox;
@@ -722,7 +722,6 @@ public class Menu {
          
 
          frame.add(new JLabel(""));
-         final Client[] client = {};
 
          submitButton.addActionListener(new ActionListener() {
              @Override
@@ -745,8 +744,7 @@ public class Menu {
                      Physio p = physiomanager.searchPhysioByID(physioID);
                      
                      Client c = new Client(id, p, name, phone, dob, cardNumber, largeFamily, email);
-
-                     client[0] = c; 
+                     clientmanager.createClient(c);
                      
                      JOptionPane.showMessageDialog(frame, "Client created successfully!");
                      frame.dispose();
@@ -760,15 +758,6 @@ public class Menu {
 
 
          frame.setVisible(true);
-         while (frame.isVisible()) {
-             try {
-                 Thread.sleep(100); 
-             } catch (InterruptedException ex) {
-                 ex.printStackTrace();
-             }
-         }
-         
-         return client[0]; 
      }
     
     public static void printMe(Integer id) {
@@ -785,39 +774,157 @@ public class Menu {
     }
 
     public static void showClients() {
-    	List<Client> clients = null;
-		
-		clients = clientmanager.showAllClients();
-		
-		System.out.println(clients);
+    	JFrame frame = new JFrame("Clients");
+    	List<Client> clients = clientmanager.showAllClients();
+    	if (clients != null) {
+    		JOptionPane.showMessageDialog(frame, clients);
+    	} else {
+    		JOptionPane.showMessageDialog(frame, "No clients in the system");
+    	}
+		JOptionPane.showMessageDialog(frame, clients);
+        
+		//System.out.println(machines);
+    	
     }
     
     public static void deleteClient() throws NumberFormatException, Exception {
-    	//int id = MainMenu.getIntGUI("ID");
-    	System.out.println("Type the id of the client");
-		Integer id = Integer.parseInt(reader.readLine());
-		
-		clientmanager.deleteClientByID(id);
+
+    	JFrame frame = new JFrame("Insert client ID to delete");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(3, 3));
+
+        JTextField intField = new JTextField();
+        frame.add(new JLabel());
+        frame.add(intField);
+
+        JButton submitButton = new JButton("Submit");
+        frame.add(submitButton);
+        
+        JButton exitButton = new JButton("Back to main menu");
+        exitButton.setBounds(20, 140, 150, 30);
+        frame.add(exitButton);
+        
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	int id = Integer.parseInt(intField.getText());
+                	clientmanager.deleteClientByID(id);
+
+                	JOptionPane.showMessageDialog(frame, "Client deleted");
+                	
+                    
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+                }
+            }
+        });
+
+        frame.setVisible(true);
+    	
     }
     
     public static void searchClientID() throws NumberFormatException, Exception {
-    	Client c = null; 
-    	System.out.println("Type the id of the client");
-		Integer id = Integer.parseInt(reader.readLine());
-    	//int id = MainMenu.getIntGUI("ID");
-		
-		c = clientmanager.searchClientByID(id);
-		System.out.println(c);
+    	JFrame frame = new JFrame("Insert physiotherapist ID");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(3, 3));
+
+        JTextField intField = new JTextField();
+        frame.add(new JLabel());
+        frame.add(intField);
+
+        JButton submitButton = new JButton("Submit");
+        frame.add(submitButton);
+        
+        JButton exitButton = new JButton("Back to main menu");
+        exitButton.setBounds(20, 140, 150, 30);
+        frame.add(exitButton);
+        
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	int id = Integer.parseInt(intField.getText());
+                	Client c = clientmanager.searchClientByID(id);
+
+                	if (c != null) {
+                		JOptionPane.showMessageDialog(frame, c);
+                	} else {
+                		JOptionPane.showMessageDialog(frame, "No client with this id in the system");
+                	}
+                	
+                	
+                    
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+                }
+            }
+        });
+
+        frame.setVisible(true);
+
     }
     
     public static void searchEngID() throws NumberFormatException, Exception {
-    	Engineer e = null; 
-    	System.out.println("Type the id of the engineer");
-		Integer id = Integer.parseInt(reader.readLine());
-    	//int id = new getIdGUI("ID");
+    	JFrame frame = new JFrame("Insert physiotherapist ID");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(3, 3));
+
+        JTextField intField = new JTextField();
+        frame.add(new JLabel());
+        frame.add(intField);
+
+        JButton submitButton = new JButton("Submit");
+        frame.add(submitButton);
+        
+        JButton exitButton = new JButton("Back to main menu");
+        exitButton.setBounds(20, 140, 150, 30);
+        frame.add(exitButton);
+        
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	int id = Integer.parseInt(intField.getText());
+                	Engineer eng = engineermanager.searchEngineerByID(id); 
+
+                	if (eng != null) {
+                		JOptionPane.showMessageDialog(frame, eng);
+                	} else {
+                		JOptionPane.showMessageDialog(frame, "No engineer with this id in the system");
+                	}
+                	
+                	
+                    
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+                }
+            }
+        });
+
+        frame.setVisible(true);
     	
-		e = engineermanager.searchEngineerByID(id);
-		System.out.println(e);
     }
     
     public static void ClientMenu(int id)  {
@@ -874,22 +981,98 @@ public class Menu {
     }
     
     public static void searchPhysioID() throws NumberFormatException, Exception {
-    	Physio p = null; 
-    	//System.out.println("Type the id of the physio");
-		//Integer id = Integer.parseInt(reader.readLine());
-    	int id = getIntGUI("physiotherapist ID");
-    	System.out.println(id); 
-    	p = physiomanager.searchPhysioByID(id);
-		System.out.println(p); 
-	
+    	
+    	JFrame frame = new JFrame("Insert physiotherapist ID");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(3, 3));
+
+        JTextField intField = new JTextField();
+        frame.add(new JLabel());
+        frame.add(intField);
+
+        JButton submitButton = new JButton("Submit");
+        frame.add(submitButton);
+        
+        JButton exitButton = new JButton("Back to main menu");
+        exitButton.setBounds(20, 140, 150, 30);
+        frame.add(exitButton);
+        
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	int id = Integer.parseInt(intField.getText());
+                	Physio p = physiomanager.searchPhysioByID(id);
+                	
+                	if (p != null) {
+                		JOptionPane.showMessageDialog(frame, p);
+                	} else {
+                		JOptionPane.showMessageDialog(frame, "No physio with this id in the system");
+                	}
+
+                	
+                	
+                    
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+                }
+            }
+        });
+
+        frame.setVisible(true);
     }
     
     public static void deleteExamID() throws NumberFormatException, Exception {
-    	System.out.println("Type the id of the exam");
-		Integer id = Integer.parseInt(reader.readLine());
-    	//int id = MainMenu.getIntGUI("ID");
-		examsmanager.deleteExamByID(id);
+
+    	JFrame frame = new JFrame("Insert physiotherapist ID");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(3, 3));
+
+        JTextField intField = new JTextField();
+        frame.add(new JLabel());
+        frame.add(intField);
+
+        JButton submitButton = new JButton("Submit");
+        frame.add(submitButton);
+        
+        JButton exitButton = new JButton("Back to main menu");
+        exitButton.setBounds(20, 140, 150, 30);
+        frame.add(exitButton);
+        
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	int id = Integer.parseInt(intField.getText());
+            		examsmanager.deleteExamByID(id);
+            		
+            		
+
+                	JOptionPane.showMessageDialog(frame, "Machine deleted correctly");
+                    
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+                }
+            }
+        });
+
+        frame.setVisible(true);
     }
+    	
     
     public static void EngMenu(int id)  {
     	JLabel label;
@@ -910,7 +1093,7 @@ public class Menu {
         phoneButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					changeEngPhoneID();
+					changeEngPhoneID(id);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -924,7 +1107,7 @@ public class Menu {
         machineButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					createMachine();
+					CreateMachineGUI();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -987,19 +1170,49 @@ public class Menu {
         frame.setVisible(true);
     }
     
-    public static void changeEngPhoneID() throws NumberFormatException, Exception {
-    	System.out.println("Type the id of the engineer");
-		Integer id = Integer.parseInt(reader.readLine());
-    	//int id = MainMenu.getIntGUI("ID");
-    	
-		System.out.println("Type the new phone number of the engineer");
-		String new_ph = reader.readLine();
-    	//String new_ph = MainMenu.getStringGUI("new phone number");
-    	
-		engineermanager.changeEngineerTelephoneByID(new_ph, id);
+    public static void changeEngPhoneID(int id) throws NumberFormatException, Exception {
+    	JFrame frame = new JFrame("Insert new phone");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        frame.setLayout(new GridLayout(3, 3));
+
+        JTextField intField = new JTextField();
+        frame.add(new JLabel());
+        frame.add(intField);
+
+        JButton submitButton = new JButton("Submit");
+        frame.add(submitButton);
+        
+        JButton exitButton = new JButton("Back to main menu");
+        exitButton.setBounds(20, 140, 150, 30);
+        frame.add(exitButton);
+        
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	String phone = intField.getText();
+                	engineermanager.changeEngineerTelephoneByID(phone, id);
+                	
+                	JOptionPane.showMessageDialog(frame, "Changed to" + engineermanager.searchEngineerByID(id));
+                	
+                    
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+                }
+            }
+        });
+
+        frame.setVisible(true);
     }
     
-    public static Machine CreateMachineGUI() {
+    public static void CreateMachineGUI() {
     	 JFrame frame;
     	 JTextField idField, typeField, phoneField, dobField, engIdField, doBoughtField;
     	 Machine m; 
@@ -1032,8 +1245,17 @@ public class Menu {
         JButton submitButton = new JButton("Create machine");
         frame.add(submitButton);
         
+        JButton exitButton = new JButton("Exit");
+        frame.add(exitButton);
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+            
+        });
+        
         frame.add(new JLabel(""));
-        final Machine[] m1 = {};
 
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -1056,10 +1278,10 @@ public class Menu {
                     
                     Machine m = new Machine(id, type, dob, db, eng);
 
-                    m1[0] = m; 
+                	machinemanager.createMachine(m);
                     
                     JOptionPane.showMessageDialog(frame, "Machine created successfully!");
-                    frame.dispose();
+                    
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -1070,137 +1292,127 @@ public class Menu {
 
 
         frame.setVisible(true);
-        while (frame.isVisible()) {
-            try {
-                Thread.sleep(100); 
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return m1[0]; 
-    }
-    public static void createMachine() throws NumberFormatException, Exception {
-    	Machine m = null; 
-    	
-    	/*System.out.println("Type the id of the machine");
-		Integer id = Integer.parseInt(reader.readLine());
-    	
-		System.out.println("Type in the type of the machine");
-		String type = reader.readLine();
-		
-		System.out.println("Type the dob of the machine, format=yyyy/mm/dd");
-		String dob_str = reader.readLine();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date dob = (Date) df.parse(dob_str);
-		
-		System.out.println("Type in the date in which the machine was bought, format=yyyy/mm/dd");
-		String db_str = reader.readLine();
-		Date db = (Date) df.parse(db_str);
-		
-		System.out.println("Type the ID of the assigned engineer");
-		int engID = Integer.parseInt(reader.readLine());
-		Engineer e = engineermanager.searchEngineerByID(engID);
-		
-		m = new Machine(id, type, dob, db, e);*/
-		
-    	m = CreateMachineGUI();
-    	machinemanager.createMachine(m);
+
     }
     
     public static void showMachines() {
+    	JFrame frame = new JFrame("Machines");
     	List<Machine> machines = null;
 		
 		machines = machinemanager.showAllMachines();
 		
-		System.out.println(machines);
+		if(machines != null) {
+			 JOptionPane.showMessageDialog(frame, machines);
+		}else {
+			 JOptionPane.showMessageDialog(frame, "No machines in the database");
+		}
+		
+
+       
+		//System.out.println(machines);
     }
     
     public static void changeProdAvailability() throws NumberFormatException, Exception {
-    	//int id = MainMenu.getIntGUI("ID");
-    	System.out.println("Type the id of the product");
-		Integer id = Integer.parseInt(reader.readLine());
-    	//int newN_available = MainMenu.getIntGUI("new number of available products");
-		System.out.println("Type new number of available product");
-		Integer newN_available = Integer.parseInt(reader.readLine());
-		
-		productsmanager.changeProductNAvailable(id, newN_available);
+
+	   	 JTextField idField, nField;
+	   		   	
+	       JFrame frame = new JFrame("");
+	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	       frame.setSize(300, 300);
+	       frame.setLayout(new GridLayout(4, 2));
+
+	       frame.add(new JLabel("Product ID:"));
+	       idField = new JTextField();
+	       frame.add(idField);
+
+	       frame.add(new JLabel("New number of available products"));
+	       nField = new JTextField();
+	       frame.add(nField);
+
+	       JButton submitButton = new JButton("Change");
+	       frame.add(submitButton);
+	       JButton exitButton = new JButton("Go back to main menu");
+	       frame.add(exitButton);
+	       
+	       frame.add(new JLabel(""));
+	       exitButton.addActionListener(new ActionListener() {
+	              @Override
+	              public void actionPerformed(ActionEvent e) {
+	                  frame.dispose();
+	              }
+	              
+	          });
+
+
+	       submitButton.addActionListener(new ActionListener() {
+	           @Override
+	           public void actionPerformed(ActionEvent e) {
+	               try {
+
+	                   int id = Integer.getInteger(idField.getText());
+	                   int n = Integer.getInteger(nField.getText());
+	                   productsmanager.changeProductNAvailable(id, n);
+	                   JOptionPane.showMessageDialog(frame, "Number of available proucts changed corectly");
+	                   
+	               } catch (Exception ex) {
+	                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	               }
+	           }
+	           
+	       });
+	       frame.setVisible(true);
     }
     
     public static void prostheticsType() throws Exception {
-    	//String type = MainMenu.getStringGUI("type of prosthetics to be shown");
-    	System.out.println("Type in the type of the prosthetic");
-		String type = reader.readLine();
+    	JTextField idField, typeField;
+		   	
+	       JFrame frame = new JFrame("");
+	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	       frame.setSize(300, 300);
+	       frame.setLayout(new GridLayout(3, 2));
+
+	       frame.add(new JLabel("Type:"));
+	       typeField = new JTextField();
+	       frame.add(typeField);
+
+	       JButton submitButton = new JButton("Show");
+	       frame.add(submitButton);
+	       JButton exitButton = new JButton("Go back to main menu");
+	       frame.add(exitButton);
+	       
+	       frame.add(new JLabel(""));
+	       exitButton.addActionListener(new ActionListener() {
+	              @Override
+	              public void actionPerformed(ActionEvent e) {
+	                  frame.dispose();
+	              }
+	              
+	          });
+
+	       
+	       frame.add(new JLabel(""));
+
+	       submitButton.addActionListener(new ActionListener() {
+	           @Override
+	           public void actionPerformed(ActionEvent e) {
+	               try {
+	            	   String type = typeField.getText();
+	            	   List<Prosthetics> p = prostheticsmanager.showAllProstheticsOfType(type);
+	            	   if(p != null) {
+	            		   JOptionPane.showMessageDialog(frame, p);
+	            	   }else {
+	            		   JOptionPane.showMessageDialog(frame, "No prosthetics in the database");
+	            	   }
+	            	   
+	                   
+	               } catch (Exception ex) {
+	                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	               }
+	           }
+	           
+	       });
+	       frame.setVisible(true);
 		
-		prostheticsmanager.showAllProstheticsOfType(type);
-    }
-
-    
-    public static int getIntGUI (String what) {
-    	
-        JFrame frame = new JFrame("Insert " + what);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-        frame.setLayout(new GridLayout(3, 2));
-
-        JTextField intField = new JTextField();
-        frame.add(new JLabel(what +":"));
-        frame.add(intField);
-
-        JButton submitButton = new JButton("Submit");
-        frame.add(submitButton);
-
-        final int[] i = {0};
-
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    i[0] = Integer.parseInt(intField.getText());
-          
-                    frame.dispose();
-                    
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
-                }
-            }
-        });
-
-        frame.setVisible(true);
-        
-        return i[0];
-    }
-	
-	public String getStringGUI(String what) {
-        JFrame frame = new JFrame("Insert " + what);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300, 200);
-        frame.setLayout(new GridLayout(3, 2));
-
-        JTextField stringField = new JTextField();
-        frame.add(new JLabel("-> "));
-        frame.add(stringField);
-
-        JButton submitButton = new JButton("Submit");
-        frame.add(submitButton);
-
-        final String[] s = {};
-
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    s[0] = stringField.getText();
-                    
-                    frame.dispose();
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Please enter a valid string.");
-                }
-            }
-        });
-
-       
-        frame.setVisible(true);
-        return s[0]; 
     }
 
 
