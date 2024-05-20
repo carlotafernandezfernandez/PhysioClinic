@@ -570,13 +570,12 @@ public class Menu {
         JButton CClientButton, clientsButton, DClientButton, clientButton, engButton, XMLButton, clientsXMLButton, exitButton;
         JFrame frame = new JFrame("Choose an option: ");
         frame.setSize(400, 450);
-        frame.setBackground(Color.blue);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
         
         label = new JLabel("Choose an option:");
         label.setBounds(20, 20, 200, 30);
-         
+        label.setBackground(Color.CYAN); 
         label.setOpaque(true); 
         frame.add(label);
 
