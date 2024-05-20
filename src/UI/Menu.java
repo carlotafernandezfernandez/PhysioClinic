@@ -1059,13 +1059,11 @@ public class Menu {
                 try {
                 	int id = Integer.parseInt(intField.getText());
             		examsmanager.deleteExamByID(id);
-            		
-            		
-
+            	
                 	JOptionPane.showMessageDialog(frame, "Machine deleted correctly");
                     
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+                    JOptionPane.showMessageDialog(frame, "No machines with this ID.");
                 }
             }
         });
@@ -1403,10 +1401,10 @@ public class Menu {
 	            	   }else {
 	            		   JOptionPane.showMessageDialog(frame, "No prosthetics in the database");
 	            	   }
-	            	   
+	    
 	                   
 	               } catch (Exception ex) {
-	                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	                   JOptionPane.showMessageDialog(frame, "No prosthetics in the database");
 	               }
 	           }
 	           

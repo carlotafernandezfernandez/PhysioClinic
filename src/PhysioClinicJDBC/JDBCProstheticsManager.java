@@ -31,6 +31,7 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 	public List<Prosthetics> showAllProstheticsOfType(String type) {
 		// TODO Auto-generated method stub
 		List<Prosthetics> prosthetics = new ArrayList<Prosthetics>();
+		prosthetics = null; 
 		Engineer eng = null; 
 		Client client = null;
 		

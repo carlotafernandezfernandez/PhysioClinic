@@ -51,6 +51,7 @@ public class JDBCMachineManager implements MachineManager{
 	public List<Machine> showAllMachines() {
 		// TODO Auto-generated method stub
 		List<Machine> machines= new ArrayList<Machine>();
+		machines = null; 
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
