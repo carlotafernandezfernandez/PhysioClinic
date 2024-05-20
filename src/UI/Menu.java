@@ -59,12 +59,12 @@ public class Menu {
         xmlmanager = new XMLManagerImpl();
         
         //int n = getInt("what");
-    	PhysioMenu(4);
+        LoginGUI();
     	//MainMenu();
         
     }
-    
-    public static void MainMenu()  {
+
+	public static void MainMenu()  {
         JButton loginButton, signUpButton, updateButton, exitButton;
         JFrame frame = new JFrame("Choose an option: ");
         frame.setSize(400, 300);
@@ -124,7 +124,7 @@ public class Menu {
 	       JFrame frame = new JFrame("");
 	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	       frame.setSize(300, 300);
-	       frame.setLayout(new GridLayout(3, 2));
+	       frame.setLayout(new GridLayout(4, 2));
 
 	       frame.add(new JLabel("Email:"));
 	       emailField = new JTextField();
@@ -136,6 +136,18 @@ public class Menu {
 
 	       JButton submitButton = new JButton("log in");
 	       frame.add(submitButton);
+	       JButton exitButton = new JButton("Go back to main menu");
+	       frame.add(exitButton);
+	       
+	       frame.add(new JLabel(""));
+	       submitButton.addActionListener(new ActionListener() {
+	              @Override
+	              public void actionPerformed(ActionEvent e) {
+	                  frame.dispose();
+	              }
+	              
+	          });
+
 	       
 	       frame.add(new JLabel(""));
 
@@ -163,8 +175,8 @@ public class Menu {
 	                       EngMenu(u.getId());
 	                      frame.dispose(); // Close login window
 	                   } else {
-	                       JFrame frame = null;
-	   					JOptionPane.showMessageDialog(frame, "Please enter a valid integer for ID.");
+	                    JFrame frame = null;
+	                    JOptionPane.showMessageDialog(frame, "Error in email or password");
 	                   }
 	                   
 	                   frame.dispose();
@@ -184,7 +196,7 @@ public class Menu {
 	       JFrame frame = new JFrame("");
 	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	       frame.setSize(300, 300);
-	       frame.setLayout(new GridLayout(4, 2));
+	       frame.setLayout(new GridLayout(5, 3));
 
 	       frame.add(new JLabel("Email:"));
 	       emailField = new JTextField();
@@ -199,6 +211,17 @@ public class Menu {
 
 	       JButton submitButton = new JButton("Sing up");
 	       frame.add(submitButton);
+	       JButton exitButton = new JButton("Go back to main menu");
+	       frame.add(exitButton);
+	       
+	       frame.add(new JLabel(""));
+	       submitButton.addActionListener(new ActionListener() {
+	              @Override
+	              public void actionPerformed(ActionEvent e) {
+	                  frame.dispose();
+	              }
+	              
+	          });
 	       
 	       frame.add(new JLabel(""));
 	       submitButton.addActionListener(new ActionListener() {
@@ -530,39 +553,6 @@ public class Menu {
 	       	           
 	       frame.setVisible(true);
 	  }
-    	
-
-   
-         
-    	/*String email = null; 
-    	String passwd = null; 
-    	byte[] encrypted_passwd = null; 
-    	
-    	try {
-    		System.out.println("Email: ");
-    		email = reader.readLine();
-    				
-    		System.out.println("Enter current password:");
-    		passwd = reader.readLine();
-    		encrypted_passwd = PhysioClinicEncription.Encription.encrypt(passwd);
-    	}catch(Exception e){e.printStackTrace();}
-		
-		
-		User u = usermanager.checkPassword(email, encrypted_passwd);
-		
-		if(u!=null) {
-			try {
-				System.out.println("Login of owner successful!");
-				
-				System.out.println("Enter new password: ");
-				String new_passwd = reader.readLine();
-				byte[] newEncrypted_passwd = PhysioClinicEncription.Encription.encrypt(new_passwd);
-				
-				usermanager.changePassword(email, newEncrypted_passwd);
-			}catch (Exception e){e.printStackTrace();}
-		}
-				
-	}*/
         
     
     public static void PhysioMenu(int id)  {
