@@ -473,7 +473,7 @@ public class Menu {
          frame = new JFrame("Change password");
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          frame.setSize(400, 400);
-         frame.setLayout(new GridLayout(4, 1));
+         frame.setLayout(new GridLayout(5, 1));
 
          frame.add(new JLabel("Email:"));
          emailField = new JTextField();
@@ -487,10 +487,20 @@ public class Menu {
          newPField = new JTextField();
          frame.add(newPField);
          
-         JButton submitButton = new JButton("change");
+         JButton submitButton = new JButton("Change");
 	       frame.add(submitButton);
+	       JButton exitButton = new JButton("Go back to main menu");
+	       frame.add(exitButton);
+	       
 	       
 	       frame.add(new JLabel(""));
+	       
+	       exitButton.addActionListener(new ActionListener() {
+	           @Override
+	           public void actionPerformed(ActionEvent e) {
+	        	   frame.dispose();
+	           }});
+
 	       submitButton.addActionListener(new ActionListener() {
 	           @Override
 	           public void actionPerformed(ActionEvent e) {
@@ -507,13 +517,17 @@ public class Menu {
 	                	   usermanager.changePassword(email, newPasswordE);
 	                	   JOptionPane.showMessageDialog(frame, "password changed correclty");
 	                	   frame.dispose();
-	                   }
+	                   } else {
+		                   JOptionPane.showMessageDialog(frame, "No user with that email and password in the database");
+		               }
 	                   
-	               } catch (Exception ex) {
+	               }catch (Exception ex) {
 	                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 	               }
 	               
 	           }});
+	       
+	       	           
 	       frame.setVisible(true);
 	  }
     	
