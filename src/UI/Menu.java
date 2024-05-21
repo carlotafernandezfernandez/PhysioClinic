@@ -70,7 +70,6 @@ public class Menu {
         usermanager = new JPAUserManager();
         xmlmanager = new XMLManagerImpl();
         
-        //int n = getInt("what");
     	MainMenu();
         
     }
@@ -635,7 +634,7 @@ public class Menu {
         XMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					printMe(u.getId());
+					printMe(u);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -760,9 +759,9 @@ public class Menu {
          frame.setVisible(true);
      }
     
-    public static void printMe(int id) {
+    public static void printMe(User u) {
 		// TODO Auto-generated method stub
-		xmlmanager.physio2xml(id);
+		xmlmanager.physio2xml(u.getId());
 	
 	}
     
