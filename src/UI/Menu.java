@@ -59,7 +59,6 @@ public class Menu {
         xmlmanager = new XMLManagerImpl();
         
         //int n = getInt("what");
-       
     	MainMenu();
         
     }
@@ -640,7 +639,7 @@ public class Menu {
         XMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					loadClients();
+					printMe(id);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -654,7 +653,7 @@ public class Menu {
         clientsXMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					printMe(id);
+					loadClients();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
