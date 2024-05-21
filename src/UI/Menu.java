@@ -1353,7 +1353,7 @@ public class Menu {
 	                   JOptionPane.showMessageDialog(frame, "Number of available proucts changed corectly");
 	                   
 	               } catch (Exception ex) {
-	                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	                   JOptionPane.showMessageDialog(frame, "No product with id: " + Integer.getInteger(idField.getText()));
 	               }
 	           }
 	           
@@ -1401,8 +1401,6 @@ public class Menu {
 	            	   }else {
 	            		   JOptionPane.showMessageDialog(frame, "No prosthetics in the database");
 	            	   }
-	    
-	                   
 	               } catch (Exception ex) {
 	                   JOptionPane.showMessageDialog(frame, "No prosthetics in the database");
 	               }
