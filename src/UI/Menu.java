@@ -1,7 +1,10 @@
 package UI;
 
+import java.awt.BorderLayout;
 import java.awt.Checkbox;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,8 +27,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+
 import PhysioClinicIFaces.*;
 import PhysioClinicJDBC.*;
 import PhysioClinicJPA.*;
@@ -774,17 +786,51 @@ public class Menu {
 
     public static void showClients() {
     	JFrame frame = new JFrame("Clients");
+    	frame.setSize(new Dimension(500, 500));
+    	JPanel contentPanel = new JPanel();
     	List<Client> clients = clientmanager.showAllClients();
+    	String[] columnNames = {"ID", "Name", "Email", "Phone", "DoB", "Card number", "Large Family"};
+    	
+    	DefaultTableModel model = new DefaultTableModel(columnNames, 0); 
+    	
     	if (clients != null) {
-    		JOptionPane.showMessageDialog(frame, clients);
+    		for (Client c : clients) {
+		        Object[] rowData = {
+		            c.getId(),
+		            c.getName(),
+		            c.getEmail(),
+		            c.getPhone(), 
+		            c.getDoB(), 
+		            c.getCard_n(), 
+		            c.isLarge_family(), 
+		            //c.getPhysio().getName(),
+		           
+		        };
+		        model.addRow(rowData);
+		    }
+    		JTable table = new JTable(model);
+    	    JScrollPane scrollPane = new JScrollPane(table);
+    	    
+    	    table.setPreferredSize(new Dimension(1000, 500)); 
+    	    contentPanel.removeAll();
+    	    contentPanel.add(scrollPane, BorderLayout.CENTER);
+    	    contentPanel.revalidate();
+    	    contentPanel.repaint();
+    	    contentPanel.setPreferredSize(new Dimension(500, 500));
+    	    frame.add(contentPanel);
+    	    frame.pack();
+    	    frame.setVisible(true);
+    	
+
     	} else {
     		JOptionPane.showMessageDialog(frame, "No clients in the system");
+    		
+    		
     	}
-		JOptionPane.showMessageDialog(frame, clients);
-        
-		//System.out.println(machines);
+		//JOptionPane.showMessageDialog(frame, clients);
     	
     }
+
     
     public static void deleteClient() throws NumberFormatException, Exception {
 
