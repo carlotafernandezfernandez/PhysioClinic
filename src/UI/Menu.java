@@ -151,7 +151,7 @@ public class Menu {
 	       frame.add(exitButton);
 	       
 	       frame.add(new JLabel(""));
-	       submitButton.addActionListener(new ActionListener() {
+	       exitButton.addActionListener(new ActionListener() {
 	              @Override
 	              public void actionPerformed(ActionEvent e) {
 	                  frame.dispose();
@@ -175,22 +175,21 @@ public class Menu {
 	                   
 	                   if (u != null && u.getRole().getName().equals("Physiotherapist")) {
 	                       System.out.println("Login of physiotherapist successful!");
-	                       PhysioMenu(u.getId());
+	                       PhysioMenu(u);
 	                       frame.dispose(); // Close login window
 	                   } else if (u != null && u.getRole().getName().equals("Client")) {
 	                       System.out.println("Login of client successful!");
-	                       ClientMenu(u.getId());
+	                       ClientMenu(u);
 	                       frame.dispose(); // Close login window
 	                   } else if (u != null && u.getRole().getName().equals("Engineer")) {
 	                       System.out.println("Login of engineer successful!");
-	                       EngMenu(u.getId());
+	                       EngMenu(u);
 	                      frame.dispose(); // Close login window
 	                   } else {
-	                    JFrame frame = null;
 	                    JOptionPane.showMessageDialog(frame, "Error in email or password");
+	                   
 	                   }
 	                   
-	                   frame.dispose();
 	               } catch (Exception ex) {
 	                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 	               }
@@ -226,7 +225,7 @@ public class Menu {
 	       frame.add(exitButton);
 	       
 	       frame.add(new JLabel(""));
-	       submitButton.addActionListener(new ActionListener() {
+	       exitButton.addActionListener(new ActionListener() {
 	              @Override
 	              public void actionPerformed(ActionEvent e) {
 	                  frame.dispose();
@@ -248,14 +247,14 @@ public class Menu {
 	                      usermanager.newUser(u);
 	                      
 	                      if(u!=null & u.getRole().getName().equals("Physiotherapist")){
-	          				CreatePhysioGUI(u.getEmail());
+	          				CreatePhysioGUI(u);
 	          				
 	          			} else if(u!=null & u.getRole().getName().equals("Client")){
 	          				//System.out.println("Insert new client´s information -> ");
-	          				CreateClientGUI(u.getEmail());
+	          				CreateClientGUI(u);
 	          				
 	          			} else if (u!=null & u.getRole().getName().equals("Engineer")){
-	          				CreateEngineerGUI(u.getEmail());
+	          				CreateEngineerGUI(u);
 	          				
 	          			}
 	                      
@@ -272,19 +271,15 @@ public class Menu {
 	       
 	}
     
-    public static void CreateClientGUI(String email) {
+    public static void CreateClientGUI(User u) {
       	 JFrame frame;
-      	 JTextField idField, nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
+      	 JTextField nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
       	 Checkbox largeFamilyCheckbox;
       	
           frame = new JFrame("Create Client");
           frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
           frame.setSize(400, 400);
           frame.setLayout(new GridLayout(10, 2));
-
-          frame.add(new JLabel("Client ID:"));
-          idField = new JTextField();
-          frame.add(idField);
 
           frame.add(new JLabel("Name:"));
           nameField = new JTextField();
@@ -325,7 +320,6 @@ public class Menu {
               @Override
               public void actionPerformed(ActionEvent e) {
                   try {
-                      int id = Integer.parseInt(idField.getText());
                       String name = nameField.getText();
                       String phone = phoneField.getText();
 
@@ -340,7 +334,7 @@ public class Menu {
                       int physioID = Integer.parseInt(physioIdField.getText());
                       Physio p = physiomanager.searchPhysioByID(physioID);
                       
-                      Client c = new Client(id, p, name, phone, dob, cardNumber, largeFamily, email);
+                      Client c = new Client(u.getId(), p, name, phone, dob, cardNumber, largeFamily, u.getEmail());
                       clientmanager.createClient(c);
                       
                       JOptionPane.showMessageDialog(frame, "Client created successfully!");
@@ -356,18 +350,14 @@ public class Menu {
       }
     
     
-    public static void CreatePhysioGUI(String email) {
+    public static void CreatePhysioGUI(User u) {
     	 JFrame frame;
-    	 JTextField idField, nameField, phoneField, dobField, salaryField, specialityField;
+    	 JTextField nameField, phoneField, dobField, salaryField, specialityField;
     	     	
         frame = new JFrame("Create Physiotherapist");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
         frame.setLayout(new GridLayout(10, 2));
-
-        frame.add(new JLabel("Physiotherapist ID:"));
-        idField = new JTextField();
-        frame.add(idField);
         
         frame.add(new JLabel("Name:"));
         nameField = new JTextField();
@@ -398,7 +388,6 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int id = Integer.parseInt(idField.getText());
                     String name = nameField.getText();
                     String phone = phoneField.getText();
                     
@@ -410,7 +399,7 @@ public class Menu {
                     float salary = Float.parseFloat(salaryField.getText());
                     String speciality = phoneField.getText();
                     
-                    Physio p = new Physio(id, name, phone, dob, speciality, email, salary); 
+                    Physio p = new Physio(u.getId(), name, phone, dob, speciality, u.getEmail(), salary); 
 
                     physiomanager.createPhysio(p);
                     
@@ -429,18 +418,14 @@ public class Menu {
     }
 
     
-    public static void CreateEngineerGUI (String email) {
+    public static void CreateEngineerGUI (User u) {
 	   	 JFrame frame;
-	   	 JTextField idField, nameField, phoneField, dobField, salaryField, specialityField;
+	   	 JTextField nameField, phoneField, dobField, salaryField, specialityField;
 	   		   	
 	       frame = new JFrame("Create Engineer");
 	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	       frame.setSize(400, 400);
 	       frame.setLayout(new GridLayout(10, 2));
-
-	       frame.add(new JLabel("Engineer ID:"));
-	       idField = new JTextField();
-	       frame.add(idField);
 
 	       frame.add(new JLabel("Name:"));
 	       nameField = new JTextField();
@@ -471,7 +456,6 @@ public class Menu {
 	           @Override
 	           public void actionPerformed(ActionEvent e) {
 	               try {
-	                   int id = Integer.parseInt(idField.getText());
 	                   String name = nameField.getText();
 	                   String phone = phoneField.getText();
 	                   
@@ -483,7 +467,7 @@ public class Menu {
 	                   float salary = Float.parseFloat(salaryField.getText());
 	                   String speciality = phoneField.getText();
 	                   
-	                   Engineer eng = new Engineer(id, name, phone, dob, speciality, email, salary); 
+	                   Engineer eng = new Engineer(u.getId(), name, phone, dob, speciality, u.getEmail(), salary); 
 
 	                   engineermanager.createEngineer(eng);
 	                   
@@ -566,7 +550,7 @@ public class Menu {
 	  }
         
     
-    public static void PhysioMenu(int id)  {
+    public static void PhysioMenu(User u)  {
     	JLabel label;
         JButton CClientButton, clientsButton, DClientButton, clientButton, engButton, XMLButton, clientsXMLButton, exitButton;
         JFrame frame = new JFrame("Choose an option: ");
@@ -651,7 +635,7 @@ public class Menu {
         XMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					printMe(id);
+					printMe(u.getId());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -687,7 +671,7 @@ public class Menu {
     
     public static void CreateClientGUIforPHYSIO() {
      	 JFrame frame;
-     	 JTextField idField, nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
+     	 JTextField passdField, nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
      	 Checkbox largeFamilyCheckbox;
      	
          frame = new JFrame("Create Client");
@@ -695,13 +679,13 @@ public class Menu {
          frame.setSize(400, 400);
          frame.setLayout(new GridLayout(10, 2));
 
-         frame.add(new JLabel("Client ID:"));
-         idField = new JTextField();
-         frame.add(idField);
-         
          frame.add(new JLabel("Email:"));
          emailField = new JTextField();
          frame.add(emailField);
+         
+         frame.add(new JLabel("Password for the clients account:"));
+         passdField = new JTextField();
+         frame.add(passdField);
 
          frame.add(new JLabel("Name:"));
          nameField = new JTextField();
@@ -738,12 +722,17 @@ public class Menu {
              @Override
              public void actionPerformed(ActionEvent e) {
                  try {
-                     int id = Integer.parseInt(idField.getText());
+                	 String email = emailField.getText();
+                     String pass = passdField.getText();
+                     byte[] passE = Encription.encrypt(pass);
+                     User u = new User(email, passE, usermanager.getRole(2));
+                     usermanager.newUser(u);
+                     u = usermanager.getUser(email);
+                     
                      String name = nameField.getText();
                      String phone = phoneField.getText();
 
                      String dobStr = dobField.getText();
-                     String email = emailField.getText();
                      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                      LocalDate dobLC = LocalDate.parse(dobStr, formatter);
                      Date dob = Date.valueOf(dobLC);
@@ -754,7 +743,7 @@ public class Menu {
                      int physioID = Integer.parseInt(physioIdField.getText());
                      Physio p = physiomanager.searchPhysioByID(physioID);
                      
-                     Client c = new Client(id, p, name, phone, dob, cardNumber, largeFamily, email);
+                     Client c = new Client(u.getId(), p, name, phone, dob, cardNumber, largeFamily, email);
                      clientmanager.createClient(c);
                      
                      JOptionPane.showMessageDialog(frame, "Client created successfully!");
@@ -771,7 +760,7 @@ public class Menu {
          frame.setVisible(true);
      }
     
-    public static void printMe(Integer id) {
+    public static void printMe(int id) {
 		// TODO Auto-generated method stub
 		xmlmanager.physio2xml(id);
 	
@@ -972,7 +961,7 @@ public class Menu {
     	
     }
     
-    public static void ClientMenu(int id)  {
+    public static void ClientMenu(User u)  {
     	JLabel label;
         JButton physioButton, examButton, exitButton;
         JFrame frame = new JFrame("Choose an option: ");
@@ -1117,7 +1106,7 @@ public class Menu {
     }
     	
     
-    public static void EngMenu(int id)  {
+    public static void EngMenu(User u)  {
     	JLabel label;
         JButton phoneButton, machineButton, machinesButton, PAButton, PTButton, exitButton;
         JFrame frame = new JFrame("Choose an option: ");
@@ -1131,12 +1120,12 @@ public class Menu {
         label.setOpaque(true); 
         frame.add(label);
 
-        phoneButton = new JButton("Change phone by ID");
+        phoneButton = new JButton("Change phone");
         phoneButton.setBounds(20, 60, 150, 30);
         phoneButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					changeEngPhoneID(id);
+					changeEngPhoneID(u.getId());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1145,12 +1134,12 @@ public class Menu {
         });
         frame.add(phoneButton);
 
-        machineButton = new JButton("Create a machine");
+        machineButton = new JButton("Create my machine");
         machineButton.setBounds(20, 100, 150, 30);
         machineButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					CreateMachineGUI();
+					CreateMachineGUI(u.getId());
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1255,10 +1244,9 @@ public class Menu {
         frame.setVisible(true);
     }
     
-    public static void CreateMachineGUI() {
+    public static void CreateMachineGUI(int id) {
     	 JFrame frame;
-    	 JTextField idField, typeField, phoneField, dobField, engIdField, doBoughtField;
-    	 Machine m; 
+    	 JTextField idField, typeField, dobField, doBoughtField;
     	
         frame = new JFrame("Create Machine");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1281,9 +1269,7 @@ public class Menu {
         doBoughtField = new JTextField();
         frame.add(doBoughtField);
 
-        frame.add(new JLabel("Assigned engineer ID:"));
-        engIdField = new JTextField();
-        frame.add(engIdField);
+        frame.add(new JLabel("Assigned engineer ID:" + id));
 
         JButton submitButton = new JButton("Create machine");
         frame.add(submitButton);
@@ -1316,8 +1302,7 @@ public class Menu {
                     LocalDate dbLC = LocalDate.parse(dbStr, formatter);
                     Date db = Date.valueOf(dbLC);
                     
-                    int eng_id = Integer.parseInt(engIdField.getText());
-                    Engineer eng = engineermanager.searchEngineerByID(eng_id);
+                    Engineer eng = engineermanager.searchEngineerByID(id);
                     
                     Machine m = new Machine(id, type, dob, db, eng);
 
