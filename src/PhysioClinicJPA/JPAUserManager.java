@@ -116,7 +116,6 @@ public class JPAUserManager implements UserManager{
 	@Override
 	public void changePassword(String email, byte[] new_passwd) {
 		try {
-			
 			Query q2 = em.createNativeQuery("SELECT * FROM users WHERE email = ?", User.class);
 			q2.setParameter(1, email);
 			User user = (User) q2.getSingleResult();

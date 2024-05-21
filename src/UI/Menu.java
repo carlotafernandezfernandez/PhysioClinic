@@ -832,13 +832,13 @@ public class Menu {
     }
     
     public static void searchClientID() throws NumberFormatException, Exception {
-    	JFrame frame = new JFrame("Insert physiotherapist ID");
+    	JFrame frame = new JFrame("Insert client ID");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel());
+        frame.add(new JLabel("->"));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -880,13 +880,13 @@ public class Menu {
     }
     
     public static void searchEngID() throws NumberFormatException, Exception {
-    	JFrame frame = new JFrame("Insert physiotherapist ID");
+    	JFrame frame = new JFrame("Insert engineer ID");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel());
+        frame.add(new JLabel("->"));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -1031,13 +1031,13 @@ public class Menu {
     
     public static void deleteExamID() throws NumberFormatException, Exception {
 
-    	JFrame frame = new JFrame("Insert physiotherapist ID");
+    	JFrame frame = new JFrame("Insert exam ID to delete");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel());
+        frame.add(new JLabel("->"));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -1169,13 +1169,13 @@ public class Menu {
     }
     
     public static void changeEngPhoneID(int id) throws NumberFormatException, Exception {
-    	JFrame frame = new JFrame("Insert new phone");
+    	JFrame frame = new JFrame("Insert new phone for engineer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel());
+        frame.add(new JLabel("->"));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -1364,12 +1364,12 @@ public class Menu {
     public static void prostheticsType() throws Exception {
     	JTextField idField, typeField;
 		   	
-	       JFrame frame = new JFrame("");
+	       JFrame frame = new JFrame("Show all prosthetics of");
 	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	       frame.setSize(300, 300);
 	       frame.setLayout(new GridLayout(3, 2));
 
-	       frame.add(new JLabel("Type:"));
+	       frame.add(new JLabel("Type ->"));
 	       typeField = new JTextField();
 	       frame.add(typeField);
 
