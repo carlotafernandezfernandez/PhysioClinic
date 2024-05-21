@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Client")
-@XmlType(propOrder = {"physio", "phone_number","card_n", "treatments_inprogress", "prosthetics", "exams","dob"})
+@XmlType(propOrder = {"phone","card_n", "treatments_inprogress", "prosthetics", "exams", "physio", "doB"})
 
 
 public class Client implements Serializable {
@@ -27,7 +27,7 @@ public class Client implements Serializable {
     private int id; 
     @XmlAttribute
     private String name; 
-    @XmlElement(name = "phone_number" ) //, Required = "false")
+    @XmlElement
     private String phone;     
     @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 

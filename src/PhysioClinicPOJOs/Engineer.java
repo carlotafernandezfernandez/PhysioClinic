@@ -40,9 +40,7 @@ public class Engineer implements Serializable {
     private String email; 
     @XmlElement
     private float salary; 
-    @XmlElement
-    @Basic(fetch=FetchType.LAZY)
-    @Lob
+    @XmlTransient
     private byte[] license; 
     @XmlTransient
     private List<Products> products;

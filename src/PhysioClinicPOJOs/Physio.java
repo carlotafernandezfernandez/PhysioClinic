@@ -4,24 +4,50 @@ import java.util.*;
 import javax.persistence.Basic;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import PhysioClinicXMLutils.SQLDateAdapter;
 
 import java.sql.Date; 
 import java.io.Serializable;
 
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Physio")
+@XmlType(propOrder = {"name", "phone","doB", "speciality", "email"})
+
+
 public class Physio implements Serializable {
     
     private static final long serialVersionUID = 1004619484145801436L;
-	
+    @XmlTransient
     private int id; 
+    @XmlAttribute
     private String name; 
+    @XmlElement
     private String phone; 
+    @XmlJavaTypeAdapter(SQLDateAdapter.class)
     private Date doB; 
+    @XmlElement
     private String speciality; 
+    @XmlElement
     private String email; 
+    @XmlTransient
     private float salary;
+    @XmlTransient
     private byte[] license; 
+    @XmlTransient
     private List<Products> products; 
+    @XmlTransient
     private List<Exams> exams;
+    @XmlTransient
     private List<Client> clients;
 	
     public int getId() {
