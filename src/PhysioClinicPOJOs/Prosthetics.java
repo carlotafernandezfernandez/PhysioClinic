@@ -39,10 +39,10 @@ public class Prosthetics implements Serializable {
 	public void setClient_id(Client client_id) {
 		this.client = client_id;
 	}
-	public String getObservations() {
+	public String getInspections() {
 		return inspections;
 	}
-	public void setObservations(String observations) {
+	public void setInspections(String observations) {
 		this.inspections = observations;
 	}
 	public static long getSerialversionuid() {

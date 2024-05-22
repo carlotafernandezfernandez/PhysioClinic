@@ -168,6 +168,7 @@ public class Menu {
 	          });
 	       
 	       JButton showButton = new JButton("👁");
+	       showButton.setFont(new Font("", Font.PLAIN, 23));
 	       frame.add(showButton);
 	       
 	       JButton submitButton = new JButton("Log in");
@@ -539,6 +540,7 @@ public class Menu {
          newPField.setEchoChar('*');
          frame.add(newPField);
 	     JButton showButton = new JButton("👁");
+	     showButton.setFont(new Font("", Font.PLAIN, 23));
 	     frame.add(showButton);
 	     JLabel passwordLabel = new JLabel();
 	     passwordLabel.setFont(new Font("", Font.PLAIN, 13));
@@ -774,6 +776,15 @@ public class Menu {
          JButton submitButton = new JButton("Create Client");
          frame.add(submitButton);
          
+         JButton exitButton = new JButton("Create Client");
+         frame.add(exitButton);
+         exitButton.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 frame.dispose();
+             
+         }});
+         
 
          frame.add(new JLabel(""));
 
@@ -861,14 +872,25 @@ public class Menu {
     		JTable table = new JTable(model);
     	    JScrollPane scrollPane = new JScrollPane(table);
     	    
-    	    table.setPreferredSize(new Dimension(1000, 500)); 
-    	    contentPanel.removeAll();
+    	    table.setPreferredSize(new Dimension(500, 500));
+    	    table.getColumnModel().getColumn(0).setPreferredWidth(5);
+    	    scrollPane.setPreferredSize(new Dimension(750,200));
     	    contentPanel.add(scrollPane, BorderLayout.CENTER);
     	    contentPanel.revalidate();
     	    contentPanel.repaint();
-    	    contentPanel.setPreferredSize(new Dimension(500, 500));
+    	    contentPanel.setPreferredSize(new Dimension(775, 500));
+
+    	    JButton exitButton = new JButton("Exit");
+    	    contentPanel.add(exitButton);
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                
+            }});
     	    frame.add(contentPanel);
     	    frame.pack();
+    	    frame.add(contentPanel);
     	    frame.setVisible(true);
     	
 
@@ -877,7 +899,6 @@ public class Menu {
     		
     		
     	}
-		//JOptionPane.showMessageDialog(frame, clients);
     	
     }
 
@@ -1496,7 +1517,7 @@ public class Menu {
 	            	   String type = typeField.getText();
 	            	   List<Prosthetics> p = prostheticsmanager.showAllProstheticsOfType(type);
 	            	   if(p != null) {
-	            		   JOptionPane.showMessageDialog(frame, p);
+	            		   prstGUI(p, type);
 	            	   }else {
 	            		   JOptionPane.showMessageDialog(frame, "No " +typeField.getText()+" prosthetics in the database");
 	            	   }
@@ -1509,6 +1530,61 @@ public class Menu {
 	       frame.setVisible(true);
 		
     }
+    
+    public static void prstGUI (List<Prosthetics> prosthetics, String type) {
+    	JFrame frame = new JFrame("All " + type +" prosthetics");
+    	frame.setSize(new Dimension(500, 500));
+    	JPanel contentPanel = new JPanel();
+    	String[] columnNames = {"ID", "Date built", "First used", "inspections", "Assigned engineer", "Assigned client"};
+    	
+    	DefaultTableModel model = new DefaultTableModel(columnNames, 0); 
+    	
+    	if (prosthetics != null) {
+    		for (Prosthetics p : prosthetics) {
+		        Object[] rowData = {
+		            p.getId(), 
+		            p.getDoB(),
+		            p.getDate_bought(), 
+		            p.getInspections(),
+		            p.getEngineer().getId(),
+		            p.getClient().getId(),
+		           
+		        };
+		        model.addRow(rowData);
+		    }
+    		JTable table = new JTable(model);
+    	    JScrollPane scrollPane = new JScrollPane(table);
+    	    
+    	    table.setPreferredSize(new Dimension(500, 500));
+    	    table.getColumnModel().getColumn(0).setPreferredWidth(5);
+    	    scrollPane.setPreferredSize(new Dimension(750,200));
+    	    contentPanel.add(scrollPane, BorderLayout.CENTER);
+    	    contentPanel.revalidate();
+    	    contentPanel.repaint();
+    	    contentPanel.setPreferredSize(new Dimension(775, 500));
 
+    	    JButton exitButton = new JButton("Exit");
+    	    contentPanel.add(exitButton);
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                
+            }});
+    	    frame.add(contentPanel);
+    	    frame.pack();
+    	    frame.add(contentPanel);
+    	    frame.setVisible(true);
+    	
+
+    	} else {
+    		JOptionPane.showMessageDialog(frame, "No clients in the system");
+    		
+    		
+    	}
+    	
+    }
+
+    
 
 } //final 
