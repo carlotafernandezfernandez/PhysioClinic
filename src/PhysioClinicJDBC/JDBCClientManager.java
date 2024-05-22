@@ -37,7 +37,7 @@ public class JDBCClientManager implements ClientManager{
 			prep.setInt(1, c.getId());
 			prep.setString(2, c.getPhone());
 			prep.setString(3, c.getName());
-			prep.setDate(4, (Date) c.getDoB());
+			prep.setDate(4, c.getDoB());
 			prep.setInt(5, c.getCard_n());
 			prep.setBoolean (8, c.isLarge_family());
 			prep.setString(9, c.getEmail());
