@@ -1247,7 +1247,7 @@ public class Menu {
     
     public static void CreateMachineGUI(int id) {
     	 JFrame frame;
-    	 JTextField idField, typeField, dobField, doBoughtField;
+    	 JTextField idField, typeField, dobField, doBoughtField, inspectionsField;
     	
         frame = new JFrame("Create Machine");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1269,6 +1269,10 @@ public class Menu {
         frame.add(new JLabel("Date in which was bought (yyyy/MM/dd):"));
         doBoughtField = new JTextField();
         frame.add(doBoughtField);
+        
+        frame.add(new JLabel("Frequency of inspections must be: "));
+        inspectionsField = new JTextField();
+        frame.add(inspectionsField);
 
         frame.add(new JLabel("Assigned engineer ID:" + id));
 
@@ -1302,10 +1306,11 @@ public class Menu {
                     String dbStr = doBoughtField.getText();
                     LocalDate dbLC = LocalDate.parse(dbStr, formatter);
                     Date db = Date.valueOf(dbLC);
+                    String inspections = inspectionsField.getText();
                     
                     Engineer eng = engineermanager.searchEngineerByID(id);
                     
-                    Machine m = new Machine(id, type, dob, db, eng);
+                    Machine m = new Machine(id, type, dob, db, eng, inspections);
 
                 	machinemanager.createMachine(m);
                     
@@ -1332,6 +1337,7 @@ public class Menu {
 		
 		if(machines != null) {
 			 JOptionPane.showMessageDialog(frame, machines);
+			 
 		}else {
 			 JOptionPane.showMessageDialog(frame, "No machines in the database");
 		}

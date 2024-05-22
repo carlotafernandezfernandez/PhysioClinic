@@ -11,6 +11,7 @@ public class Machine implements Serializable {
 	private String type; 
     private Date doB; 
     private Date dBought; 
+    private String inspections;
     private List<Exams> exams;
     private Engineer engineer; 	
 	
@@ -54,13 +55,14 @@ public class Machine implements Serializable {
 		return serialVersionUID;
 	}
 	
-	public Machine(int id, String type, java.sql.Date dob2, java.sql.Date db, Engineer engineer) {
+	public Machine(int id, String type, java.sql.Date dob2, java.sql.Date db, Engineer engineer, String inspections) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.doB = dob2;
 		this.dBought = db;
 		this.engineer = engineer; 
+		this.setInspections(inspections); 
 		this.exams = new ArrayList<Exams>();
 	}
 	public Machine(String type, Date doB, Date dBought, Engineer engineer) {
@@ -75,9 +77,16 @@ public class Machine implements Serializable {
 		super();
 		this.exams = new ArrayList<Exams>();
 	}
+	
+	public String getInspections() {
+		return inspections;
+	}
+	public void setInspections(String inspections) {
+		this.inspections = inspections;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(dBought, doB, engineer, exams, id, type);
+		return Objects.hash(dBought, doB, engineer, exams, id, inspections, type);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -90,12 +99,12 @@ public class Machine implements Serializable {
 		Machine other = (Machine) obj;
 		return Objects.equals(dBought, other.dBought) && Objects.equals(doB, other.doB)
 				&& Objects.equals(engineer, other.engineer) && Objects.equals(exams, other.exams) && id == other.id
-				&& Objects.equals(type, other.type);
+				&& Objects.equals(inspections, other.inspections) && Objects.equals(type, other.type);
 	}
 	@Override
 	public String toString() {
-		return "Machine [id=" + id + ", type=" + type + ", doB=" + doB + ", dBought=" + dBought + ", exams=" + exams
-				+ "]";
+		return "Machine [id=" + id + ", type=" + type + ", doB=" + doB + ", dBought=" + dBought + ", inspections="
+				+ inspections + ", engineer=" + engineer.getId() + "]";
 	}
 	
 	

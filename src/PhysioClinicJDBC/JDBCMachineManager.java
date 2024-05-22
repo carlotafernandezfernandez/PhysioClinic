@@ -28,15 +28,16 @@ public class JDBCMachineManager implements MachineManager{
 		try {
 			//NO SE NECESITARÍA EL ID????
 			String sql= "INSERT INTO Machine (machine_id, machine_type, machine_doB, machine_datebought, "
-					+ "engineer_id)"
-					+ "VALUES (?,?,?,?,?)";
+					+ "machine_inspections, engineer_id)"
+					+ "VALUES (?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, m.getId());
 			prep.setString(2, m.getType());
-			prep.setDate(3, (Date) m.getDoB());
-			prep.setDate(4, (Date) m.getdBought());
-			prep.setInt(5,  m.getEngineer().getId());
+			prep.setDate(3, m.getDoB());
+			prep.setDate(4, m.getdBought());
+			prep.setString(5, m.getInspections());
+			prep.setInt(6,  m.getEngineer().getId());
 			
 			prep.executeUpdate();				
 					
@@ -47,11 +48,11 @@ public class JDBCMachineManager implements MachineManager{
 		}
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public List<Machine> showAllMachines() {
 		// TODO Auto-generated method stub
-		List<Machine> machines= new ArrayList<Machine>();
-		machines = null; 
+		List<Machine> machines= new ArrayList<Machine>(); 
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
@@ -64,11 +65,12 @@ public class JDBCMachineManager implements MachineManager{
 				String type = rs.getString("machine_type");
 				Date doB = rs.getDate("machine_doB");
 				Date d_bought = rs.getDate("machine_dateBought");
+				String inspections = rs.getString("Machine_inspections");
 				Integer engineer_id = rs.getInt("engineer_id");
 				Engineer eng = null;
 				eng = engineermanager.searchEngineerByID(engineer_id);
 		
-				Machine m = new Machine (id, type, doB, d_bought, eng);
+				Machine m = new Machine (id, type, doB, d_bought, eng, inspections);
 				machines.add(m);
 			}
 			

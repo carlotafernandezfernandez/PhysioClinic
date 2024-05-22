@@ -63,8 +63,8 @@ private Connection c = null;
 					+ "Machine_id INTEGER PRIMARY KEY,"
 					+ "Machine_type TEXT,"
 					+ "Machine_doB DATE,"
-					+ "Machine_dateBought DATE DEFAULT CURRENT_DATE,"
-					+ "Machine_inspections TEXT NOT NULL,"
+					+ "Machine_dateBought DATE,"
+					+ "Machine_inspections TEXT,"
 					+ "Engineer_id INTEGER,"
 					+ "FOREIGN KEY(Engineer_id) REFERENCES Engineer (eng_id)"
 					+ ")";
