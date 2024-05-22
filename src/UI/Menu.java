@@ -838,7 +838,7 @@ public class Menu {
 		JOptionPane.showMessageDialog(frame, p);
 	}
     
-    public static void loadClient() {
+    public static void loadClients() {
     	Client c = null;
     	JFrame frame = new JFrame();
     	File file = new File("./xmls/External-Client.xml");
@@ -846,7 +846,7 @@ public class Menu {
     		c = xmlmanager.xml2Client(file);
         	System.out.print(c);
     	}catch(Exception ex) {
-    		JOptionPane.showMessageDialog(frame, "No product with id: " + Integer.getInteger(idField.getText()));
+    		
     	}
     	
     }
