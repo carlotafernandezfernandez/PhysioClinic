@@ -75,7 +75,6 @@ public class Menu {
         xmlmanager = new XMLManagerImpl();
         
     	MainMenu();
-        
     }
 
 	public static void MainMenu()  {
@@ -776,7 +775,7 @@ public class Menu {
          JButton submitButton = new JButton("Create Client");
          frame.add(submitButton);
          
-         JButton exitButton = new JButton("Create Client");
+         JButton exitButton = new JButton("Back to menu");
          frame.add(exitButton);
          exitButton.addActionListener(new ActionListener() {
              @Override
@@ -1499,10 +1498,13 @@ public class Menu {
 	       typeField = new JTextField();
 	       frame.add(typeField);
 
-	       JButton submitButton = new JButton("Show");
-	       frame.add(submitButton);
+	       
 	       JButton exitButton = new JButton("Go back to main menu");
 	       frame.add(exitButton);
+	       
+	       JButton submitButton = new JButton("Show");
+	       frame.add(submitButton);
+	       
 	       
 	       frame.add(new JLabel(""));
 	       exitButton.addActionListener(new ActionListener() {
