@@ -620,13 +620,13 @@ public class Menu {
         frame.setLayout(null);
         
         label = new JLabel("Choose an option:");
-        label.setBounds(20, 20, 200, 30);
+        label.setBounds(35, 20, 300, 30);
         label.setBackground(Color.CYAN); 
         label.setOpaque(true); 
         frame.add(label);
 
         CClientButton = new JButton("Create client");
-        CClientButton.setBounds(20, 60, 150, 30);
+        CClientButton.setBounds(35, 60, 250, 30);
         CClientButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -641,7 +641,7 @@ public class Menu {
         frame.add(CClientButton);
 
         clientsButton = new JButton("Show all clients");
-        clientsButton.setBounds(20, 100, 150, 30);
+        clientsButton.setBounds(35, 100, 250, 30);
         clientsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showClients();
@@ -650,7 +650,7 @@ public class Menu {
         frame.add(clientsButton);
 
         DClientButton = new JButton("Delete Client");
-        DClientButton.setBounds(20, 140, 150, 30);
+        DClientButton.setBounds(35, 140, 250, 30);
         DClientButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -664,7 +664,7 @@ public class Menu {
         frame.add(DClientButton);
         
         clientButton = new JButton("Search client by ID");
-        clientButton.setBounds(20, 180, 150, 30);
+        clientButton.setBounds(35, 180, 250, 30);
         clientButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -678,7 +678,7 @@ public class Menu {
         frame.add(clientButton);
         
         engButton = new JButton("Search engineer by ID");
-        engButton.setBounds(20, 220, 150, 30);
+        engButton.setBounds(35, 220, 250, 30);
         engButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -692,7 +692,7 @@ public class Menu {
         frame.add(engButton);
         
         XMLButton = new JButton("Print me to XML");
-        XMLButton.setBounds(20, 260, 150, 30);
+        XMLButton.setBounds(35, 260, 250, 30);
         XMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -706,7 +706,7 @@ public class Menu {
         frame.add(XMLButton);
         
         clientsXMLButton = new JButton("Load clients from XML file");
-        clientsXMLButton.setBounds(20, 300, 150, 30);
+        clientsXMLButton.setBounds(35, 300, 250, 30);
         clientsXMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -720,7 +720,7 @@ public class Menu {
         frame.add(clientsXMLButton);
 
         exitButton = new JButton("Back to main menu");
-        exitButton.setBounds(20, 340, 150, 30);
+        exitButton.setBounds(35, 340, 250, 30);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
@@ -1052,13 +1052,13 @@ public class Menu {
         frame.setLayout(null);
 
         label = new JLabel("Choose an option:");
-        label.setBounds(20, 20, 160, 30);
+        label.setBounds(20, 20, 300, 30);
         label.setBackground(Color.ORANGE); 
         label.setOpaque(true); 
         frame.add(label);
 
         physioButton = new JButton("Search physiotherapist by ID");
-        physioButton.setBounds(20, 60, 150, 30);
+        physioButton.setBounds(35, 60, 250, 30);
         physioButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -1072,7 +1072,7 @@ public class Menu {
         frame.add(physioButton);
 
         examButton = new JButton("Delete exam by its ID");
-        examButton.setBounds(20, 100, 150, 30);
+        examButton.setBounds(35, 100, 250, 30);
         examButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -1086,7 +1086,7 @@ public class Menu {
         frame.add(examButton);
 
         exitButton = new JButton("Back to main menu");
-        exitButton.setBounds(20, 140, 150, 30);
+        exitButton.setBounds(35, 140, 250, 30);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
@@ -1197,7 +1197,7 @@ public class Menu {
         frame.setLayout(null);
         
         label = new JLabel("Choose an option:");
-        label.setBounds(20, 20, 280, 30);
+        label.setBounds(20, 20, 300, 30);
         label.setBackground(Color.GREEN); 
         label.setOpaque(true); 
         frame.add(label);
@@ -1522,7 +1522,7 @@ public class Menu {
 	            		   JOptionPane.showMessageDialog(frame, "No " +typeField.getText()+" prosthetics in the database");
 	            	   }
 	               } catch (Exception ex) {
-	                   JOptionPane.showMessageDialog(frame, "No " +typeField.getText()+" prosthetics in the database");
+	                   
 	               }
 	           }
 	           
@@ -1535,7 +1535,7 @@ public class Menu {
     	JFrame frame = new JFrame("All " + type +" prosthetics");
     	frame.setSize(new Dimension(500, 500));
     	JPanel contentPanel = new JPanel();
-    	String[] columnNames = {"ID", "Date built", "First used", "inspections", "Assigned engineer", "Assigned client"};
+    	String[] columnNames = {"ID", "Date built", "First used", "Inspections", "Assigned engineer", "Assigned client"};
     	
     	DefaultTableModel model = new DefaultTableModel(columnNames, 0); 
     	
