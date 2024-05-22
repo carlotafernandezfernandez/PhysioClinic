@@ -1,12 +1,25 @@
 package PhysioClinicJDBC;
 
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import PhysioClinicIFaces.EngineerManager;
 import PhysioClinicPOJOs.Engineer;
+import PhysioClinicPOJOs.User;
 
 public class JDBCEngineerManager implements EngineerManager{
 	
@@ -46,8 +59,7 @@ public class JDBCEngineerManager implements EngineerManager{
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			Integer e_id = rs.getInt("eng_id");
-			//byte[] license = rs.getBytes("eng_license");
+			//Integer e_id = rs.getInt("eng_id");
 			String speciality = rs.getString("eng_speciality");
 			String email = rs.getString("eng_email");
 			String phone = rs.getString("eng_phone");
@@ -55,7 +67,7 @@ public class JDBCEngineerManager implements EngineerManager{
 			Date doB = rs.getDate("eng_doB");
 			Float salary = rs.getFloat("eng_salary");
 			
-		    eng = new Engineer (e_id, name, phone, doB, speciality, email, salary);
+		    eng = new Engineer (eng_id, name, phone, doB, speciality, email, salary);
 		    
 		    rs.close();
 		    stmt.close();
@@ -79,9 +91,8 @@ public class JDBCEngineerManager implements EngineerManager{
 			prep.setString(3, e.getEmail());
 			prep.setString(4, e.getPhone());
 			prep.setString(5, e.getName());
-			prep.setDate(6, (Date) e.getDoB());
+			prep.setDate(6, e.getDoB());
 			prep.setFloat(7, e.getSalary());
-			
 			
 			prep.executeUpdate();				
 					
@@ -92,6 +103,7 @@ public class JDBCEngineerManager implements EngineerManager{
 		}
 		
 	}
+	
 	
 	
 	

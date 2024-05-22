@@ -5,9 +5,12 @@ import java.awt.Checkbox;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -129,27 +133,32 @@ public class Menu {
 
     public static void LoginGUI() {
 		
-	   	 JTextField emailField, passwdField;
+	   	 JTextField emailField;
+	   	 JPasswordField passwdField; 
 	   		   	
 	       JFrame frame = new JFrame("");
 	       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	       frame.setSize(300, 300);
-	       frame.setLayout(new GridLayout(4, 2));
+	       frame.setLayout(new GridLayout(4, 5));
 
 	       frame.add(new JLabel("Email:"));
 	       emailField = new JTextField();
 	       frame.add(emailField);
+	       JLabel emailLabel = new JLabel();
+	       frame.add(emailLabel);
 
+	       
 	       frame.add(new JLabel("Password:"));
-	       passwdField = new JTextField();
+	       passwdField = new JPasswordField();
+	       passwdField.setEchoChar('*');
 	       frame.add(passwdField);
-
-	       JButton submitButton = new JButton("log in");
-	       frame.add(submitButton);
-	       JButton exitButton = new JButton("Go back to main menu");
+	       JLabel passwordLabel = new JLabel();
+	       frame.add(passwordLabel);
+	       
+	       
+	       JButton exitButton = new JButton("Main menu");
 	       frame.add(exitButton);
 	       
-	       frame.add(new JLabel(""));
 	       exitButton.addActionListener(new ActionListener() {
 	              @Override
 	              public void actionPerformed(ActionEvent e) {
@@ -157,18 +166,41 @@ public class Menu {
 	              }
 	              
 	          });
-
 	       
-	       frame.add(new JLabel(""));
+	       JButton showButton = new JButton("👁");
+	       frame.add(showButton);
+	       
+	       JButton submitButton = new JButton("Log in");
+	       frame.add(submitButton);
+	  
+	       
+	       
+	       showButton.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mousePressed(MouseEvent e) {
+	                
+	                char[] password = passwdField.getPassword();
+	                
+	                String passwordString = new String(password);
+	                
+	                passwordLabel.setText("⮀ " + passwordString);
+	            }
+	            
+	            @Override
+	            public void mouseReleased(MouseEvent e) {
+	                passwordLabel.setText("");
+	            }
+	        });
 
 	       submitButton.addActionListener(new ActionListener() {
 	           @Override
 	           public void actionPerformed(ActionEvent e) {
 	               try {
 
-	                   String password = passwdField.getText();
+	            	   char[] passwd = passwdField.getPassword();
+	            	   String passwordString = new String(passwd);
 	                   String email = emailField.getText();
-	                   byte [] passwordE = PhysioClinicEncription.Encription.encrypt(password);
+	                   byte [] passwordE = PhysioClinicEncription.Encription.encrypt(passwordString);
 
 	                   User u = usermanager.checkPassword(email, passwordE);
 	                   
@@ -464,7 +496,7 @@ public class Menu {
 	                   Date dob = Date.valueOf(dobLC);
 
 	                   float salary = Float.parseFloat(salaryField.getText());
-	                   String speciality = phoneField.getText();
+	                   String speciality = specialityField.getText();
 	                   
 	                   Engineer eng = new Engineer(u.getId(), name, phone, dob, speciality, u.getEmail(), salary); 
 
@@ -485,12 +517,13 @@ public class Menu {
       
     public static void updatePasswordGUI() {
     	JFrame frame;
-     	 JTextField emailField, CpasswdField, newPField;
+     	JTextField emailField, CpasswdField; 
+     	JPasswordField newPField;
      	
          frame = new JFrame("Change password");
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          frame.setSize(400, 400);
-         frame.setLayout(new GridLayout(5, 1));
+         frame.setLayout(new GridLayout(6, 2));
 
          frame.add(new JLabel("Email:"));
          emailField = new JTextField();
@@ -501,11 +534,37 @@ public class Menu {
          frame.add(CpasswdField);
          
          frame.add(new JLabel("New Password:"));
-         newPField = new JTextField();
+         
+         newPField = new JPasswordField();
+         newPField.setEchoChar('*');
          frame.add(newPField);
+	     JButton showButton = new JButton("👁");
+	     frame.add(showButton);
+	     JLabel passwordLabel = new JLabel();
+	     passwordLabel.setFont(new Font("", Font.PLAIN, 13));
+	     frame.add(passwordLabel);
+	     
+	     
+	       showButton.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mousePressed(MouseEvent e) {
+	                
+	                char[] password = newPField.getPassword();
+	                
+	                String passwordString = new String(password);
+	                
+	                passwordLabel.setText("   ↳"+passwordString + "");
+	            }
+	            
+	            @Override
+	            public void mouseReleased(MouseEvent e) {
+	                passwordLabel.setText("");
+	            }
+	        });
          
          JButton submitButton = new JButton("Change");
 	       frame.add(submitButton);
+	       
 	       JButton exitButton = new JButton("Go back to main menu");
 	       frame.add(exitButton);
 	       
@@ -524,9 +583,10 @@ public class Menu {
 	               try {
 	            	   String password = CpasswdField.getText();
 	                   String email = emailField.getText();
-	                   String newpass = newPField.getText();
+	                   char[] newpass = newPField.getPassword();
+	            	   String passwordString = new String(newpass);
 	                   byte [] passwordE = PhysioClinicEncription.Encription.encrypt(password);
-	                   byte [] newPasswordE = PhysioClinicEncription.Encription.encrypt(newpass);
+	                   byte [] newPasswordE = PhysioClinicEncription.Encription.encrypt(passwordString);
 
 	                   User u = usermanager.checkPassword(email, passwordE);
 	                   
@@ -824,13 +884,13 @@ public class Menu {
     
     public static void deleteClient() throws NumberFormatException, Exception {
 
-    	JFrame frame = new JFrame("Insert client ID to delete");
+    	JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel());
+        frame.add(new JLabel("ID of client to delete:"));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -867,13 +927,13 @@ public class Menu {
     }
     
     public static void searchClientID() throws NumberFormatException, Exception {
-    	JFrame frame = new JFrame("Insert client ID");
+    	JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel("->"));
+        frame.add(new JLabel("Insert client ID: "));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -915,13 +975,13 @@ public class Menu {
     }
     
     public static void searchEngID() throws NumberFormatException, Exception {
-    	JFrame frame = new JFrame("Insert engineer ID");
+    	JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel("->"));
+        frame.add(new JLabel("Insert engineer ID"));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -1017,13 +1077,13 @@ public class Menu {
     
     public static void searchPhysioID() throws NumberFormatException, Exception {
     	
-    	JFrame frame = new JFrame("Insert physiotherapist ID");
+    	JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel());
+        frame.add(new JLabel("Insert physiotherapist ID: "));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -1066,13 +1126,13 @@ public class Menu {
     
     public static void deleteExamID() throws NumberFormatException, Exception {
 
-    	JFrame frame = new JFrame("Insert exam ID to delete");
+    	JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel("->"));
+        frame.add(new JLabel("Insert exam ID to delete"));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -1122,7 +1182,7 @@ public class Menu {
         frame.add(label);
 
         phoneButton = new JButton("Change phone");
-        phoneButton.setBounds(20, 60, 150, 30);
+        phoneButton.setBounds(35, 60, 250, 30);
         phoneButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -1136,7 +1196,7 @@ public class Menu {
         frame.add(phoneButton);
 
         machineButton = new JButton("Create my machine");
-        machineButton.setBounds(20, 100, 150, 30);
+        machineButton.setBounds(35, 100, 250, 30);
         machineButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -1150,7 +1210,7 @@ public class Menu {
         frame.add(machineButton);
 
         machinesButton = new JButton("Show all machines");
-        machinesButton.setBounds(20, 140, 150, 30);
+        machinesButton.setBounds(35, 140, 250, 30);
         machinesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -1164,7 +1224,7 @@ public class Menu {
         frame.add(machinesButton);
         
         PAButton = new JButton("Change product availability");
-        PAButton.setBounds(20, 180, 150, 30);
+        PAButton.setBounds(35, 180, 250, 30);
         PAButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -1178,11 +1238,11 @@ public class Menu {
        frame. add(PAButton);
         
         PTButton = new JButton("Show all prosthetics of same type");
-        PTButton.setBounds(20, 220, 150, 30);
+        PTButton.setBounds(35, 220, 250, 30);
         PTButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-					searchEngID();
+                	prostheticsType();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1192,7 +1252,7 @@ public class Menu {
         frame.add(PTButton);
 
         exitButton = new JButton("Back to main menu");
-        exitButton.setBounds(20, 260, 150, 30);
+        exitButton.setBounds(35, 260, 250, 30);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
@@ -1204,13 +1264,13 @@ public class Menu {
     }
     
     public static void changeEngPhoneID(int id) throws NumberFormatException, Exception {
-    	JFrame frame = new JFrame("Insert new phone for engineer");
+    	JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(3, 3));
 
         JTextField intField = new JTextField();
-        frame.add(new JLabel("->"));
+        frame.add(new JLabel("Insert new phone: "));
         frame.add(intField);
 
         JButton submitButton = new JButton("Submit");
@@ -1245,7 +1305,7 @@ public class Menu {
         frame.setVisible(true);
     }
     
-    public static void CreateMachineGUI(int id) {
+    public static void CreateMachineGUI(int eng_id) {
     	 JFrame frame;
     	 JTextField idField, typeField, dobField, doBoughtField, inspectionsField;
     	
@@ -1262,7 +1322,7 @@ public class Menu {
         typeField = new JTextField();
         frame.add(typeField);
 
-        frame.add(new JLabel("Date of Birth (yyyy/MM/dd):"));
+        frame.add(new JLabel("Release date (yyyy/MM/dd):"));
         dobField = new JTextField();
         frame.add(dobField);
         
@@ -1270,12 +1330,14 @@ public class Menu {
         doBoughtField = new JTextField();
         frame.add(doBoughtField);
         
-        frame.add(new JLabel("Frequency of inspections must be: "));
+        frame.add(new JLabel("Frequency of inspections: "));
         inspectionsField = new JTextField();
         frame.add(inspectionsField);
-
-        frame.add(new JLabel("Assigned engineer ID:" + id));
-
+        
+        frame.add(new JLabel("Assigned engineer (your id):" + eng_id));
+        
+        frame.add(new JLabel());
+      
         JButton submitButton = new JButton("Create machine");
         frame.add(submitButton);
         
@@ -1295,7 +1357,7 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int id = Integer.parseInt(idField.getText());
+                    int machine_id = Integer.parseInt(idField.getText());
                     String type = typeField.getText();
                     
                     String dobStr = dobField.getText();
@@ -1308,9 +1370,9 @@ public class Menu {
                     Date db = Date.valueOf(dbLC);
                     String inspections = inspectionsField.getText();
                     
-                    Engineer eng = engineermanager.searchEngineerByID(id);
+                    Engineer eng = engineermanager.searchEngineerByID(eng_id);
                     
-                    Machine m = new Machine(id, type, dob, db, eng, inspections);
+                    Machine m = new Machine(machine_id, type, dob, db, eng, inspections);
 
                 	machinemanager.createMachine(m);
                     
@@ -1436,10 +1498,10 @@ public class Menu {
 	            	   if(p != null) {
 	            		   JOptionPane.showMessageDialog(frame, p);
 	            	   }else {
-	            		   JOptionPane.showMessageDialog(frame, "No prosthetics in the database");
+	            		   JOptionPane.showMessageDialog(frame, "No " +typeField.getText()+" prosthetics in the database");
 	            	   }
 	               } catch (Exception ex) {
-	                   JOptionPane.showMessageDialog(frame, "No prosthetics in the database");
+	                   JOptionPane.showMessageDialog(frame, "No " +typeField.getText()+" prosthetics in the database");
 	               }
 	           }
 	           

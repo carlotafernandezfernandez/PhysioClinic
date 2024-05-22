@@ -26,7 +26,7 @@ public class JDBCMachineManager implements MachineManager{
 	public void createMachine(Machine m) {
 		// TODO Auto-generated method stub
 		try {
-			//NO SE NECESITARÍA EL ID????
+			
 			String sql= "INSERT INTO Machine (machine_id, machine_type, machine_doB, machine_datebought, "
 					+ "machine_inspections, engineer_id)"
 					+ "VALUES (?,?,?,?,?,?)";
@@ -48,7 +48,6 @@ public class JDBCMachineManager implements MachineManager{
 		}
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public List<Machine> showAllMachines() {
 		// TODO Auto-generated method stub
