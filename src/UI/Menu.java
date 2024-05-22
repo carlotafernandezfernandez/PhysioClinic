@@ -726,7 +726,8 @@ public class Menu {
                      byte[] passE = Encription.encrypt(pass);
                      User u = new User(email, passE, usermanager.getRole(2));
                      usermanager.newUser(u);
-                     u = usermanager.getUser(email);
+                     System.out.println(u);
+                     //u = usermanager.getUser(email);
                      
                      String name = nameField.getText();
                      String phone = phoneField.getText();
