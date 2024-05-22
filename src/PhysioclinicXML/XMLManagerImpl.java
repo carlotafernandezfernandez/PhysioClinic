@@ -23,7 +23,7 @@ public class XMLManagerImpl implements XMLManager{
 	ClientManager clientmanager;
 	
 	@Override
-	public void physio2xml(Integer id) {
+	public Physio physio2xml(Integer id) {
 		// TODO Auto-generated method stub
 		Physio p = null;
 		List<Client> clients = new ArrayList<Client>();
@@ -34,7 +34,7 @@ public class XMLManagerImpl implements XMLManager{
 			//Do a SQL query to get the physio by the id
 			p = physiomanager.searchPhysioByID(id);
 			//search for the clients of the physio
-			clients = clientmanager.showAllClients();
+			clients = clientmanager.showAllClientsID(id);
 			p.setClients(clients);
 			
 			//export the physio to an xml file
@@ -43,12 +43,11 @@ public class XMLManagerImpl implements XMLManager{
 			
 			File file = new File("Physio.xml");
 			marshaller.marshal(p, file);
-			System.out.print(p);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		return p; 
 	}
 
 	@Override

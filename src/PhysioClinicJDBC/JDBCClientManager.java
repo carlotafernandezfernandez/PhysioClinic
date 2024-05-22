@@ -92,6 +92,43 @@ public class JDBCClientManager implements ClientManager{
 	}
 
 	@Override
+	public List<Client> showAllClientsID(int physio_id) {
+		
+		List<Client> clients= new ArrayList<Client>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM Client WHERE Physiotherapist_id= "+ physio_id;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("client_id");
+				String phone = rs.getString("phone");
+				String name = rs.getString("name");
+				Date doB = rs.getDate("doB");
+				Integer card_number = rs.getInt("card_number");
+				Boolean family_number = rs.getBoolean("family_number");
+				String email = rs.getString("email");
+				Physio physio = null;
+				physio = physiomanager.searchPhysioByID(physio_id);
+				
+				Client c = new Client (id, physio, name, phone, doB, card_number, family_number, email);
+				clients.add(c);
+			}
+			
+			rs.close();
+			stmt.close();
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		
+		}
+		
+		return clients;
+	}
+	@Override
 	public void deleteClientByID(int client_id) {
 		// TODO Auto-generated method stub
 		try {

@@ -396,7 +396,7 @@ public class Menu {
                     Date dob = Date.valueOf(dobLC);
                     
                     float salary = Float.parseFloat(salaryField.getText());
-                    String speciality = phoneField.getText();
+                    String speciality = specialityField.getText();
                     
                     Physio p = new Physio(u.getId(), name, phone, dob, speciality, u.getEmail(), salary); 
 
@@ -761,8 +761,9 @@ public class Menu {
     
     public static void printMe(User u) {
 		// TODO Auto-generated method stub
-		xmlmanager.physio2xml(u.getId());
-	
+    	JFrame frame = new JFrame();
+		Physio p  = xmlmanager.physio2xml(u.getId());
+		JOptionPane.showMessageDialog(frame, p);
 	}
     
     public static void loadClients() {
