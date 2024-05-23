@@ -36,10 +36,10 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 		Client client = null;
 		
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM Prosthetics WHERE prost_type= \""+type+ "\"";
-			
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM Prosthetics WHERE prost_type LIKE ? ";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, type);
+			ResultSet rs = prep.executeQuery();
 			
 			while(rs.next())
 			{
@@ -58,7 +58,7 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 			}
 			
 			rs.close();
-			stmt.close();
+			prep.close();
 			
 		}catch(Exception e)
 		{
