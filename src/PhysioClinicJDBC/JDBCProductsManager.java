@@ -22,6 +22,7 @@ public class JDBCProductsManager implements ProductsManager{
 			prep.setInt(2, product_id);
 			
 			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();

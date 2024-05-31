@@ -63,7 +63,8 @@ public class JDBCPhysioManager implements PhysioManager{
 			prep.setFloat(6, p.getSalary());
 			prep.setDate(7, (Date) p.getDoB());
 			
-			prep.executeUpdate();				
+			prep.executeUpdate();
+			prep.close();
 					
 		}
 		catch(Exception e)

@@ -10,7 +10,7 @@ private Connection c = null;
 	
 	public JDBCManager() {
 		
-		try {
+		try { 
 			
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:./db/proyecto.db");
@@ -149,7 +149,7 @@ private Connection c = null;
 					+ "FOREIGN KEY (client_id) REFERENCES Client (\"client_id\")"
 					+ ")";
 			stmt.executeUpdate(sql);
-
+			stmt.close();
 			
 			
 		}catch(SQLException e) {
@@ -174,4 +174,5 @@ private Connection c = null;
 			e.printStackTrace();
 		}		
 	}
+	
 }

@@ -304,7 +304,7 @@ public class Menu {
     
     public static void CreateClientGUI(User u) {
       	 JFrame frame;
-      	 JTextField nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
+      	 JTextField nameField, phoneField, dobField, cardNumberField, physioIdField;
       	 Checkbox largeFamilyCheckbox;
       	
           frame = new JFrame("Create Client");
@@ -1562,7 +1562,9 @@ public class Menu {
 	           @Override
 	           public void actionPerformed(ActionEvent e) {
 	               try {
-	            	   String type = typeField.getText();
+	            	   String p_typeORIGInAL = typeField.getText();
+	            	   String p_typeNOSPACES = p_typeORIGInAL.replaceAll("\\s","");
+	            	   String type = p_typeNOSPACES.toLowerCase();
 	            	   List<Prosthetics> p = prostheticsmanager.showAllProstheticsOfType(type);
 	            	   if(p != null) {
 	            		   prstGUI(p, type);
