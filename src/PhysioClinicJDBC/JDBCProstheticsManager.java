@@ -36,15 +36,17 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 		Client client = null;
 		
 		try {
-			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM Prosthetics WHERE prost_type= \""+type+ "\"";
-			
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM Prosthetics WHERE prost_type LIKE ? ";
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			prep.setString(1, type);
+			ResultSet rs = prep.executeQuery();
 			
 			while(rs.next())
 			{
 				Integer id = rs.getInt("prost_id");
-				String p_type = rs.getString("prost_type");
+				String p_typeORIGInAL = rs.getString("prost_type");
+				String p_typeNOSPACES = p_typeORIGInAL.replaceAll("\\s","");
+				String p_type = p_typeNOSPACES.toLowerCase();
 				Date doB = rs.getDate("prost_doB");
 				Date d_bought = rs.getDate("prost_dateBought");
 				String inspections = rs.getString("prost_inspections");
@@ -58,7 +60,7 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 			}
 			
 			rs.close();
-			stmt.close();
+			prep.close();
 			
 		}catch(Exception e)
 		{
@@ -67,5 +69,4 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 		
 		return prosthetics;
 	}
-		
 }

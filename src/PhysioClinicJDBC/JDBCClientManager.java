@@ -28,7 +28,6 @@ public class JDBCClientManager implements ClientManager{
 	public void createClient(Client c) {
 		// TODO Auto-generated method stub
 		try {
-			//NO SE NECESITARÍA EL ID??
 			String sql= "INSERT INTO Client (client_id, phone, name, doB, card_number, allergies, treatment, "
 					+ "family_number, email)"
 					+ "VALUES (?,?,?,?,?,?,?,?,?)";
@@ -42,13 +41,17 @@ public class JDBCClientManager implements ClientManager{
 			prep.setBoolean (8, c.isLarge_family());
 			prep.setString(9, c.getEmail());
 			
-			prep.executeUpdate();				
+			prep.executeUpdate();	
+			prep.close();
+			
 					
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+		
+		
 		
 	}
 
@@ -137,7 +140,8 @@ public class JDBCClientManager implements ClientManager{
 			
 			prep.setInt(1, client_id);
 			
-			prep.executeUpdate();			
+			prep.executeUpdate();	
+			prep.close();
 			
 		}catch(Exception e)
 		{

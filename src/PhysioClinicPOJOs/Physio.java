@@ -181,7 +181,7 @@ public class Physio implements Serializable {
 	public String toString() {
 		return "Physio [id=" + id + ", name=" + name + ", phone=" + phone + ", doB=" + doB + ", specialty=" + speciality
 				+ ", email=" + email + ", salary=" + salary + ", license=" + Arrays.toString(license) + ", products="
-				+ products + ", exams=" + exams + ", clients=" + clients + "]";
+				+ products + ", exams=" + exams + "]";
 	}
 	
 	

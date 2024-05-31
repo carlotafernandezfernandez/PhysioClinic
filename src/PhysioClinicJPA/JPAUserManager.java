@@ -113,6 +113,7 @@ public class JPAUserManager implements UserManager{
 		return u;
 	}
 	
+	
 	@Override
 	public void changePassword(String email, byte[] new_passwd) {
 		try {

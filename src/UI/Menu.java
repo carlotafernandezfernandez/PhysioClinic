@@ -304,7 +304,7 @@ public class Menu {
     
     public static void CreateClientGUI(User u) {
       	 JFrame frame;
-      	 JTextField nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
+      	 JTextField nameField, phoneField, dobField, cardNumberField, physioIdField;
       	 Checkbox largeFamilyCheckbox;
       	
           frame = new JFrame("Create Client");
@@ -1419,17 +1419,57 @@ public class Menu {
     
     public static void showMachines() {
     	JFrame frame = new JFrame("Machines");
-    	List<Machine> machines = null;
-		
-		machines = machinemanager.showAllMachines();
-		
-		if(machines != null) {
-			 JOptionPane.showMessageDialog(frame, machines);
-			 
-		}else {
-			 JOptionPane.showMessageDialog(frame, "No machines in the database");
-		}
-		
+    	frame.setSize(new Dimension(500, 500));
+    	JPanel contentPanel = new JPanel();
+    	List<Machine> machines = machinemanager.showAllMachines();
+    	String[] columnNames = {"ID", "Type", "Date made", "Date first used", "Inspections", "Assigned engineer ID"};
+    	
+    	DefaultTableModel model = new DefaultTableModel(columnNames, 0); 
+    	
+    	if (machines != null) {
+    		for (Machine m : machines) {
+		        Object[] rowData = {
+		            m.getId(),
+		            m.getType(),
+		            m.getDoB(),
+		            m.getdBought(),
+		            m.getInspections(),
+		            m.getEngineer().getId(),
+		            //c.getPhysio().getName(),
+		           
+		        };
+		        model.addRow(rowData);
+		    }
+    		JTable table = new JTable(model);
+    	    JScrollPane scrollPane = new JScrollPane(table);
+    	    
+    	    table.setPreferredSize(new Dimension(500, 500));
+    	    table.getColumnModel().getColumn(0).setPreferredWidth(5);
+    	    scrollPane.setPreferredSize(new Dimension(750,200));
+    	    contentPanel.add(scrollPane, BorderLayout.CENTER);
+    	    contentPanel.revalidate();
+    	    contentPanel.repaint();
+    	    contentPanel.setPreferredSize(new Dimension(775, 500));
+
+    	    JButton exitButton = new JButton("Exit");
+    	    contentPanel.add(exitButton);
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                
+            }});
+    	    frame.add(contentPanel);
+    	    frame.pack();
+    	    frame.add(contentPanel);
+    	    frame.setVisible(true);
+    	
+
+    	} else {
+    		JOptionPane.showMessageDialog(frame, "No machines in the system");
+    		
+    		
+    	}
 
        
 		//System.out.println(machines);
@@ -1522,7 +1562,9 @@ public class Menu {
 	           @Override
 	           public void actionPerformed(ActionEvent e) {
 	               try {
-	            	   String type = typeField.getText();
+	            	   String p_typeORIGInAL = typeField.getText();
+	            	   String p_typeNOSPACES = p_typeORIGInAL.replaceAll("\\s","");
+	            	   String type = p_typeNOSPACES.toLowerCase();
 	            	   List<Prosthetics> p = prostheticsmanager.showAllProstheticsOfType(type);
 	            	   if(p != null) {
 	            		   prstGUI(p, type);
@@ -1530,7 +1572,7 @@ public class Menu {
 	            		   JOptionPane.showMessageDialog(frame, "No " +typeField.getText()+" prosthetics in the database");
 	            	   }
 	               } catch (Exception ex) {
-	                   
+	                   System.out.println(ex); 
 	               }
 	           }
 	           

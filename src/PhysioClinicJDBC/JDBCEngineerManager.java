@@ -40,6 +40,7 @@ public class JDBCEngineerManager implements EngineerManager{
 			prep.setInt(2, eng_id);
 			
 			prep.executeUpdate();
+			prep.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -94,7 +95,8 @@ public class JDBCEngineerManager implements EngineerManager{
 			prep.setDate(6, e.getDoB());
 			prep.setFloat(7, e.getSalary());
 			
-			prep.executeUpdate();				
+			prep.executeUpdate();	
+			prep.close();
 					
 		}
 		catch(Exception ex)

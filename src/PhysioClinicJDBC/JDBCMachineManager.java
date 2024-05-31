@@ -39,7 +39,8 @@ public class JDBCMachineManager implements MachineManager{
 			prep.setString(5, m.getInspections());
 			prep.setInt(6,  m.getEngineer().getId());
 			
-			prep.executeUpdate();				
+			prep.executeUpdate();	
+			prep.close();
 					
 		}
 		catch(Exception e)
