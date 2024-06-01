@@ -814,7 +814,8 @@ public class Menu {
                      Physio p = physiomanager.searchPhysioByID(physioID);
                      
                      Client c = new Client(u.getId(), p, name, phone, dob, cardNumber, largeFamily, email);
-                     clientmanager.createClient(c);
+                     
+                     clientmanager.createClientPhysio(c);
                      
                      JOptionPane.showMessageDialog(frame, "Client created successfully!");
                      frame.dispose();

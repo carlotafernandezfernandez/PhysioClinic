@@ -54,6 +54,38 @@ public class JDBCClientManager implements ClientManager{
 		
 		
 	}
+	
+	@Override
+	public void createClientPhysio(Client c) {
+		// TODO Auto-generated method stub
+		try {
+			String sql= "INSERT INTO Client (client_id, phone, name, doB, card_number, allergies, treatment, "
+					+ "family_number, email, Physiotherapist_id)"
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			
+			prep.setString(2, c.getPhone());
+			prep.setString(3, c.getName());
+			prep.setDate(4, c.getDoB());
+			prep.setInt(5, c.getCard_n());
+			prep.setBoolean (8, c.isLarge_family());
+			prep.setString(9, c.getEmail());
+			prep.setInt(10, c.getPhysio().getId());
+			
+			prep.executeUpdate();	
+			prep.close();
+			
+					
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 
 	@Override
 	public List<Client> showAllClients() {
