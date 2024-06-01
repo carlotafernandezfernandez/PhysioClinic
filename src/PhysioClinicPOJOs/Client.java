@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Client")
-@XmlType(propOrder = {"phone","card_n", "treatments_inprogress", "prosthetics", "exams", "physio", "doB"})
+@XmlType(propOrder = {"phone","card_n","email", "doB", "physio"})
 
 
 public class Client implements Serializable {
@@ -35,15 +35,15 @@ public class Client implements Serializable {
     private int card_n; 
     @XmlTransient
     private List<String> allergies; 
-    @XmlElement
+    @XmlTransient
     private List<String> treatments_inprogress; 
     @XmlTransient
     private boolean large_family; 
-    @XmlTransient
+    @XmlElement
     private String email; 
-    @XmlElement
+    @XmlTransient
     private List<Prosthetics> prosthetics;
-    @XmlElement
+    @XmlTransient
     private List<Exams> exams; 
     @XmlElement
     private Physio physio; 

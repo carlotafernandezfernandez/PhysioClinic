@@ -2,27 +2,22 @@
 
 <!DOCTYPE Client [
 
-<!ELEMENT Client (phone,card_n, treatments_inprogress, prosthetics, exams, doB, physio)>
+<!ELEMENT Client (phone,card_n,email,doB, physio)>
 	<!ATTLIST Client name CDATA #REQUIRED>
 		<!ELEMENT phone (#PCDATA)>
 		<!ELEMENT card_n (#PCDATA)>
-		<!ELEMENT treatments_inprogress (#PCDATA)>
-		<!ELEMENT  prosthetics (#PCDATA)>
-		<!ELEMENT exams (#PCDATA)>
+		<!ELEMENT email (#PCDATA)>
 		<!ELEMENT doB (#PCDATA)>
 		<!ELEMENT physio (phone, doB, speciality, email)>
 		<!ATTLIST physio name CDATA #REQUIRED>
 			<!ELEMENT speciality (#PCDATA)>
-			<!ELEMENT  email (#PCDATA)>
 ]>
 
 
 <Client name = "Carlota">
 	<phone> 6811087785</phone>
 	<card_n> 123456788765 </card_n>
-	<treatments_inprogress> 1 </treatments_inprogress>
-	<prosthetics> 1 </prosthetics>
-	<exams> 1 </exams>
+	<email>carlota@gmail.com</email>
 	<doB> 2000/07/09 </doB>
 	<physio name= "Juanjo">
 		<phone>6703167229</phone>

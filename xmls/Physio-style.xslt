@@ -1,4 +1,6 @@
+<xsl:stylesheet version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="html" indent="yes" />
+
 
 <xsl:template match="/">
    <html>
@@ -13,9 +15,7 @@
 	  <th>Client´s name</th>
       <th>Phone</th>
       <th>Card number</th>
-      <th>treatments in progress</th>
-      <th>Prosthetics</th>
-      <th>Exams</th>
+      <th>Email</th>
       <th>Date of Birth</th>
       
       <xsl:for-each select="physio/client/client">
@@ -24,9 +24,7 @@
 	            <td><xsl:value-of select="@name" /></td>
 	            <td><xsl:value-of select="phone" /></td>
 	            <td><xsl:value-of select="card_n" /></td>
-	            <td><xsl:value-of select="treatments_inprogress" /></td> 
-	            <td><xsl:value-of select="prosthetics" /></td>     
-	            <td><xsl:value-of select="exams" /></td>     
+	            <td><xsl:value-of select="email" /></td>
 	            <td><xsl:value-of select="doB" /></td>                           
 	       </tr>        
       </xsl:for-each>  
