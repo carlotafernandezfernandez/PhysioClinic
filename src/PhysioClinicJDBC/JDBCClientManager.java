@@ -64,7 +64,7 @@ public class JDBCClientManager implements ClientManager{
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			
+			prep.setInt(1, c.getId());
 			prep.setString(2, c.getPhone());
 			prep.setString(3, c.getName());
 			prep.setDate(4, c.getDoB());
@@ -167,9 +167,8 @@ public class JDBCClientManager implements ClientManager{
 	public void deleteClientByID(int client_id) {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "DELETE FROM Client WHERE id=?";
+			String sql = "DELETE FROM Client WHERE client_id=?";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			
 			prep.setInt(1, client_id);
 			
 			prep.executeUpdate();	

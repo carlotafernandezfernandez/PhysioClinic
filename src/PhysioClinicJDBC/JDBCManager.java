@@ -48,7 +48,7 @@ private Connection c = null;
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Engineer ("
-					+ "eng_id	INTEGER PRIMARY KEY,"
+					+ "eng_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "eng_licence	BLOB,"
 					+ "eng_speciality	TEXT,"
 					+ "eng_email	TEXT UNIQUE,"
@@ -60,7 +60,7 @@ private Connection c = null;
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Machine("
-					+ "Machine_id INTEGER PRIMARY KEY,"
+					+ "Machine_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "Machine_type TEXT,"
 					+ "Machine_doB DATE,"
 					+ "Machine_dateBought DATE,"
@@ -71,7 +71,7 @@ private Connection c = null;
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Physiotherapist ("
-					+ "physio_id	INTEGER PRIMARY KEY,"
+					+ "physio_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "physio_name	TEXT NOT NULL,"
 					+ "physio_speciality	TEXT,"
 					+ "physio_phone	TEXT,"
@@ -83,14 +83,14 @@ private Connection c = null;
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Products ("
-					+ "	prod_id	INTEGER PRIMARY KEY,"
+					+ "	prod_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "	availability	INTEGER DEFAULT 1 CHECK(availability IN (0, 1)),"
 					+ "	n_available	INTEGER NOT NULL"
 					+ ")";
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Prosthetics ("
-					+ "prost_id	INTEGER PRIMARY KEY,"
+					+ "prost_id	INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "prost_type	TEXT NOT NULL,"
 					+ "prost_doB	DATE,"
 					+ "prost_dateBought DATE DEFAULT CURRENT_DATE,"
@@ -139,7 +139,7 @@ private Connection c = null;
 			stmt.executeUpdate(sql);
 			
 			sql = "CREATE TABLE Exam ("
-					+ "ex_id INTEGER PRIMARY KEY,"
+					+ "ex_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 					+ "ex_type TEXT,"
 					+ "client_id INTEGER,"
 					+ "ex_doB DATE,"
