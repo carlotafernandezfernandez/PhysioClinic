@@ -53,7 +53,7 @@ public class XMLManagerImpl implements XMLManager{
 	@Override
 	public Client xml2Client(File xml) {
 		// TODO Auto-generated method stub
-		Client c = null;
+		Client c = new Client();
 		manager = new JDBCManager();
 		clientmanager = new JDBCClientManager(manager);
 		

@@ -3,32 +3,35 @@
 <xsl:template match="/">
    <html>
 	
-	<p><b>Owner:</b></p>
-	<p> Name: <xsl:value-of select="owner/@name" /> </p>
-	<p> Email:   <xsl:value-of select="owner/email" /> </p>
-	<p> Phone: <xsl:value-of select="owner/phone" /></p>
-	<p> CardNumber: <xsl:value-of select="owner/cardnumber" /></p>
+	<p><b>Physio:</b></p>
+	<p> Name: <xsl:value-of select="physio/@name" /> </p>
+	<p> Phone: <xsl:value-of select="physio/phone" /></p>
+	<p> Speciality: <xsl:value-of select="physio/speciality" /></p>
+	<p> Email: <xsl:value-of select="physio/email" /> </p>
 	
 	<table border="1">
-	  <th>Pet's name</th>
-      <th>Type Of Animal</th>
-      <th>Coat</th>
+	  <th>Client´s name</th>
+      <th>Phone</th>
+      <th>Card number</th>
+      <th>treatments in progress</th>
+      <th>Prosthetics</th>
+      <th>Exams</th>
       <th>Date of Birth</th>
-      <th>Cured</th>
       
-      <xsl:for-each select="owner/pets/pet">
+      <xsl:for-each select="physio/client/client">
       <xsl:sort select="@name" />
 	       <tr>
 	            <td><xsl:value-of select="@name" /></td>
-	            <td><xsl:value-of select="typeofAnimal" /></td>
-	            <td><xsl:value-of select="coat" /></td>
-	            <td><xsl:value-of select="dob" /></td> 
-	            <td><xsl:value-of select="cured" /></td>                  
+	            <td><xsl:value-of select="phone" /></td>
+	            <td><xsl:value-of select="card_n" /></td>
+	            <td><xsl:value-of select="treatments_inprogress" /></td> 
+	            <td><xsl:value-of select="prosthetics" /></td>     
+	            <td><xsl:value-of select="exams" /></td>     
+	            <td><xsl:value-of select="doB" /></td>                           
 	       </tr>        
       </xsl:for-each>  
 		
 	</table>		
-	   
    </html>
    </xsl:template>
 	

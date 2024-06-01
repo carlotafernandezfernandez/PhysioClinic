@@ -839,7 +839,7 @@ public class Menu {
 	}
     
     public static void loadClients() {
-    	Client c = null;
+    	Client c = new Client();
     	JFrame frame = new JFrame();
     	File file = new File("./xmls/External-Client.xml");
     	try {
