@@ -1182,7 +1182,7 @@ public class Menu {
                 	int id = Integer.parseInt(intField.getText());
             		examsmanager.deleteExamByID(id);
             	
-                	JOptionPane.showMessageDialog(frame, "Machine deleted correctly");
+                	JOptionPane.showMessageDialog(frame, "Exam deleted correctly");
                     
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame, "No machines with this ID.");
@@ -1512,14 +1512,15 @@ public class Menu {
 	           @Override
 	           public void actionPerformed(ActionEvent e) {
 	               try {
-
-	                   int id = Integer.getInteger(idField.getText());
-	                   int n = Integer.getInteger(nField.getText());
+	            	   
+	                   int id = Integer.parseInt(idField.getText());
+	                   int n = Integer.parseInt(nField.getText());
 	                   productsmanager.changeProductNAvailable(id, n);
 	                   JOptionPane.showMessageDialog(frame, "Number of available proucts changed corectly");
 	                   
 	               } catch (Exception ex) {
-	                   JOptionPane.showMessageDialog(frame, "No product with id: " + Integer.getInteger(idField.getText()));
+	                   //JOptionPane.showMessageDialog(frame, "No product with id: " + Integer.getInteger(idField.getText()));
+	            	   System.out.println(ex);
 	               }
 	           }
 	           
