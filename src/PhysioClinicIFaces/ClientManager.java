@@ -9,6 +9,5 @@ public interface ClientManager {
 	public void deleteClientByID(int client_id);
 	public Client searchClientByID(int client_id);
 	public List<Client> showAllClientsID(int id); 
-	public void createClientPhysio(Client c);
 	
 }
