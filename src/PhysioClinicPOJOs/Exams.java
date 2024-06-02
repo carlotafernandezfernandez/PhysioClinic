@@ -76,7 +76,7 @@ public class Exams implements Serializable {
 		this.physios = new ArrayList<Physio>();
 		
 	} 
-	public Exams(int id, String type, Machine machine, Date doB, Client client, int physio_id) {
+	public Exams(int id, String type, Machine machine, Date doB, Client client) {
 		super();
 		this.id= id;
 		this.type = type;

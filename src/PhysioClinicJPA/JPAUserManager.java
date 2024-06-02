@@ -60,6 +60,8 @@ public class JPAUserManager implements UserManager{
 		// TODO Auto-generated method stub
 		em.getTransaction().begin();
 		em.persist(u);
+		em.flush();
+		em.clear();
 		em.getTransaction().commit();
 	}
 	

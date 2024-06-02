@@ -4,8 +4,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import PhysioClinicIFaces.PhysioManager;
+import PhysioClinicPOJOs.Client;
 import PhysioClinicPOJOs.Physio;
 
 public class JDBCPhysioManager implements PhysioManager{
@@ -18,15 +21,15 @@ public class JDBCPhysioManager implements PhysioManager{
 
 	public Physio searchPhysioByID (int physio_id) {
 		// TODO Auto-generated method stub
-		Physio physio = null;
+		Physio physio = new Physio();
 		
 		try {
 			Statement stmt = manager.getConnection().createStatement();
-			String sql = "SELECT * FROM Physiotherapist WHERE physio_id=" + physio_id;
+			String sql = "SELECT * FROM Physiotherapist WHERE physio_id= " + physio_id;
 		
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			Integer id = rs.getInt("physio_id");
+			//Integer id = rs.getInt("physio_id");
 			String name = rs.getString("physio_name");
 			String speciality = rs.getString("physio_speciality");
 			String email = rs.getString("physio_email");
@@ -35,7 +38,7 @@ public class JDBCPhysioManager implements PhysioManager{
 			Float salary = rs.getFloat("physio_salary");
 			Date doB = rs.getDate("physio_doB");
 			
-		    physio = new Physio(id, name, phone, doB, speciality, email, salary);
+		    physio = new Physio(physio_id, name, phone, doB, speciality, email, salary);
 
 		    
 		    rs.close();
@@ -73,5 +76,41 @@ public class JDBCPhysioManager implements PhysioManager{
 		}
 	}
 	
+	@Override
+	public List<Physio> showAllPhysios() {
+		
+		List<Physio> physios= new ArrayList<Physio>();
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM Physiotherapist";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while(rs.next())
+			{
+				Integer id = rs.getInt("physio_id");
+				String name = rs.getString("physio_name");
+				String speciality = rs.getString("physio_speciality");
+				String phone = rs.getString("physio_phone");
+				String email = rs.getString("physio_email");
+				float salary = rs.getFloat("physio_salary");
+				Date dob = rs.getDate("physio_doB");
+				
+				
+				Physio p = new Physio (id, name, phone, dob, speciality, email, salary);
+				physios.add(p);
+			}
+			
+			rs.close();
+			stmt.close();
+			
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		
+		}
+		
+		return physios;
+	}
 }
 		

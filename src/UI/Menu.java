@@ -75,6 +75,7 @@ public class Menu {
         xmlmanager = new XMLManagerImpl();
         
     	MainMenu();
+    	
     }
 
 	public static void MainMenu()  {
@@ -278,10 +279,12 @@ public class Menu {
 	                      usermanager.newUser(u);
 	                      
 	                      if(u!=null & u.getRole().getName().equals("Physiotherapist")){
+	                    	  
 	          				CreatePhysioGUI(u);
 	          				
 	          			} else if(u!=null & u.getRole().getName().equals("Client")){
 	          				//System.out.println("Insert new client´s information -> ");
+	          				showPhysiosGUI();
 	          				CreateClientGUI(u);
 	          				
 	          			} else if (u!=null & u.getRole().getName().equals("Engineer")){
@@ -336,7 +339,7 @@ public class Menu {
           //emailField = new JTextField();
           //frame.add(emailField);
 
-          frame.add(new JLabel("Physiotherapist ID:"));
+          frame.add(new JLabel("Physiotherapist ID (from the list provided):"));
           physioIdField = new JTextField();
           frame.add(physioIdField);
           
@@ -593,7 +596,7 @@ public class Menu {
 	                   
 	                   if(u!=null) {
 	                	   usermanager.changePassword(email, newPasswordE);
-	                	   JOptionPane.showMessageDialog(frame, "password changed correclty");
+	                	   JOptionPane.showMessageDialog(frame, "Password changed correclty");
 	                	   frame.dispose();
 	                   } else {
 		                   JOptionPane.showMessageDialog(frame, "No user with that email and password in the database");
@@ -624,23 +627,8 @@ public class Menu {
         label.setOpaque(true); 
         frame.add(label);
 
-        CClientButton = new JButton("Create client");
-        CClientButton.setBounds(35, 60, 250, 30);
-        CClientButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                	CreateClientGUIforPHYSIO();
-					
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-            }
-        });
-        frame.add(CClientButton);
-
         clientsButton = new JButton("Show all clients");
-        clientsButton.setBounds(35, 100, 250, 30);
+        clientsButton.setBounds(35, 60, 250, 30);
         clientsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 showClients();
@@ -649,7 +637,7 @@ public class Menu {
         frame.add(clientsButton);
 
         DClientButton = new JButton("Delete Client");
-        DClientButton.setBounds(35, 140, 250, 30);
+        DClientButton.setBounds(35, 100, 250, 30);
         DClientButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -663,7 +651,7 @@ public class Menu {
         frame.add(DClientButton);
         
         clientButton = new JButton("Search client by ID");
-        clientButton.setBounds(35, 180, 250, 30);
+        clientButton.setBounds(35, 140, 250, 30);
         clientButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -677,7 +665,7 @@ public class Menu {
         frame.add(clientButton);
         
         engButton = new JButton("Search engineer by ID");
-        engButton.setBounds(35, 220, 250, 30);
+        engButton.setBounds(35, 180, 250, 30);
         engButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -691,7 +679,7 @@ public class Menu {
         frame.add(engButton);
         
         XMLButton = new JButton("Print me to XML");
-        XMLButton.setBounds(35, 260, 250, 30);
+        XMLButton.setBounds(35, 220, 250, 30);
         XMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -705,7 +693,7 @@ public class Menu {
         frame.add(XMLButton);
         
         clientsXMLButton = new JButton("Load clients from XML file");
-        clientsXMLButton.setBounds(35, 300, 250, 30);
+        clientsXMLButton.setBounds(35, 260, 250, 30);
         clientsXMLButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -719,7 +707,7 @@ public class Menu {
         frame.add(clientsXMLButton);
 
         exitButton = new JButton("Back to main menu");
-        exitButton.setBounds(35, 340, 250, 30);
+        exitButton.setBounds(35, 300, 250, 30);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
@@ -729,107 +717,6 @@ public class Menu {
         frame.setVisible(true);
     }
     
-    public static void CreateClientGUIforPHYSIO() {
-     	 JFrame frame;
-     	 JTextField passdField, nameField, phoneField, dobField, cardNumberField, emailField, physioIdField;
-     	 Checkbox largeFamilyCheckbox;
-     	
-         frame = new JFrame("Create Client");
-         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         frame.setSize(400, 400);
-         frame.setLayout(new GridLayout(10, 2));
-
-         frame.add(new JLabel("Email:"));
-         emailField = new JTextField();
-         frame.add(emailField);
-         
-         frame.add(new JLabel("Password for the clients account:"));
-         passdField = new JTextField();
-         frame.add(passdField);
-
-         frame.add(new JLabel("Name:"));
-         nameField = new JTextField();
-         frame.add(nameField);
-
-         frame.add(new JLabel("Phone:"));
-         phoneField = new JTextField();
-         frame.add(phoneField);
-
-         frame.add(new JLabel("Date of Birth (yyyy/MM/dd):"));
-         dobField = new JTextField();
-         frame.add(dobField);
-
-         frame.add(new JLabel("Card Number:"));
-         cardNumberField = new JTextField();
-         frame.add(cardNumberField);
-
-         frame.add(new JLabel("Large Family:"));
-         largeFamilyCheckbox = new Checkbox();
-         frame.add(largeFamilyCheckbox);
-
-         frame.add(new JLabel("Physiotherapist ID:"));
-         physioIdField = new JTextField();
-         frame.add(physioIdField);
-         
-
-         JButton submitButton = new JButton("Create Client");
-         frame.add(submitButton);
-         
-         JButton exitButton = new JButton("Back to menu");
-         frame.add(exitButton);
-         exitButton.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 frame.dispose();
-             
-         }});
-         
-
-         frame.add(new JLabel(""));
-
-         submitButton.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                 try {
-                	 String email = emailField.getText();
-                     String pass = passdField.getText();
-                     byte[] passE = Encription.encrypt(pass);
-                     User u = new User(email, passE, usermanager.getRole(2));
-                     usermanager.newUser(u);
-                     System.out.println(u);
-                     //u = usermanager.getUser(email);
-                     
-                     String name = nameField.getText();
-                     String phone = phoneField.getText();
-
-                     String dobStr = dobField.getText();
-                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                     LocalDate dobLC = LocalDate.parse(dobStr, formatter);
-                     Date dob = Date.valueOf(dobLC);
-
-                     int cardNumber = Integer.parseInt(cardNumberField.getText());
-                     boolean largeFamily = largeFamilyCheckbox.getState();
-                     //String email = emailField.getText();
-                     int physioID = Integer.parseInt(physioIdField.getText());
-                     Physio p = physiomanager.searchPhysioByID(physioID);
-                     
-                     Client c = new Client(u.getId(), p, name, phone, dob, cardNumber, largeFamily, email);
-                     
-                     clientmanager.createClientPhysio(c);
-                     
-                     JOptionPane.showMessageDialog(frame, "Client created successfully!");
-                     frame.dispose();
-                 } catch (Exception ex) {
-                     JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                 }
-             }
-             
-         });
-
-
-
-         frame.setVisible(true);
-     }
     
     public static void printMe(User u) {
 		// TODO Auto-generated method stub
@@ -846,6 +733,63 @@ public class Menu {
     		c = xmlmanager.xml2Client(file);
         	System.out.print(c);
     	}catch(Exception ex) {
+    		
+    	}
+    	
+    }
+    
+    public static void showPhysiosGUI() {
+    	JFrame frame = new JFrame("Physios");
+    	frame.setSize(new Dimension(500, 500));
+    	JPanel contentPanel = new JPanel();
+    	List<Physio> physios = physiomanager.showAllPhysios();
+    	String[] columnNames = {"ID", "Name", "Email", "Phone", "DoB", "Speciality"};
+    	
+    	DefaultTableModel model = new DefaultTableModel(columnNames, 0); 
+    	
+    	if (physios != null) {
+    		for (Physio p : physios) {
+		        Object[] rowData = {
+		           p.getId(),
+		           p.getName(),
+		           p.getEmail(),
+		           p.getPhone(),
+		           p.getDoB(),
+		           p.getSpeciality(),
+		           
+		            //c.getPhysio().getName(),
+		           
+		        };
+		        model.addRow(rowData);
+		    }
+    		JTable table = new JTable(model);
+    	    JScrollPane scrollPane = new JScrollPane(table);
+    	    
+    	    table.setPreferredSize(new Dimension(500, 500));
+    	    table.getColumnModel().getColumn(0).setPreferredWidth(5);
+    	    scrollPane.setPreferredSize(new Dimension(750,200));
+    	    contentPanel.add(scrollPane, BorderLayout.CENTER);
+    	    contentPanel.revalidate();
+    	    contentPanel.repaint();
+    	    contentPanel.setPreferredSize(new Dimension(775, 500));
+
+    	    JButton exitButton = new JButton("Exit");
+    	    contentPanel.add(exitButton);
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                
+            }});
+    	    frame.add(contentPanel);
+    	    frame.pack();
+    	    frame.add(contentPanel);
+    	    frame.setVisible(true);
+    	
+
+    	} else {
+    		JOptionPane.showMessageDialog(frame, "No physios in the system");
+    		
     		
     	}
     	
@@ -1082,7 +1026,9 @@ public class Menu {
         examButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
+					examGUI(examsmanager.showAllExamsINFO(u.getId()));
 					deleteExamID();
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1185,7 +1131,7 @@ public class Menu {
                 	JOptionPane.showMessageDialog(frame, "Exam deleted correctly");
                     
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "No machines with this ID.");
+                    JOptionPane.showMessageDialog(frame, "No exam with this ID.");
                 }
             }
         });
@@ -1196,7 +1142,7 @@ public class Menu {
     
     public static void EngMenu(User u)  {
     	JLabel label;
-        JButton phoneButton, machineButton, machinesButton, PAButton, PTButton, exitButton;
+        JButton phoneButton, machineButton, machinesButton, PAButton, PTButton, exitButton, cpButton;
         JFrame frame = new JFrame("Choose an option: ");
         frame.setSize(400, 450);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1265,7 +1211,7 @@ public class Menu {
        frame. add(PAButton);
         
         PTButton = new JButton("Show all prosthetics of same type");
-        PTButton.setBounds(35, 220, 250, 30);
+        PTButton.setBounds(35, 260, 250, 30);
         PTButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -1277,9 +1223,24 @@ public class Menu {
             }
         });
         frame.add(PTButton);
+        
+        cpButton = new JButton("Create my prosthetic");
+        cpButton.setBounds(35, 220, 250, 30);
+        cpButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                	showClients();
+                	createProsthetic(u.getId());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+            }
+        });
+        frame.add(cpButton);
 
         exitButton = new JButton("Back to main menu");
-        exitButton.setBounds(35, 260, 250, 30);
+        exitButton.setBounds(35, 300, 250, 30);
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
@@ -1341,9 +1302,9 @@ public class Menu {
         frame.setSize(400, 400);
         frame.setLayout(new GridLayout(10, 2));
 
-        frame.add(new JLabel("Machine ID:"));
+        /*frame.add(new JLabel("Machine ID:"));
         idField = new JTextField();
-        frame.add(idField);
+        frame.add(idField);*/
         
         frame.add(new JLabel("Type:"));
         typeField = new JTextField();
@@ -1384,7 +1345,7 @@ public class Menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int machine_id = Integer.parseInt(idField.getText());
+                    //int machine_id = Integer.parseInt(idField.getText());
                     String type = typeField.getText();
                     
                     String dobStr = dobField.getText();
@@ -1399,8 +1360,7 @@ public class Menu {
                     
                     Engineer eng = engineermanager.searchEngineerByID(eng_id);
                     
-                    Machine m = new Machine(machine_id, type, dob, db, eng, inspections);
-
+                    Machine m = new Machine(type, dob, db, eng, inspections);
                 	machinemanager.createMachine(m);
                     
                     JOptionPane.showMessageDialog(frame, "Machine created successfully!");
@@ -1417,6 +1377,97 @@ public class Menu {
         frame.setVisible(true);
 
     }
+    
+    public static void createProsthetic(int eng_id) {
+   	 JFrame frame;
+   	 JTextField idField, typeField, dobField, doBoughtField, inspectionsField, clientField;
+   	
+       frame = new JFrame("Create Prosthetic");
+       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       frame.setSize(500, 300);
+       frame.setLayout(new GridLayout(10, 2));
+       
+       frame.add(new JLabel("Type:"));
+       typeField = new JTextField();
+       frame.add(typeField);
+
+       frame.add(new JLabel("Release date (yyyy/MM/dd):"));
+       dobField = new JTextField();
+       frame.add(dobField);
+       
+       frame.add(new JLabel("Date in which was bought (yyyy/MM/dd):"));
+       doBoughtField = new JTextField();
+       frame.add(doBoughtField);
+       
+       frame.add(new JLabel("Frequency of inspections: "));
+       inspectionsField = new JTextField();
+       frame.add(inspectionsField);
+       
+       frame.add(new JLabel("ID of client (from the list provided): "));
+       clientField = new JTextField();
+       frame.add(clientField);
+       
+       frame.add(new JLabel("Assigned engineer (your id):" + eng_id));
+       
+       frame.add(new JLabel());
+     
+       JButton submitButton = new JButton("Create prosthetics");
+       frame.add(submitButton);
+       
+       JButton exitButton = new JButton("Exit");
+       frame.add(exitButton);
+       exitButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               frame.dispose();
+           }
+           
+       });
+       
+       frame.add(new JLabel(""));
+
+       submitButton.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               try {
+            	   //int ID = Integer.parseInt(idField.getText());
+            	   
+                   String type = typeField.getText();
+                   
+                   String dobStr = dobField.getText();
+                   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                   LocalDate dobLC = LocalDate.parse(dobStr, formatter);
+                   Date dob = Date.valueOf(dobLC);
+                   
+                   String dbStr = doBoughtField.getText();
+                   LocalDate dbLC = LocalDate.parse(dbStr, formatter);
+                   Date db = Date.valueOf(dbLC);
+                   String inspections = inspectionsField.getText();
+                   int clientID = Integer.parseInt(clientField.getText());
+                   
+                   Client c = clientmanager.searchClientByID(clientID);
+                   
+                   Engineer eng = engineermanager.searchEngineerByID(eng_id);
+                   
+                   Prosthetics p = new Prosthetics(type, c, eng, inspections, dob, db);
+                   prostheticsmanager.createProsthetic(p);
+                   
+                   JOptionPane.showMessageDialog(frame, "Prosthetics created successfully!");
+                   frame.dispose();
+                   
+               } catch (Exception ex) {
+                   JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+               }
+           }
+           
+       });
+
+
+
+       frame.setVisible(true);
+
+   }
+
     
     public static void showMachines() {
     	JFrame frame = new JFrame("Machines");
@@ -1630,7 +1681,60 @@ public class Menu {
     	
 
     	} else {
-    		JOptionPane.showMessageDialog(frame, "No clients in the system");
+    		JOptionPane.showMessageDialog(frame, "No prosthetics in the system");
+    		
+    		
+    	}
+    	
+    }
+    
+    public static void examGUI (List<Exams> exams) {
+    	JFrame frame = new JFrame("All exams in the DB");
+    	frame.setSize(new Dimension(500, 500));
+    	JPanel contentPanel = new JPanel();
+    	String[] columnNames = {"ID", "Type", "Date created", "Assigned Machine", "Assigned client"};
+    	
+    	DefaultTableModel model = new DefaultTableModel(columnNames, 0); 
+    	
+    	if (exams != null) {
+    		for (Exams e : exams) {
+		        Object[] rowData = {
+		            e.getId(), 
+		            e.getType(), 
+		            e.getDoB(), 
+		            e.getMachine().getId(), 
+		            e.getClient().getId(),
+		           
+		        };
+		        model.addRow(rowData);
+		    }
+    		JTable table = new JTable(model);
+    	    JScrollPane scrollPane = new JScrollPane(table);
+    	    
+    	    table.setPreferredSize(new Dimension(500, 500));
+    	    table.getColumnModel().getColumn(0).setPreferredWidth(5);
+    	    scrollPane.setPreferredSize(new Dimension(750,200));
+    	    contentPanel.add(scrollPane, BorderLayout.CENTER);
+    	    contentPanel.revalidate();
+    	    contentPanel.repaint();
+    	    contentPanel.setPreferredSize(new Dimension(775, 500));
+
+    	    JButton exitButton = new JButton("Exit");
+    	    contentPanel.add(exitButton);
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    frame.dispose();
+                
+            }});
+    	    frame.add(contentPanel);
+    	    frame.pack();
+    	    frame.add(contentPanel);
+    	    frame.setVisible(true);
+    	
+
+    	} else {
+    		JOptionPane.showMessageDialog(frame, "No exams in the system");
     		
     		
     	}

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import PhysioClinicIFaces.MachineManager;
 import PhysioClinicIFaces.EngineerManager;
 import PhysioClinicPOJOs.Machine;
+import PhysioClinicPOJOs.Physio;
+import PhysioClinicPOJOs.Client;
 import PhysioClinicPOJOs.Engineer;
 
 public class JDBCMachineManager implements MachineManager{
@@ -32,7 +34,7 @@ public class JDBCMachineManager implements MachineManager{
 					+ "VALUES (?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, m.getId());
+			
 			prep.setString(2, m.getType());
 			prep.setDate(3, m.getDoB());
 			prep.setDate(4, m.getdBought());
@@ -67,8 +69,7 @@ public class JDBCMachineManager implements MachineManager{
 				Date d_bought = rs.getDate("machine_dateBought");
 				String inspections = rs.getString("Machine_inspections");
 				Integer engineer_id = rs.getInt("engineer_id");
-				Engineer eng = null;
-				eng = engineermanager.searchEngineerByID(engineer_id);
+				Engineer eng =  engineermanager.searchEngineerByID(engineer_id);
 		
 				Machine m = new Machine (id, type, doB, d_bought, eng, inspections);
 				machines.add(m);
@@ -84,6 +85,36 @@ public class JDBCMachineManager implements MachineManager{
 		}
 		
 		return machines;
+	}
+	
+	@Override
+	public Machine searchMachineID (int machine_id) {
+		Machine m = new Machine();
+		
+		
+		try {
+			Statement stmt = manager.getConnection().createStatement();
+			String sql = "SELECT * FROM Machine WHERE Machine_id=" + machine_id;
+		
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			Integer id = rs.getInt("Machine_id");
+			String type = rs.getString("Machine_type");
+			Date doB = rs.getDate("Machine_doB");
+			Date dB = rs.getDate("Machine_dateBought");
+			String inspections = rs.getString("Machine_inspections");
+			int eID = rs.getInt("Engineer_id");
+			Engineer eng = engineermanager.searchEngineerByID(eID);
+			
+			m = new Machine (id, type, doB, dB, eng, inspections);
+		    
+		    rs.close();
+		    stmt.close();
+		    
+		}catch(Exception e) {e.printStackTrace();}
+		
+		
+		return m;
 	}
 
 	

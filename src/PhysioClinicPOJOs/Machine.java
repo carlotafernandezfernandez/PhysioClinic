@@ -65,10 +65,11 @@ public class Machine implements Serializable {
 		this.setInspections(inspections); 
 		this.exams = new ArrayList<Exams>();
 	}
-	public Machine(String type, Date doB, Date dBought, Engineer engineer) {
+	public Machine(String type, Date doB, Date dBought, Engineer engineer, String inspections) {
 		super();
 		this.type = type;
 		this.doB = doB;
+		this.inspections = inspections; 
 		this.dBought = dBought;
 		this.engineer = engineer; 
 		this.exams = new ArrayList<Exams>();

@@ -64,7 +64,7 @@ public class JDBCClientManager implements ClientManager{
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?)";
 			
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			prep.setInt(1, c.getId());
+			
 			prep.setString(2, c.getPhone());
 			prep.setString(3, c.getName());
 			prep.setDate(4, c.getDoB());
@@ -106,9 +106,8 @@ public class JDBCClientManager implements ClientManager{
 				Integer card_number = rs.getInt("card_number");
 				Boolean family_number = rs.getBoolean("family_number");
 				String email = rs.getString("email");
-				Integer physio_id = rs.getInt("physiotherapist_id");
-				Physio physio = null;
-				physio = physiomanager.searchPhysioByID(physio_id);
+				Integer physio_id = rs.getInt("Physiotherapist_id");
+				Physio physio = physiomanager.searchPhysioByID(physio_id);
 				
 				Client c = new Client (id, physio, name, phone, doB, card_number, family_number, email);
 				clients.add(c);
@@ -145,8 +144,7 @@ public class JDBCClientManager implements ClientManager{
 				Integer card_number = rs.getInt("card_number");
 				Boolean family_number = rs.getBoolean("family_number");
 				String email = rs.getString("email");
-				Physio physio = null;
-				physio = physiomanager.searchPhysioByID(physio_id);
+				Physio physio= physiomanager.searchPhysioByID(physio_id);
 				
 				Client c = new Client (id, physio, name, phone, doB, card_number, family_number, email);
 				clients.add(c);
@@ -184,7 +182,7 @@ public class JDBCClientManager implements ClientManager{
 	@Override
 	public Client searchClientByID(int client_id) {
 		// TODO Auto-generated method stub
-		Client client = null;
+		Client client = new Client();
 		
 		
 		try {

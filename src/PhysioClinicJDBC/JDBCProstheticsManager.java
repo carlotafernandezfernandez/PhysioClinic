@@ -31,8 +31,6 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 	public List<Prosthetics> showAllProstheticsOfType(String type) {
 		// TODO Auto-generated method stub
 		List<Prosthetics> prosthetics = new ArrayList<Prosthetics>();
-		Engineer eng = null; 
-		Client client = null;
 		
 		try {
 			String sql = "SELECT * FROM Prosthetics WHERE prost_type LIKE ? ";
@@ -51,8 +49,8 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 				String inspections = rs.getString("prost_inspections");
 				Integer eng_id = rs.getInt("eng_id");
 				Integer client_id = rs.getInt("client_id");
-				eng = engineermanager.searchEngineerByID(eng_id);
-				client = clientmanager.searchClientByID(client_id);
+				Engineer eng = engineermanager.searchEngineerByID(eng_id);
+				Client client = clientmanager.searchClientByID(client_id);
 				
 				Prosthetics p = new Prosthetics(id, p_type, eng, client, inspections, doB, d_bought);
 				prosthetics.add(p);
@@ -68,4 +66,31 @@ public class JDBCProstheticsManager implements ProstheticsManager{
 		
 		return prosthetics;
 	}
+	
+	public void createProsthetic(Prosthetics p) {
+		try {
+			String sql= "INSERT INTO Prosthetics (prost_id, prost_type, prost_doB, prost_dateBought, prost_inspections, eng_id, "
+					+ "client_id)"
+					+ "VALUES (?,?,?,?,?,?,?)";
+			
+			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+
+			prep.setString(2, p.getType());
+			prep.setDate(3, p.getDoB());
+			prep.setDate(4, p.getDate_bought());
+			prep.setString(5, p.getInspections());
+			prep.setInt (6, p.getEngineer().getId());
+			prep.setInt(7, p.getClient().getId());
+			
+			prep.executeUpdate();	
+			prep.close();
+			
+					
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 }
